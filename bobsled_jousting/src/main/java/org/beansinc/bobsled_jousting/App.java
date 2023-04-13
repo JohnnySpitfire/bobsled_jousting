@@ -18,16 +18,16 @@ public class App
             System.out.println(ryan.getName());
             System.out.println(tim.getName());
 
-            System.out.println(jeff.getEffects());
+            System.out.println(jeff.getModifiers());
             System.out.println(ryan.getPosition());
-            System.out.println(tim.getEffects());
+            System.out.println(tim.getModifiers());
 
-            System.out.println(ryan.getStats());
-            System.out.println(jeff.getStats());
+            System.out.println(ryan.getAttributes());
+            System.out.println(jeff.getAttributes());
 
-            ryan.AddEffect(ContestantEffects.SLEEPY);
+            ryan.AddEffect(SledModifers.SLEEPY);
 
-            System.out.println(ryan.getEffects());
+            System.out.println(ryan.getModifiers());
 
         } catch(Exception e) {
             System.out.println(e.getMessage());

@@ -1,6 +1,6 @@
 package org.beansinc.bobsled_jousting;
 
-public enum ContestantEffects {
+public enum SledModifers {
     SLEEPY,
     POISONED,
     PARALYSED

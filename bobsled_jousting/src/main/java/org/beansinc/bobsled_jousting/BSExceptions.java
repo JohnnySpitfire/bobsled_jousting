@@ -2,8 +2,6 @@ package org.beansinc.bobsled_jousting;
 
 import java.util.NoSuchElementException;
 
-import javax.swing.tree.ExpandVetoException;
-
 public class BSExceptions {
 
     public static class ContestantNotFound extends NoSuchElementException {
@@ -13,16 +11,16 @@ public class BSExceptions {
         }
     }
 
-    public static class ContestantEffectNotFound extends NoSuchElementException {
+    public static class ObjectEffectNotFound extends NoSuchElementException {
 
-        public ContestantEffectNotFound(ContestantEffects effect, String name){
-            super(String.format("Effect \"%s\" not bound to contestant \"%s\"", effect, name));
+        public <T> ObjectEffectNotFound(T effect){
+            super(String.format("Effect \"%s\" not bound to contestant", effect));
         }
     }
 
-    public static class InvalidContestantStatType extends Exception {
+    public static class InvalidObjectStatType extends Exception {
 
-        public <T> InvalidContestantStatType(T effect, T name) {
+        public <T> InvalidObjectStatType(T effect, T name) {
             super(String.format("Effect \"%s\" (%s) or contestant \"%s\" (%s) is not a valid data type for contestantStats", 
                                         effect, effect.getClass(), name, name.getClass()));
         }
