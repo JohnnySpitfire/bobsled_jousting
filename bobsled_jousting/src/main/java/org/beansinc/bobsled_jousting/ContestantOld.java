@@ -6,22 +6,22 @@ import java.util.Map;
 
 
 import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
-import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectStatType;
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
-
+@SuppressWarnings("unchecked")
 public class ContestantOld {
     
     private String contestantName;
     private ContestantPositions contestantPosition;
     private EnumMap<ContestantAttributes, Integer> contestantStats;
-    private EnumSet<SledModifers> contestantEffects;
+    private EnumSet<ContestantModifers> contestantEffects;
 
     public ContestantOld(String name){
 
         this.contestantName = name;
         this.contestantPosition = ContestantPositions.OTHER;
         this.contestantStats = this.generateDefaultStatsMap();
-        this.contestantEffects = EnumSet.noneOf(SledModifers.class);
+        this.contestantEffects = EnumSet.noneOf(ContestantModifers.class);
     }
 
     public ContestantOld(String name, ContestantPositions position){
@@ -29,20 +29,20 @@ public class ContestantOld {
         this.contestantName = name;
         this.contestantPosition = position;
         this.contestantStats = this.generateDefaultStatsMap();
-        this.contestantEffects = EnumSet.noneOf(SledModifers.class);
+        this.contestantEffects = EnumSet.noneOf(ContestantModifers.class);
 
     }
 
-    public ContestantOld(String name, ContestantPositions position, Object[][] stats) throws InvalidObjectStatType{
+    public ContestantOld(String name, ContestantPositions position, Object[][] stats) throws InvalidObjectAttributeType{
 
         this.contestantName = name;
         this.contestantPosition = position;
         this.contestantStats = this.generateDefaultStatsMap();
-        this.contestantEffects = EnumSet.noneOf(SledModifers.class);
+        this.contestantEffects = EnumSet.noneOf(ContestantModifers.class);
 
         for (Object[] stat : stats) {
             if(!(stat[0] instanceof ContestantAttributes) || !(stat[1] instanceof Integer)) {
-                throw new BSExceptions.InvalidObjectStatType(stat[0], stat[1]);
+                // throw new InvalidObjectAttributeType(stat[0], stat[1]);
             } else {
                 this.contestantStats.put((ContestantAttributes) stat[0], (Integer) stat[1]);
             }
@@ -64,7 +64,7 @@ public class ContestantOld {
         return this.contestantStats;
     }
 
-    public EnumSet<SledModifers> getEffects(){
+    public EnumSet<ContestantModifers> getEffects(){
         
         return this.contestantEffects;
     }
@@ -84,15 +84,15 @@ public class ContestantOld {
         this.contestantStats.remove(stat);
     }
 
-    public void AddEffect(SledModifers effect) {
+    public void AddEffect(ContestantModifers effect) {
 
         this.contestantEffects.add(effect);
     }
 
-    public void RemoveEffect(SledModifers effect) throws ObjectEffectNotFound {
+    public void RemoveEffect(ContestantModifers effect) throws ObjectEffectNotFound {
 
         if(!this.contestantEffects.contains(effect)) {
-            throw new BSExceptions.ObjectEffectNotFound(effect);
+            throw new ObjectEffectNotFound(effect);
         } else {
             this.contestantEffects.remove(effect);
         }

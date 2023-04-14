@@ -6,29 +6,29 @@ import java.util.Map;
 
 
 import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
-import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectStatType;
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
-
-public class TeamObject<A extends Enum<A>, M extends Enum<M>> {
+@SuppressWarnings("unchecked")
+public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     
     private String name;
     private EnumMap<A, Integer> objectAttributes;
     private EnumSet<M> objectModifiers;
 
-    public TeamObject(String name, Class<A> attributesClass, Class<M> modifiersClass){
+    public TeamMember(String name, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
         setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
     }
 
-    public TeamObject(String name, Object[][] Attributes, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectStatType{
+    public TeamMember(String name, Object[][] attributes, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
         setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
-        populateObjectAttributesWithInput(Attributes);
+        populateObjectAttributesWithInput(attributes);
     }
 
     public String getName() {
@@ -69,7 +69,7 @@ public class TeamObject<A extends Enum<A>, M extends Enum<M>> {
     public void RemoveEffect(M effect) throws ObjectEffectNotFound {
 
         if(!this.objectModifiers.contains(effect)) {
-            throw new BSExceptions.ObjectEffectNotFound(effect);
+            throw new ObjectEffectNotFound(effect);
         } else {
             this.objectModifiers.remove(effect);
         }
@@ -90,23 +90,23 @@ public class TeamObject<A extends Enum<A>, M extends Enum<M>> {
         return defaultStats;
     }
 
-    private void setObjectEnumMapAndEnumSet(Class<A> attributes, Class<M> modifiers) {
-        if(attributes == ContestantAttributes.class && modifiers == SledModifers.class) {
+    private void setObjectEnumMapAndEnumSet(Class<A> attributes, Class<M> modifiers) throws InvalidObjectAttributeType {
+        if(attributes == ContestantAttributes.class && modifiers == ContestantModifers.class) {
             this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttributes, Integer>(ContestantAttributes.class);
-            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(SledModifers.class);
+            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifers.class);
 
-        } else if (attributes.isInstance(SledAttributes.class) && modifiers.isInstance(SledModifiers.class)) {
+        } else if (attributes == SledAttributes.class && modifiers == SledModifiers.class) {
             this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<SledAttributes, Integer>(SledAttributes.class);
             this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(SledModifiers.class);
         } else {
-            //Throw type error exception
+            throw new InvalidObjectAttributeType(attributes.getClass(), modifiers.getClass(), name);
         }
     }
 
-    private void populateObjectAttributesWithInput(Object[][] stats) throws InvalidObjectStatType {
+    private void populateObjectAttributesWithInput(Object[][] stats) throws InvalidObjectAttributeType {
         for (Object[] stat : stats) {
             if(!(stat[0] instanceof Enum<?>) || !(stat[1] instanceof Integer)) {
-                throw new BSExceptions.InvalidObjectStatType(stat[0], stat[1]);
+                throw new InvalidObjectAttributeType(stat[0].getClass(), name);
             } else {
                 this.objectAttributes.put((A) stat[0], (Integer) stat[1]);
             }

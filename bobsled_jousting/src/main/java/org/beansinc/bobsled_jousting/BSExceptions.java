@@ -1,5 +1,6 @@
 package org.beansinc.bobsled_jousting;
 
+import java.io.InvalidObjectException;
 import java.util.NoSuchElementException;
 
 public class BSExceptions {
@@ -18,11 +19,22 @@ public class BSExceptions {
         }
     }
 
-    public static class InvalidObjectStatType extends Exception {
+    public static class InvalidObjectAttributeType extends InvalidObjectException {
 
-        public <T> InvalidObjectStatType(T effect, T name) {
-            super(String.format("Effect \"%s\" (%s) or contestant \"%s\" (%s) is not a valid data type for contestantStats", 
-                                        effect, effect.getClass(), name, name.getClass()));
+        public <T extends Class<?>> InvalidObjectAttributeType(T attributeObj, String name) {
+            super(String.format("Attribute object \"%s\" (%s) is not a valid data type for member \"%s\"", 
+                                attributeObj.getName(),
+                                attributeObj,
+                                name));
+        }
+
+        public <T extends Class<?>> InvalidObjectAttributeType(T attributeObj, T modifierObj, String name) {
+            super(String.format("Attribute object \"%s\" (%s) or Modifier \"%s\" (%s) is not a valid data type for member \"%s\"", 
+                                attributeObj.getName(),
+                                attributeObj,
+                                modifierObj,
+                                modifierObj.getName(),
+                                name));
         }
     }
 

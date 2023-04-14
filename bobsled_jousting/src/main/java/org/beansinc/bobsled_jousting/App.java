@@ -10,24 +10,32 @@ public class App
     {
         try {
 
-            Contestant jeff = new Contestant("jeff");
-            Contestant tim = new Contestant("ryan", ContestantPositions.FORWARD);
-            Contestant ryan = new Contestant("tim", ContestantPositions.BACK, new Object[][]{{ContestantAttributes.ALCOHOL_TOLERANCE, 100}});
+            Sled jeff = new Sled("jeff");
+            Contestant ryan = new Contestant("ryan", ContestantPositions.FORWARD);
+            Contestant tim = new Contestant("tim", ContestantPositions.BACK, new Object[][]{{ContestantAttributes.ALCOHOL_TOLERANCE, 100}});
 
             System.out.println(jeff.getName());
-            System.out.println(ryan.getName());
             System.out.println(tim.getName());
+            System.out.println(ryan.getName());
 
-            System.out.println(jeff.getModifiers());
-            System.out.println(ryan.getPosition());
-            System.out.println(tim.getModifiers());
+            System.out.println(jeff.getName() + ": "+ jeff.getAttributes().get(SledAttributes.ARMOUR));
 
-            System.out.println(ryan.getAttributes());
-            System.out.println(jeff.getAttributes());
+            System.out.println(jeff.getName() + ": "+ jeff.getAttributes());
 
-            ryan.AddEffect(SledModifers.SLEEPY);
+            System.out.println(tim.getName() + ": "+ tim.getAttributes());
+            System.out.println(ryan.getName() + ": "+ ryan.getAttributes());
 
-            System.out.println(ryan.getModifiers());
+            System.out.println(jeff.getName() + ": "+ jeff.getModifiers());
+            System.out.println(tim.getName() + ": "+ tim.getModifiers());
+            System.out.println(ryan.getName() + ": "+ ryan.getModifiers());
+
+            tim.AddEffect(ContestantModifers.PARALYSED);
+            ryan.AddEffect(ContestantModifers.SLEEPY);
+            ryan.AddEffect(ContestantModifers.POISONED);
+
+            System.out.println(tim.getName() + ": "+ tim.getModifiers());
+            System.out.println(ryan.getName() + ": "+ ryan.getModifiers());
+
 
         } catch(Exception e) {
             System.out.println(e.getMessage());

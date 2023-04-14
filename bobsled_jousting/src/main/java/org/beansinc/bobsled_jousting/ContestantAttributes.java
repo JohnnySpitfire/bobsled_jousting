@@ -6,7 +6,7 @@ public enum ContestantAttributes {
     STANIMA,
     ALCOHOL_TOLERANCE;
 
-    public static <A> Object[][] getDefaultAttributes(){
+    public static Object[][] getDefaultAttributes(){
         return new Object[][]{
             {OFFENCE, 100},
             {DEFENCE, 100},

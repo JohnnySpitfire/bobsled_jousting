@@ -1,32 +1,32 @@
 package org.beansinc.bobsled_jousting;
 
-import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectStatType;
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 
-public class Contestant extends TeamObject<ContestantAttributes, SledModifers>{
+public class Contestant extends TeamMember<ContestantAttributes, ContestantModifers>{
     
     private String contestantName;
     private ContestantPositions contestantPosition;
 
-    public Contestant(String name){
+    public Contestant(String name) throws InvalidObjectAttributeType{
        
-        super(name, ContestantAttributes.class, SledModifers.class);
+        super(name, ContestantAttributes.class, ContestantModifers.class);
         
         this.contestantName = name;
         this.contestantPosition = ContestantPositions.OTHER;
     }
 
-    public Contestant(String name, ContestantPositions position){
+    public Contestant(String name, ContestantPositions position) throws InvalidObjectAttributeType{
         
-        super(name, ContestantAttributes.class, SledModifers.class);
+        super(name, ContestantAttributes.class, ContestantModifers.class);
 
         this.contestantName = name;
         this.contestantPosition = position;
     }
 
-    public Contestant(String name, ContestantPositions position, Object[][] stats) throws InvalidObjectStatType{
+    public Contestant(String name, ContestantPositions position, Object[][] attributes) throws InvalidObjectAttributeType{
 
-        super(name, ContestantAttributes.class, SledModifers.class);
+        super(name, attributes, ContestantAttributes.class, ContestantModifers.class);
 
         this.contestantName = name;
         this.contestantPosition = position;
