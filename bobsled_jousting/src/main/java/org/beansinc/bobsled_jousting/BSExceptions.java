@@ -21,19 +21,19 @@ public class BSExceptions {
 
     public static class InvalidObjectAttributeType extends InvalidObjectException {
 
-        public <T extends Class<?>> InvalidObjectAttributeType(T attributeObj, String name) {
+        public <T extends Class<?>> InvalidObjectAttributeType(T attributeClass, String name) {
             super(String.format("Attribute object \"%s\" (%s) is not a valid data type for member \"%s\"", 
-                                attributeObj.getName(),
-                                attributeObj,
+                                attributeClass.getName(),
+                                attributeClass,
                                 name));
         }
 
-        public <T extends Class<?>> InvalidObjectAttributeType(T attributeObj, T modifierObj, String name) {
+        public <T extends Class<?>> InvalidObjectAttributeType(T attributeClass, T modifierClass, String name) {
             super(String.format("Attribute object \"%s\" (%s) or Modifier \"%s\" (%s) is not a valid data type for member \"%s\"", 
-                                attributeObj.getName(),
-                                attributeObj,
-                                modifierObj,
-                                modifierObj.getName(),
+                                attributeClass.getName(),
+                                attributeClass,
+                                modifierClass,
+                                modifierClass.getName(),
                                 name));
         }
     }

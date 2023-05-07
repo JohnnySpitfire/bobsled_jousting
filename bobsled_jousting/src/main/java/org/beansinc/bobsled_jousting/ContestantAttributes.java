@@ -4,7 +4,7 @@ public enum ContestantAttributes {
     OFFENCE,
     DEFENCE,
     STANIMA,
-    ALCOHOL_TOLERANCE;
+    ALCOHOL_CONSUMED;
 
     public static Object[][] getDefaultAttributes(){
         return new Object[][]{

@@ -1,4 +1,4 @@
-package org.beansinc.bobsled_jousting;
+package org.beansinc.bobsled_jousting.depreciated;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -6,6 +6,10 @@ import java.util.Map;
 
 
 import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
+import org.beansinc.bobsled_jousting.ContestantAttributes;
+import org.beansinc.bobsled_jousting.ContestantModifers;
+import org.beansinc.bobsled_jousting.ContestantPositions;
+import org.beansinc.bobsled_jousting.Utils;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 @SuppressWarnings("unchecked")
@@ -19,7 +23,7 @@ public class ContestantOld {
     public ContestantOld(String name){
 
         this.contestantName = name;
-        this.contestantPosition = ContestantPositions.OTHER;
+        this.contestantPosition = ContestantPositions.RESERVE;
         this.contestantStats = this.generateDefaultStatsMap();
         this.contestantEffects = EnumSet.noneOf(ContestantModifers.class);
     }
