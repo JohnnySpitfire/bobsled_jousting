@@ -3,6 +3,7 @@ package org.beansinc.bobsled_jousting;
 import java.util.ArrayList;
 
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 public class BaseTeam {
@@ -13,17 +14,25 @@ public class BaseTeam {
     public static final int MAX_RESERVE_SIZE = 5;
 
     private String teamName;
+
+    private int teamMoney;
+
     private ArrayList<Contestant> activeContestants;
     private ArrayList<Contestant> reserveContestants;
 
-    public BaseTeam(String name){
+    private Sled teamSled;
+
+    public BaseTeam(String name) throws InvalidObjectAttributeType {
 
         this.teamName = name;
         this.activeContestants = new ArrayList<Contestant>();
         this.reserveContestants = new ArrayList<Contestant>();
+        this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+        this.teamMoney = 1000;
+
     }
 
-    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr) throws InvalidTeamSize {
+    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr) throws InvalidTeamSize, InvalidObjectAttributeType {
 
         if(activeContestantsArr.size() < MIN_ACTIVE_SIZE) {
             throw new BSExceptions.InvalidTeamSize();
@@ -32,9 +41,12 @@ public class BaseTeam {
         this.teamName = name;
         this.activeContestants = activeContestantsArr;
         this.reserveContestants = new ArrayList<Contestant>();
+        this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+        this.teamMoney = 1000;
+
     }
 
-    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr, ArrayList<Contestant> reserveContestantsArr) throws InvalidTeamSize {
+    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr, ArrayList<Contestant> reserveContestantsArr) throws InvalidTeamSize, InvalidObjectAttributeType {
 
         if(activeContestantsArr.size() < MIN_ACTIVE_SIZE) {
             throw new BSExceptions.InvalidTeamSize();
@@ -43,6 +55,36 @@ public class BaseTeam {
         this.teamName = name;
         this.activeContestants = activeContestantsArr;
         this.reserveContestants = reserveContestantsArr;
+        this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+        this.teamMoney = 1000;
+
+    }
+
+    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr, ArrayList<Contestant> reserveContestantsArr, Sled sledInput) throws InvalidTeamSize, InvalidObjectAttributeType {
+
+        if(activeContestantsArr.size() < MIN_ACTIVE_SIZE) {
+            throw new BSExceptions.InvalidTeamSize();
+        }
+        
+        this.teamName = name;
+        this.activeContestants = activeContestantsArr;
+        this.reserveContestants = reserveContestantsArr;
+        this.teamSled = sledInput;
+        this.teamMoney = 1000;
+
+    }
+
+    public BaseTeam(String name, ArrayList<Contestant> activeContestantsArr, ArrayList<Contestant> reserveContestantsArr, Sled sledInput, int moneyInput) throws InvalidTeamSize, InvalidObjectAttributeType {
+
+        if(activeContestantsArr.size() < MIN_ACTIVE_SIZE) {
+            throw new BSExceptions.InvalidTeamSize();
+        }
+        
+        this.teamName = name;
+        this.activeContestants = activeContestantsArr;
+        this.reserveContestants = reserveContestantsArr;
+        this.teamSled = sledInput;
+        this.teamMoney = moneyInput;
 
     }
 
@@ -99,6 +141,12 @@ public class BaseTeam {
             throw new ContestantNotFound(contestant, teamName);
         }
         this.reserveContestants.remove(contestant);
+    }
+
+    public void swapSled(Sled newSled) {
+
+        this.teamSled = newSled;
+        
     }
 
 }

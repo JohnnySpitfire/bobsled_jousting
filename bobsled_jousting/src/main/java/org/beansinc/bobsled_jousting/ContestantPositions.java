@@ -4,5 +4,5 @@ public enum ContestantPositions {
     FORWARD,
     CENTRE,
     BACK,
-    OTHER
+    RESERVE
 }
