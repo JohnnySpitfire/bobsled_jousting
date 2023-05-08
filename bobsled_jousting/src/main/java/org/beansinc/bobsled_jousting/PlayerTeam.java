@@ -2,11 +2,12 @@ package org.beansinc.bobsled_jousting;
 
 import java.util.ArrayList;
 
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
-    public PlayerTeam(String name) throws InvalidTeamSize {
+    public PlayerTeam(String name) throws InvalidTeamSize, InvalidObjectAttributeType {
         super(name, new ArrayList<Contestant>(), new ArrayList<Contestant>());
     }
 

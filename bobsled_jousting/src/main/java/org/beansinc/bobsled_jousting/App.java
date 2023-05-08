@@ -1,7 +1,5 @@
 package org.beansinc.bobsled_jousting;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 /**
  * Hello world!
  *
