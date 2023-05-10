@@ -13,13 +13,14 @@ public class MainMenuScreen {
 	public MainMenuScreen(BaseTeam incomingTeam) {
 		team = incomingTeam;
 		initialize();
+		frmMainmenu.setVisible(true);
 	}
 	
 	public void closeWindow() {
 		frmMainmenu.dispose();
 	}
 	public void finishedWindow() {
-		team.closeMainScreen(this);
+		team.closeMainMenuScreen(this);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class MainMenuScreen {
 	private void initialize() {
 		frmMainmenu = new JFrame();
 		frmMainmenu.setTitle("MainMenu");
-		frmMainmenu.setBounds(100, 100, 450, 300);
+		frmMainmenu.setBounds(100, 100, 447, 332);
 		frmMainmenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMainmenu.getContentPane().setLayout(null);
 		

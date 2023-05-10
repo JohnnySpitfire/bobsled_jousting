@@ -4,14 +4,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
 
 public class SetupScreen {
 
 	private JFrame frmSetupscreen;
 	private BaseTeam team;
+	private final Action action = new SwingAction();
+	
+	public SetupScreen(BaseTeam incomingTeam) {
+		team = incomingTeam;
+		initialize();
+		frmSetupscreen.setVisible(true);
+	}
 	
 	public void closeWindow() {
 		frmSetupscreen.dispose();
+	}
+	public void finishedWindow() {
+		team.closeSetupScreen(this);
+		
 	}
 
 	/**
@@ -48,7 +62,17 @@ public class SetupScreen {
 		frmSetupscreen.getContentPane().setLayout(null);
 		
 		JButton btnAccept = new JButton("Accept");
+		btnAccept.setAction(action);
 		btnAccept.setBounds(169, 227, 89, 23);
 		frmSetupscreen.getContentPane().add(btnAccept);
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "Accept");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			finishedWindow();
+		}
 	}
 }
