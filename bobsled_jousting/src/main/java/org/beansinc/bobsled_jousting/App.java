@@ -12,11 +12,13 @@ public class App
 
             Sled jeff = new Sled("jeff");
             Contestant ryan = new Contestant("ryan", ContestantPositions.FORWARD);
-            Contestant tim = new Contestant("tim", ContestantPositions.BACK, new Object[][]{{ContestantAttributes.ALCOHOL_TOLERANCE, 100}});
+            Contestant tim = new Contestant("tim", ContestantPositions.BACK, new Object[][]{{ContestantAttributes.ALCOHOL_CONSUMED, 100}});
 
             System.out.println(jeff.getName());
             System.out.println(tim.getName());
             System.out.println(ryan.getName());
+
+            tim.EditStat(ContestantAttributes.ALCOHOL_CONSUMED, 69);
 
             System.out.println(jeff.getName() + ": "+ jeff.getAttributes().get(SledAttributes.ARMOUR));
 
@@ -32,6 +34,10 @@ public class App
             tim.AddEffect(ContestantModifers.PARALYSED);
             ryan.AddEffect(ContestantModifers.SLEEPY);
             ryan.AddEffect(ContestantModifers.POISONED);
+
+            int stanima = ryan.getAttributes(ContestantAttributes.STANIMA);
+
+            System.out.println(stanima);
 
             System.out.println(tim.getName() + ": "+ tim.getModifiers());
             System.out.println(ryan.getName() + ": "+ ryan.getModifiers());
