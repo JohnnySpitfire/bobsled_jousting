@@ -46,6 +46,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         return this.objectAttributes;
     }
 
+    public int getAttributes(A stat) {
+        return this.objectAttributes.get(stat);
+    }
+
     public EnumSet<M> getModifiers(){
         
         return this.objectModifiers;
@@ -64,6 +68,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     public void AddEffect(M effect) {
 
         this.objectModifiers.add(effect);
+    }
+
+    public void EditStat(A stat, int newVal) {
+        this.objectAttributes.replace(stat, newVal);
     }
 
     public void RemoveEffect(M effect) throws ObjectEffectNotFound {
