@@ -7,42 +7,54 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
-    public PlayerTeam(String name) throws InvalidTeamSize, InvalidObjectAttributeType {
-        super(name, new ArrayList<Contestant>(), new ArrayList<Contestant>());
+    public PlayerTeam(String name, int funds) throws InvalidObjectAttributeType, InvalidTeamSize {
+        super(name, funds);
     }
 
     @Override
     public void onWeekEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onWeekEnd'");
+
+        ArrayList<Contestant> activeTeam = this.getActiveTeam();
+        
+        for(Contestant contestant : activeTeam){
+            
+            Contestant modifiedContestant = contestant;
+            modifiedContestant.editStat(ContestantAttribute.STANIMA, 100);
+            this.modifyActiveContestant(modifiedContestant, contestant);
+        }
     }
 
     @Override
-    public void onMatchPlay() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onMatchPlay'");
+    public void onContestantPosSwap(Contestant contestant, ContestantPosition newPos) {
+
+        Contestant modifiedContestant = contestant;
+        modifiedContestant.setPosition(newPos);
+        this.modifyActiveContestant(modifiedContestant, contestant);
     }
 
     @Override
-    public void onContestantPosSwap() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onContestantPosSwap'");
+    public void purchaseActivePlayer(Contestant newContestant) throws InvalidTeamSize {
+        
+        this.addActiveContestant(newContestant);
+        this.modifyTotalFunds(-newContestant.getValue());
+        
     }
 
     @Override
-    public void onContestantTransfer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onContestantTransfer'");
+    public void purchaseReservePlayer(Contestant newContestant) throws InvalidTeamSize{
+
+        this.addReserveContestant(newContestant);
+        this.modifyTotalFunds(-newContestant.getValue());
     }
 
     @Override
-    public void onItemPurchase() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onItemPurchase'");
+    public void onItemPurchase(Item item, int cost) {
+        this.modifyTotalFunds(-item.value);
+        this.addItem(item);
     }
 
     @Override
-    public void getNewRandomAthlete() {
+    public void getNewRandomContestant(Contestant newContestant) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getNewRandomAthlete'");
     }
@@ -52,6 +64,18 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'onSellAsset'");
     }
-    
+
+    @Override
+    public void onContestantQuit(Contestant contestant) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'onContestantQuit'");
+    }
+
+    @Override
+    public void onAthleteStatIncrease(Contestant contestant) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'onAthleteStatIncrease'");
+    }
+
 }
  
