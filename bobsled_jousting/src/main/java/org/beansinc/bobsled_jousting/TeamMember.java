@@ -14,21 +14,38 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     private String name;
     private EnumMap<A, Integer> objectAttributes;
     private EnumSet<M> objectModifiers;
+    private int value;
 
     public TeamMember(String name, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
-        setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
+        this.setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
     }
 
     public TeamMember(String name, Object[][] attributes, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
-        setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
+        this.setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
-        populateObjectAttributesWithInput(attributes);
+        this.populateObjectAttributesWithInput(attributes);
+
+    }
+
+    public TeamMember(String name, Map<ContestantAttribute, Integer> attributes, EnumSet<ContestantModifer> modifiers, int value) {
+
+        this.name = name;
+
+        this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttribute, Integer>(ContestantAttribute.class);
+        this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifer.class);
+
+        for(ContestantAttribute attr: attributes.keySet()) {
+            this.objectAttributes.put((A) attr, attributes.get(attr));
+        }
+
+        this.value = value;
+
     }
 
     public String getName() {
@@ -39,6 +56,14 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public void setValue(int val){
+        this.value = val;
     }
 
     public Map<A, Integer> getAttributes(){
@@ -55,26 +80,26 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         return this.objectModifiers;
     }
 
-    public void AddStat(A stat, int value){
+    public void addAttribute(A stat, int value){
 
         this.objectAttributes.put(stat, value);
     }
 
-    public void RemoveStat(A stat) {
+    public void removeStat(A stat) {
 
         this.objectAttributes.remove(stat);
     }
 
-    public void AddEffect(M effect) {
+    public void addModifier(M effect) {
 
         this.objectModifiers.add(effect);
     }
 
-    public void EditStat(A stat, int newVal) {
+    public void editStat(A stat, int newVal) {
         this.objectAttributes.replace(stat, newVal);
     }
 
-    public void RemoveEffect(M effect) throws ObjectEffectNotFound {
+    public void removeEffect(M effect) throws ObjectEffectNotFound {
 
         if(!this.objectModifiers.contains(effect)) {
             throw new ObjectEffectNotFound(effect);
@@ -85,9 +110,9 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
  
     private EnumMap<A, Integer> generateDefaultStatsMap(Class<A> attributes){
 
-        Object[][] defaultStatsArr = attributes == ContestantAttributes.class? 
-                                    ContestantAttributes.getDefaultAttributes():
-                                    SledAttributes.getDefaultAttributes();
+        Object[][] defaultStatsArr = attributes == ContestantAttribute.class? 
+                                    ContestantAttribute.getDefaultAttributes():
+                                    SledAttribute.getDefaultAttributes();
 
         Map<?,?> defaultStatsMap = Utils.write2DArrayToMap(defaultStatsArr);
 
@@ -99,13 +124,13 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     private void setObjectEnumMapAndEnumSet(Class<A> attributes, Class<M> modifiers) throws InvalidObjectAttributeType {
-        if(attributes == ContestantAttributes.class && modifiers == ContestantModifers.class) {
-            this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttributes, Integer>(ContestantAttributes.class);
-            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifers.class);
+        if(attributes == ContestantAttribute.class && modifiers == ContestantModifer.class) {
+            this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttribute, Integer>(ContestantAttribute.class);
+            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifer.class);
 
-        } else if (attributes == SledAttributes.class && modifiers == SledModifiers.class) {
-            this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<SledAttributes, Integer>(SledAttributes.class);
-            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(SledModifiers.class);
+        } else if (attributes == SledAttribute.class && modifiers == SledModifier.class) {
+            this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<SledAttribute, Integer>(SledAttribute.class);
+            this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(SledModifier.class);
         } else {
             throw new InvalidObjectAttributeType(attributes.getClass(), modifiers.getClass(), name);
         }

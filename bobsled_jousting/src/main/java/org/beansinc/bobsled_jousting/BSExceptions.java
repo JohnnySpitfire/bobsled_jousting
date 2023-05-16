@@ -1,6 +1,7 @@
 package org.beansinc.bobsled_jousting;
 
 import java.io.InvalidObjectException;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class BSExceptions {
@@ -42,6 +43,13 @@ public class BSExceptions {
 
         public InvalidTeamSize() {
             super("Team must contain between 4 and 10 contestants and no more than 5 reserves");
+        }
+    }
+
+    public static class ItemNotFound extends Exception {
+        
+        public ItemNotFound(Item item, ArrayList<Item> itemList){
+            super(String.format("%s not found in %s", item.name(), itemList));
         }
     }
 }
