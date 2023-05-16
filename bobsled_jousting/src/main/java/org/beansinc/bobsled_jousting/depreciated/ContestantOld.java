@@ -23,7 +23,7 @@ public class ContestantOld {
     public ContestantOld(String name){
 
         this.contestantName = name;
-        this.contestantPosition = ContestantPosition.RESERVE;
+        this.contestantPosition = ContestantPosition.CENTRE;
         this.contestantStats = this.generateDefaultStatsMap();
         this.contestantEffects = EnumSet.noneOf(ContestantModifer.class);
     }

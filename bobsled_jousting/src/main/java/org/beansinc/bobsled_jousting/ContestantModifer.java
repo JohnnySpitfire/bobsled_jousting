@@ -10,7 +10,8 @@ public enum ContestantModifer {
     POISONED,
     PARALYSED,
     DRUNK,
-    TIPSY;
+    TIPSY,
+    INJURED;
 
     public static final List<ContestantModifer> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 

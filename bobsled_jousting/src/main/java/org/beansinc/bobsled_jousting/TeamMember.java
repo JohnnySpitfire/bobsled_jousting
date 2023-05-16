@@ -19,17 +19,32 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     public TeamMember(String name, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
-        setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
+        this.setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
     }
 
     public TeamMember(String name, Object[][] attributes, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
         this.name = name;
-        setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
+        this.setObjectEnumMapAndEnumSet(attributesClass, modifiersClass);
         
         this.objectAttributes = this.generateDefaultStatsMap(attributesClass);
-        populateObjectAttributesWithInput(attributes);
+        this.populateObjectAttributesWithInput(attributes);
+
+    }
+
+    public TeamMember(String name, Map<ContestantAttribute, Integer> attributes, EnumSet<ContestantModifer> modifiers, int value) {
+
+        this.name = name;
+
+        this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttribute, Integer>(ContestantAttribute.class);
+        this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifer.class);
+
+        for(ContestantAttribute attr: attributes.keySet()) {
+            this.objectAttributes.put((A) attr, attributes.get(attr));
+        }
+
+        this.value = value;
 
     }
 

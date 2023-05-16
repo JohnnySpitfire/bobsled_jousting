@@ -8,8 +8,7 @@ import java.util.Random;
 public enum ContestantAttribute {
     OFFENCE,
     DEFENCE,
-    STANIMA,
-    ALCOHOL_CONSUMED;
+    STANIMA;
 
     public static final List<ContestantAttribute> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 

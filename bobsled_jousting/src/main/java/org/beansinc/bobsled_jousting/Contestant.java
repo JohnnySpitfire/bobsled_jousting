@@ -10,14 +10,14 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
     public Contestant(String name) throws InvalidObjectAttributeType{
        
         super(name, ContestantAttribute.class, ContestantModifer.class);
-        this.position = ContestantPosition.RESERVE;
+        this.position = ContestantPosition.CENTRE;
     }
-
+    
     public Contestant(String name, String nickname) throws InvalidObjectAttributeType{
        
         super(name, ContestantAttribute.class, ContestantModifer.class);
         this.nickname = nickname;
-        this.position = ContestantPosition.RESERVE;
+        this.position = ContestantPosition.CENTRE;
     }
 
     public Contestant(String name, ContestantPosition position) throws InvalidObjectAttributeType{
@@ -34,6 +34,21 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
 
     }
 
+    public Contestant(Contestant contestant){
+
+        super(contestant.getName(), 
+            contestant.getAttributes(), 
+            contestant.getModifiers(), 
+            contestant.getValue());
+
+        this.nickname = contestant.getNickname();
+        this.position = contestant.getPosition();
+    }
+
+    
+    /** 
+     * @return ContestantPosition
+     */
     public ContestantPosition getPosition(){
         
         return this.position;

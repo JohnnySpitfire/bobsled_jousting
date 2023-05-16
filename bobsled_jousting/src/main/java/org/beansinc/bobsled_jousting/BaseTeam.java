@@ -1,6 +1,7 @@
 package org.beansinc.bobsled_jousting;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
@@ -25,7 +26,9 @@ public class BaseTeam {
 
     private Sled teamSled;
 
-    public BaseTeam(String name) throws InvalidObjectAttributeType {
+    public final Random rnd;
+
+    public BaseTeam(String name, Random random) throws InvalidObjectAttributeType {
 
         this.teamName = name;
         this.activeContestants = new ArrayList<Contestant>();
@@ -33,10 +36,11 @@ public class BaseTeam {
         this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
         this.teamFunds = 1000;
         this.items = new ArrayList<Item>();
+        this.rnd = random;
 
     }
 
-    public BaseTeam(String name, int funds) throws InvalidTeamSize, InvalidObjectAttributeType {
+    public BaseTeam(String name, int funds, Random random) throws InvalidTeamSize, InvalidObjectAttributeType {
         
         this.teamName = name;
         this.activeContestants = new ArrayList<Contestant>();
@@ -44,8 +48,7 @@ public class BaseTeam {
         this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
         this.teamFunds = funds;
         this.items = new ArrayList<Item>();
-
-
+        this.rnd = random;
     }
 
     public String getName() {
@@ -110,11 +113,8 @@ public class BaseTeam {
         this.reserveContestants.add(contestant);
     }
 
-    public void removeActiveContestant(Contestant contestant) throws InvalidTeamSize, ContestantNotFound {
+    public void removeActiveContestant(Contestant contestant) throws ContestantNotFound {
 
-        if(this.activeContestants.size() - 1 < MIN_ACTIVE_SIZE) {
-            throw new InvalidTeamSize();
-        }
         if (!this.activeContestants.contains(contestant)) {
             throw new ContestantNotFound(contestant, teamName);
         }
@@ -150,6 +150,15 @@ public class BaseTeam {
 
         int contestantIndex = this.activeContestants.indexOf(oldContestant);
         this.reserveContestants.set(contestantIndex, modifiedContestant);
+    }
+
+    public boolean isActiveTeamFull() {
+
+        if(activeContestants.size() == MAX_ACTIVE_SIZE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

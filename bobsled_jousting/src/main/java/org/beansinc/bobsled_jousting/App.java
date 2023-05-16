@@ -17,9 +17,9 @@ public class App
         Scanner scn = new Scanner(System.in);
         try {
 
-            gameSetUp(scn);
+            GameEnviroment game = gameSetUp(scn);
 
-            
+            game.gameWeek();
         
             scn.close();
 
@@ -29,7 +29,7 @@ public class App
 
     }
 
-    private static void gameSetUp(Scanner scn) throws InvalidObjectAttributeType, InvalidTeamSize {
+    private static GameEnviroment gameSetUp(Scanner scn) throws InvalidObjectAttributeType, InvalidTeamSize {
         System.out.println("Please enter a team name");
         String teamName = scn.nextLine();
         System.out.println("How many weeks would you like to play?");
@@ -49,9 +49,9 @@ public class App
         ArrayList<Contestant> startingReserveContestants = new ArrayList<Contestant>();
 
 
-        for(int i=0; i<=15; i++){
+        for(int i=0; i<15; i++){
 
-            Contestant randContestant = game.generateRandomContestant();
+            Contestant randContestant = Utils.generateRandomContestant(game.getRandom());
             initalContestants.add(randContestant);
 
             System.out.println(String.format("%s. %s", i + 1, randContestant.getName()));
@@ -96,5 +96,7 @@ public class App
         } while (i < 4);
 
         game.gameStart(startingActiveContestants, startingReserveContestants);
+
+        return game;
     }
 }
