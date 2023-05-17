@@ -13,7 +13,7 @@ public class BaseTeam {
     public static final int MIN_ACTIVE_SIZE = 4;
     public static final int MAX_ACTIVE_SIZE = 4; //pls change me :(
     public static final int MIN_RESERVE_SIZE = 0;
-    public static final int MAX_RESERVE_SIZE = 5;
+    public static final int MAX_RESERVE_SIZE = 15;
 
     private String teamName;
 
@@ -97,7 +97,7 @@ public class BaseTeam {
 
     public void addActiveContestant(Contestant contestant) throws InvalidTeamSize {
 
-        if(this.activeContestants.size() + 1 > MAX_ACTIVE_SIZE) {
+        if(this.activeContestants.size() > MAX_ACTIVE_SIZE) {
             throw new InvalidTeamSize();
         }
 

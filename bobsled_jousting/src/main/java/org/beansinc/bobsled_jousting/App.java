@@ -15,6 +15,7 @@ public class App
     public static void main( String[] args )
     {
         Scanner scn = new Scanner(System.in);
+
         try {
 
             GameEnviroment game = gameSetUp(scn);
@@ -30,6 +31,7 @@ public class App
     }
 
     private static GameEnviroment gameSetUp(Scanner scn) throws InvalidObjectAttributeType, InvalidTeamSize {
+
         System.out.println("Please enter a team name");
         String teamName = scn.nextLine();
         System.out.println("How many weeks would you like to play?");

@@ -15,5 +15,5 @@ public interface TeamBehaviour {
     public Contestant getNewRandomContestant(float difficulty) throws InvalidObjectAttributeType, InvalidTeamSize;
     public Contestant onContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType;
     public ArrayList<Contestant[]> onAthleteStatIncrease(float difficulty);
-    public <T> void sellAsset(T assetType);
+    public void sellContestant(Contestant contestant);
 }
