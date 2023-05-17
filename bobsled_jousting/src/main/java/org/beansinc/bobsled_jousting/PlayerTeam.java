@@ -6,7 +6,6 @@ import java.util.Random;
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
-import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
@@ -38,7 +37,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     @Override
     public void purchaseContestant(Contestant newContestant) throws InvalidTeamSize {
         
-        this.addActiveContestant(newContestant);
+        this.addReserveContestant(newContestant);
         this.modifyTotalFunds(-newContestant.getValue());
         
     }
@@ -49,28 +48,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         this.addItem(item);
     }
 
-    @Override
-    public <T> void sellAsset(T asset) {
-
-        if(asset instanceof Contestant){
-
-            sellContestant((Contestant) asset);
-
-        } else if (asset instanceof Item) {
-
-            try {
-
-                this.removeItem((Item) asset);
-                
-            } catch (ItemNotFound e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void sellContestant(Contestant asset) {
+    public void sellContestant(Contestant asset) {
 
         if(this.getActiveTeam().contains(asset)){
 
