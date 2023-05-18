@@ -17,13 +17,17 @@ public class GameEnviroment {
    private PlayerTeam playerTeam;
    private GameEnviroment game;
 
+   Market market;
+
    Random rnd;
 
-   public GameEnviroment(String teamName, int totalWeeks, int difficulty) {
+   public GameEnviroment(String teamName, int totalWeeks, int difficulty) throws InvalidObjectAttributeType {
 
       this.rnd = new Random();
       this.totalSeasonWeeks = totalWeeks;
       this.difficulty = 1f - (float) (difficulty)/100f;
+
+      this.market = new Market(this.rnd);
 
       int startingFunds = (int) (2000 + 1000 * this.difficulty);
 
@@ -76,10 +80,17 @@ public class GameEnviroment {
    public int getTotalWeeks() {
       return this.totalSeasonWeeks;
    }
-   
-   
+
+   public Market getMarket() {
+      return this.market;
+   }
+
+   public void setMarket() throws InvalidObjectAttributeType {
+      this.market = new Market(this.rnd);
+   }   
    
    public static void launchSetupScreen() {
+
 		SetupScreen setupWindow = new SetupScreen();
 	}
    

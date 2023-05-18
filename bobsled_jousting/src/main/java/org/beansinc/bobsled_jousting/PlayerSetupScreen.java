@@ -525,7 +525,8 @@ public class PlayerSetupScreen implements MouseListener{
 					textAfford.setText("Insufficient Funds");
 				}
 				try {
-					enviroment.getPlayerTeam().purchaseContestant(initialContestants.get(initialIndex));
+					enviroment.getPlayerTeam().modifyTotalFunds(-initialContestants.get(initialIndex).getValue());
+					enviroment.getPlayerTeam().addActiveContestant(initialContestants.get(initialIndex));
 				} catch (InvalidTeamSize e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -542,8 +543,11 @@ public class PlayerSetupScreen implements MouseListener{
 		}
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() > 0) {
+
 			initialContestants.add(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
-			enviroment.getPlayerTeam().sellAsset(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
+			enviroment.getPlayerTeam().modifyTotalFunds(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
+			enviroment.getPlayerTeam().removeActiveContestant(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
+			
 			}
 		}
 	}
@@ -582,6 +586,7 @@ public class PlayerSetupScreen implements MouseListener{
 		textMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 		textAfford.setText("");
 		textRequiredPlayers.setText("");
+		
 		//initialContestants.get(initialIndex).setName(textNameVarIN.getText());
 		//enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
 	}
