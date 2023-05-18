@@ -15,7 +15,7 @@ public class GameEnviroment {
    private float difficulty;
 
    private PlayerTeam playerTeam;
-   
+   private GameEnviroment game;
 
    Random rnd;
 
@@ -25,7 +25,7 @@ public class GameEnviroment {
       this.totalSeasonWeeks = totalWeeks;
       this.difficulty = 1f - (float) (difficulty)/100f;
 
-      int startingFunds = (int) (3000 - 1000 * this.difficulty);
+      int startingFunds = (int) (2000 + 1000 * this.difficulty);
 
       try {
          this.playerTeam = new PlayerTeam(teamName, startingFunds, this.rnd);
@@ -77,5 +77,60 @@ public class GameEnviroment {
       return this.totalSeasonWeeks;
    }
    
+   
+   
+   public static void launchSetupScreen() {
+		SetupScreen setupWindow = new SetupScreen();
+	}
+   
+   public void closeSetupScreen(SetupScreen setupWindow) throws InvalidObjectAttributeType {
+   		game = setupWindow.getGameEnviroment();
+		setupWindow.closeWindow();
+		launchPlayerSetupScreen();
+	}
+   
+   public void launchMainMenuScreen() {
+		MainMenuScreen mainWindow = new MainMenuScreen(game);
+	}
+   
+   public void closeMainMenuScreen(MainMenuScreen mainWindow) {
+		mainWindow.closeWindow();
+	}
+   
+   public void launchInventoryScreen() {
+   	InventoryScreen inventoryWindow = new InventoryScreen(this);
+	}
+   
+   public void closeInventoryScreen(InventoryScreen inventoryWindow) {
+		inventoryWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+   
+   public void launchClubScreen() {
+   	InventoryScreen clubWindow = new InventoryScreen(this);
+	}
+   
+   public void closeClubScreen(ClubScreen clubWindow) {
+		clubWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+   
+   public void launchStoreScreen() {
+   	StoreScreen storeWindow = new StoreScreen(this);
+	}
+   
+   public void closeStoreScreen(StoreScreen storeWindow) {
+		storeWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+   
+   public void launchPlayerSetupScreen() throws InvalidObjectAttributeType {
+	   PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(game);
+	}
+  
+  public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) {
+	  playerSetupWindow.closeWindow();
+	  launchMainMenuScreen();
+	}
 }
 
