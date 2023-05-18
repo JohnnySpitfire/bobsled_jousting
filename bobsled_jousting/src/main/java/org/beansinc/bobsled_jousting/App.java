@@ -13,9 +13,7 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 public class App 
 {
     public static void main( String[] args )
-    {
-        Scanner scn = new Scanner(System.in);
-
+    {      
         try {
 
             GameEnviroment game = gameSetUp(scn);
@@ -99,6 +97,13 @@ public class App
 
         game.gameStart(startingActiveContestants, startingReserveContestants);
 
-        return game;
+        return game;*/
+    	
+    	GameEnviroment.launchSetupScreen();
+    	
     }
+    
+    
+    
+   
 }
