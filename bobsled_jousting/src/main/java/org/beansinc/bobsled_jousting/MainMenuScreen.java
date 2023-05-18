@@ -31,6 +31,8 @@ public class MainMenuScreen {
 	private final Action Club = new SwingAction_1();
 	private final Action Store = new SwingAction_2();
 	private final Action Quit = new SwingAction_3();
+	private JTextField txtWeek;
+	private JTextField txtWeeksRemaining;
 	
 	public MainMenuScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -114,6 +116,22 @@ public class MainMenuScreen {
 		textMoney.setBounds(573, 11, 86, 20);
 		frmMainmenu.getContentPane().add(textMoney);
 		textMoney.setColumns(10);
+		
+		txtWeek = new JTextField();
+		txtWeek.setEditable(false);
+		txtWeek.setHorizontalAlignment(SwingConstants.CENTER);
+		txtWeek.setText("Week:"+enviroment.getCurrentWeek());
+		txtWeek.setBounds(175, 11, 109, 20);
+		frmMainmenu.getContentPane().add(txtWeek);
+		txtWeek.setColumns(10);
+		
+		txtWeeksRemaining = new JTextField();
+		txtWeeksRemaining.setEditable(false);
+		txtWeeksRemaining.setHorizontalAlignment(SwingConstants.CENTER);
+		txtWeeksRemaining.setText("Weeks Remaining:"+(enviroment.getTotalWeeks() - enviroment.getCurrentWeek()));
+		txtWeeksRemaining.setBounds(362, 11, 130, 20);
+		frmMainmenu.getContentPane().add(txtWeeksRemaining);
+		txtWeeksRemaining.setColumns(10);
 	}
 	
 	private class SwingAction extends AbstractAction {

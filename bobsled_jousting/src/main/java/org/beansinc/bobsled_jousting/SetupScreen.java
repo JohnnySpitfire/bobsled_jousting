@@ -164,7 +164,12 @@ public class SetupScreen implements ChangeListener{
 					teamName = name;
 					weeks = numWeeks.getValue();
 					dif = difficulty.getValue();
-					enviroment = new GameEnviroment(teamName, weeks, dif);
+					try {
+						enviroment = new GameEnviroment(teamName, weeks, dif);
+					} catch (InvalidObjectAttributeType e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					try {
 						finishedWindow();
 					} catch (InvalidObjectAttributeType e1) {

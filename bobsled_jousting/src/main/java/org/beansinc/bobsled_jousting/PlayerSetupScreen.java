@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -24,8 +25,9 @@ import java.util.EnumMap;
 
 import javax.swing.Action;
 import java.awt.event.MouseAdapter;
+import javax.swing.JScrollBar;
 
-public class PlayerSetupScreen implements MouseListener{
+public class PlayerSetupScreen implements MouseListener, ActionListener {
 
 	private JFrame frmPlayersetupscreen;
 	private GameEnviroment enviroment;
@@ -157,6 +159,7 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN.add(textPositionIN);
 		
 		textNameVarIN = new JTextField();
+		textNameVarIN.addActionListener(this);
 		textNameVarIN.setHorizontalAlignment(SwingConstants.CENTER);
 		textNameVarIN.setText(""+initialContestants.get(initialIndex).getName());
 		textNameVarIN.setColumns(10);
@@ -217,8 +220,8 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN.add(textPositionVarIN);
 		
 		textModifiersVarIN = new JTextField();
-		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textModifiersVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
+		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textModifiersVarIN.setEditable(false);
 		textModifiersVarIN.setColumns(10);
 		textModifiersVarIN.setBounds(96, 157, 86, 38);
@@ -279,6 +282,7 @@ public class PlayerSetupScreen implements MouseListener{
 		textMoney.setColumns(10);
 		
 		textAfford = new JTextField();
+		textAfford.setEditable(false);
 		textAfford.setHorizontalAlignment(SwingConstants.CENTER);
 		textAfford.setText("");
 		textAfford.setBounds(89, 368, 86, 20);
@@ -286,6 +290,7 @@ public class PlayerSetupScreen implements MouseListener{
 		textAfford.setColumns(10);
 		
 		textRequiredPlayers = new JTextField();
+		textRequiredPlayers.setEditable(false);
 		textRequiredPlayers.setHorizontalAlignment(SwingConstants.CENTER);
 		textRequiredPlayers.setText("");
 		textRequiredPlayers.setBounds(227, 384, 212, 20);
@@ -320,6 +325,7 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN_1.add(textPositionAct);
 		
 		textNameVarAct = new JTextField();
+		textNameVarAct.addActionListener(this);
 		textNameVarAct.setText("");
 		textNameVarAct.setHorizontalAlignment(SwingConstants.CENTER);
 		textNameVarAct.setColumns(10);
@@ -490,10 +496,10 @@ public class PlayerSetupScreen implements MouseListener{
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			if (activeIndex == 0) {
+			if (activeIndex == 0 && 0 != (enviroment.getPlayerTeam().getActiveTeam().size())) {
 				activeIndex = enviroment.getPlayerTeam().getActiveTeam().size() - 1;
 			}
-			else {
+			else if (0 != (enviroment.getPlayerTeam().getActiveTeam().size())) {
 				activeIndex -= 1;
 			}
 		}
@@ -508,7 +514,7 @@ public class PlayerSetupScreen implements MouseListener{
 			if (activeIndex == (enviroment.getPlayerTeam().getActiveTeam().size() - 1)) {
 				activeIndex = 0;
 			}
-			else {
+			else if (0 != (enviroment.getPlayerTeam().getActiveTeam().size())){
 				activeIndex += 1;
 			}
 		}
@@ -524,13 +530,21 @@ public class PlayerSetupScreen implements MouseListener{
 				if (enviroment.getPlayerTeam().getTotalFunds() < initialContestants.get(initialIndex).getValue())  {
 					textAfford.setText("Insufficient Funds");
 				}
-				try {
-					enviroment.getPlayerTeam().purchaseContestant(initialContestants.get(initialIndex));
-				} catch (InvalidTeamSize e1) {
+				else {
+					try {
+						enviroment.getPlayerTeam().modifyTotalFunds(-initialContestants.get(initialIndex).getValue());
+						enviroment.getPlayerTeam().addActiveContestant(initialContestants.get(initialIndex));
+				} 
+					catch (InvalidTeamSize e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					}
 				}
+				
 				initialContestants.remove(initialIndex);
+				if (initialIndex == initialContestants.size() && initialIndex != 0) {
+					initialIndex -= 1;
+				}
 			}
 		}
 	}
@@ -542,9 +556,14 @@ public class PlayerSetupScreen implements MouseListener{
 		}
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() > 0) {
-			initialContestants.add(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
-			enviroment.getPlayerTeam().sellAsset(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
+				initialContestants.add(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
+				enviroment.getPlayerTeam().modifyTotalFunds(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
+				enviroment.getPlayerTeam().removeActiveContestant(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
+				if (activeIndex == enviroment.getPlayerTeam().getActiveTeam().size() && activeIndex != 0) {
+					activeIndex -= 1;
+				}
 			}
+			
 		}
 	}
 
@@ -585,6 +604,17 @@ public class PlayerSetupScreen implements MouseListener{
 		//initialContestants.get(initialIndex).setName(textNameVarIN.getText());
 		//enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (textNameVarIN.getText() != "" && textNameVarAct.getText() != "") {
+			initialContestants.get(initialIndex).setName(textNameVarIN.getText());
+			if (enviroment.getPlayerTeam().getActiveTeam().size() != 0) {
+				enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
+			}
+		}
+		
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -609,4 +639,6 @@ public class PlayerSetupScreen implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

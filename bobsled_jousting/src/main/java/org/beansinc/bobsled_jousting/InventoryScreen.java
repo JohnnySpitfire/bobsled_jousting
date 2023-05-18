@@ -85,7 +85,6 @@ public class InventoryScreen {
 		frmInventory.getContentPane().add(txtMoney);
 		txtMoney.setColumns(10);
 		
-		
 	}
 
 	private class SwingAction extends AbstractAction {
