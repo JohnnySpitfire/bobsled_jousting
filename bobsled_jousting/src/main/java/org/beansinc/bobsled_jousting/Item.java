@@ -7,7 +7,9 @@ import java.util.Random;
 
 public enum Item {
     
-    HEALTH_POTION(50);
+    HEALTH_POTION(50),
+    STANIMA_POTION(30),
+    ABSOLUT(42);
 
     public final int value;
 

@@ -6,7 +6,6 @@ import java.util.Random;
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
-import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
@@ -28,49 +27,36 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public void onContestantPosSwap(Contestant contestant, ContestantPosition newPos) {
+    public void swapContestantTeam(Contestant contestant) throws InvalidTeamSize {
 
-        Contestant modifiedContestant = contestant;
-        modifiedContestant.setPosition(newPos);
-        this.modifyActiveContestant(modifiedContestant, contestant);
+        if (this.getActiveTeam().contains(contestant)) {
+
+            this.removeActiveContestant(contestant);
+            this.addReserveContestant(contestant);
+
+        } else if (this.getReserveTeam().contains(contestant)) {
+
+            this.removeReserveContestant(contestant);
+            this.addActiveContestant(contestant);
+            
+        }
     }
 
     @Override
     public void purchaseContestant(Contestant newContestant) throws InvalidTeamSize {
         
-        this.addActiveContestant(newContestant);
+        this.addReserveContestant(newContestant);
         this.modifyTotalFunds(-newContestant.getValue());
         
     }
 
     @Override
-    public void onItemPurchase(Item item, int cost) {
+    public void purchaseItem(Item item, int cost) {
         this.modifyTotalFunds(-item.value);
         this.addItem(item);
     }
 
-    @Override
-    public <T> void sellAsset(T asset) {
-
-        if(asset instanceof Contestant){
-
-            sellContestant((Contestant) asset);
-
-        } else if (asset instanceof Item) {
-
-            try {
-
-                this.removeItem((Item) asset);
-                
-            } catch (ItemNotFound e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void sellContestant(Contestant asset) {
+    public void sellContestant(Contestant asset) {
 
         if(this.getActiveTeam().contains(asset)){
 
