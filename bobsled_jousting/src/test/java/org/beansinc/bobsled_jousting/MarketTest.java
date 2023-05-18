@@ -125,4 +125,37 @@ public class MarketTest {
 
     }
 
+    @RepeatedTest(200)
+    @Test
+    void testContestantTeamSwap() throws InvalidTeamSize {
+
+        
+
+        ArrayList<Contestant> oldActiveContestants = new ArrayList<Contestant>();
+        oldActiveContestants.addAll(team.getActiveTeam());
+
+        ArrayList<Contestant> oldReserveContestants = new ArrayList<Contestant>();
+        oldReserveContestants.addAll(team.getReserveTeam());
+
+        int rndActiveIndex = rnd.nextInt(team.getActiveTeam().size() - 1);
+        Contestant rndActiveContestant = team.getActiveTeam().get(rndActiveIndex);
+
+        int rndReserveIndex = rnd.nextInt(team.getReserveTeam().size() - 1);
+        Contestant rndReserveContestant = team.getReserveTeam().get(rndReserveIndex);
+
+        team.swapContestantTeam(rndActiveContestant);
+        team.swapContestantTeam(rndReserveContestant);
+
+
+        assertEquals(oldActiveContestants.size(), team.getActiveTeam().size());
+        assertNotEquals(oldActiveContestants, team.getActiveTeam());
+
+        assertEquals(oldReserveContestants.size(), team.getReserveTeam().size());
+        assertNotEquals(oldReserveContestants, team.getReserveTeam());
+
+        assertTrue(this.team.getReserveTeam().contains(rndActiveContestant));
+        assertTrue(this.team.getActiveTeam().contains(rndReserveContestant));
+
+    }
+
 }

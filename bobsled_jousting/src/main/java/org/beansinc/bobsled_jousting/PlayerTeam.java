@@ -27,11 +27,19 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public void onContestantPosSwap(Contestant contestant, ContestantPosition newPos) {
+    public void swapContestantTeam(Contestant contestant) throws InvalidTeamSize {
 
-        Contestant modifiedContestant = contestant;
-        modifiedContestant.setPosition(newPos);
-        this.modifyActiveContestant(modifiedContestant, contestant);
+        if (this.getActiveTeam().contains(contestant)) {
+
+            this.removeActiveContestant(contestant);
+            this.addReserveContestant(contestant);
+
+        } else if (this.getReserveTeam().contains(contestant)) {
+
+            this.removeReserveContestant(contestant);
+            this.addActiveContestant(contestant);
+            
+        }
     }
 
     @Override
@@ -43,7 +51,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public void onItemPurchase(Item item, int cost) {
+    public void purchaseItem(Item item, int cost) {
         this.modifyTotalFunds(-item.value);
         this.addItem(item);
     }
