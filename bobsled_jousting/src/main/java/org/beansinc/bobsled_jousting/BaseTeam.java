@@ -8,6 +8,8 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
+
+
 public class BaseTeam {
     
     public static final int MIN_ACTIVE_SIZE = 4;
@@ -26,6 +28,12 @@ public class BaseTeam {
 
     private Sled teamSled;
 
+    public BaseTeam() {
+        this.activeContestants = new ArrayList<Contestant>();
+        this.reserveContestants = new ArrayList<Contestant>();
+        this.teamMoney = 1000;
+    }
+  
     public final Random rnd;
 
     public BaseTeam(String name, Random random) throws InvalidObjectAttributeType {
@@ -37,7 +45,6 @@ public class BaseTeam {
         this.teamFunds = 1000;
         this.items = new ArrayList<Item>();
         this.rnd = random;
-
     }
 
     public BaseTeam(String name, int funds, Random random) throws InvalidTeamSize, InvalidObjectAttributeType {
@@ -78,7 +85,25 @@ public class BaseTeam {
     public ArrayList<Item> getItems(){
         return this.items;
     }
+    
+    public void setName(String incomingName) throws InvalidObjectAttributeType {
+    	teamName = incomingName;
+    	setSled(teamName);
+    }
+    
+    public void setSled(String name) throws InvalidObjectAttributeType {
+    	this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+    }
+    
+    public int getMoney() {
+    	return this.teamMoney;
+    }
 
+    public ArrayList<Contestant> getActiveTeam() {
+     
+        return this.activeContestants;
+      
+    }
     public void addItem(Item item) {
         this.items.add(item);
     }
@@ -167,5 +192,48 @@ public class BaseTeam {
         this.teamSled = newSled;
         
     }
-
+    
+    public void launchMainMenuScreen() {
+		MainMenuScreen mainWindow = new MainMenuScreen(this);
+	}
+    
+    public void closeMainMenuScreen(MainMenuScreen mainWindow) {
+		mainWindow.closeWindow();
+	}
+    
+    public void launchSetupScreen() {
+		SetupScreen setupWindow = new SetupScreen(this);
+	}
+    
+    public void closeSetupScreen(SetupScreen setupWindow) {
+		setupWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+    
+    public void launchInventoryScreen() {
+    	InventoryScreen inventoryWindow = new InventoryScreen(this);
+	}
+    
+    public void closeInventoryScreen(InventoryScreen inventoryWindow) {
+		inventoryWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+    
+    public void launchClubScreen() {
+    	InventoryScreen clubWindow = new InventoryScreen(this);
+	}
+    
+    public void closeClubScreen(ClubScreen clubWindow) {
+		clubWindow.closeWindow();
+		launchMainMenuScreen();
+	}
+    
+    public void launchStoreScreen() {
+    	StoreScreen storeWindow = new StoreScreen(this);
+	}
+    
+    public void closeStoreScreen(StoreScreen storeWindow) {
+		storeWindow.closeWindow();
+		launchMainMenuScreen();
+	}
 }
