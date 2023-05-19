@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 public class StoreScreen {
 
@@ -20,8 +21,8 @@ public class StoreScreen {
 	private JTextField txtMoney;
 	private final Action Back = new SwingAction();
 	private JTextField txtName;
-	private JButton btnDown;
-	private JButton btnUp;
+	private JButton btnSled;
+	private JButton btnItems;
 	
 	public StoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -95,13 +96,35 @@ public class StoreScreen {
 		frmStore.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
-		btnDown = new JButton("Down");
-		btnDown.setBounds(225, 271, 213, 117);
-		frmStore.getContentPane().add(btnDown);
+		btnSled = new JButton("Sled");
+		btnSled.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enviroment.launchSledStoreScreen();
+				closeWindow();
+			}
+		});
+		btnSled.setBounds(227, 42, 213, 367);
+		frmStore.getContentPane().add(btnSled);
 		
-		btnUp = new JButton("Up");
-		btnUp.setBounds(225, 106, 213, 126);
-		frmStore.getContentPane().add(btnUp);
+		btnItems = new JButton("Items");
+		btnItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enviroment.launchItemStoreScreen();
+				closeWindow();
+			}
+		});
+		btnItems.setBounds(10, 42, 213, 367);
+		frmStore.getContentPane().add(btnItems);
+		
+		JButton btnPlayers = new JButton("Players");
+		btnPlayers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enviroment.launchPlayerStoreScreen();
+				closeWindow();
+			}
+		});
+		btnPlayers.setBounds(446, 42, 213, 367);
+		frmStore.getContentPane().add(btnPlayers);
 	}
 
 	private class SwingAction extends AbstractAction {

@@ -87,9 +87,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
             Contestant randContestant = Utils.generateRandomContestant(enviroment.getRandom());
             initialContestants.add(randContestant);
         }
-		for(int i = 0; i < initialContestants.size(); i++) {   
-		    System.out.print(initialContestants.get(i));
-		} 
+		
 		initialize();
 		frmPlayersetupscreen.setVisible(true);
 	}

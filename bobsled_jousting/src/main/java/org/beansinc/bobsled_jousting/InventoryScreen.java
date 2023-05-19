@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
 
 public class InventoryScreen {
 
@@ -17,6 +21,13 @@ public class InventoryScreen {
 	private GameEnviroment enviroment;
 	private JTextField textName;
 	private JTextField txtMoney;
+	private JTextField textSled;
+	private JTextField txtSledName;
+	private JTextField textRam;
+	private JTextField txtArmour;
+	private JTextField txtSpeed;
+	private JTextField txtModifiers;
+	private JTextField txtCost;
 
 	
 	public InventoryScreen(GameEnviroment incomingEnviroment) {
@@ -85,8 +96,70 @@ public class InventoryScreen {
 		frmInventory.getContentPane().add(txtMoney);
 		txtMoney.setColumns(10);
 		
+		textSled = new JTextField();
+		textSled.setEditable(false);
+		textSled.setHorizontalAlignment(SwingConstants.CENTER);
+		textSled.setText("Sled");
+		textSled.setBounds(92, 59, 86, 20);
+		frmInventory.getContentPane().add(textSled);
+		textSled.setColumns(10);
+		
+		JPanel panelSled = new JPanel();
+		panelSled.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelSled.setBounds(43, 91, 191, 302);
+		frmInventory.getContentPane().add(panelSled);
+		panelSled.setLayout(null);
+		
+		txtSledName = new JTextField();
+		txtSledName.setEditable(false);
+		txtSledName.setText(""+enviroment.getPlayerTeam().getSled().getName());
+		txtSledName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSledName.setBounds(10, 11, 171, 27);
+		panelSled.add(txtSledName);
+		txtSledName.setColumns(10);
+		
+		textRam = new JTextField();
+		textRam.setEditable(false);
+		textRam.setText("Ram:"+enviroment.getPlayerTeam().getSled().getRam());
+		textRam.setHorizontalAlignment(SwingConstants.CENTER);
+		textRam.setColumns(10);
+		textRam.setBounds(10, 112, 171, 27);
+		panelSled.add(textRam);
+		
+		txtArmour = new JTextField();
+		txtArmour.setEditable(false);
+		txtArmour.setText("Armour:"+enviroment.getPlayerTeam().getSled().getAttributes(SledAttribute.ARMOUR));
+		txtArmour.setHorizontalAlignment(SwingConstants.CENTER);
+		txtArmour.setColumns(10);
+		txtArmour.setBounds(10, 150, 171, 27);
+		panelSled.add(txtArmour);
+		
+		txtSpeed = new JTextField();
+		txtSpeed.setEditable(false);
+		txtSpeed.setText("Speed:"+enviroment.getPlayerTeam().getSled().getAttributes(SledAttribute.SPEED));
+		txtSpeed.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSpeed.setColumns(10);
+		txtSpeed.setBounds(10, 188, 171, 27);
+		panelSled.add(txtSpeed);
+		
+		txtModifiers = new JTextField();
+		txtModifiers.setEditable(false);
+		txtModifiers.setText("Modifiers:"+enviroment.getPlayerTeam().getSled().getModifiers());
+		txtModifiers.setHorizontalAlignment(SwingConstants.CENTER);
+		txtModifiers.setColumns(10);
+		txtModifiers.setBounds(10, 226, 171, 27);
+		panelSled.add(txtModifiers);
+		
+		txtCost = new JTextField();
+		txtCost.setEditable(false);
+		txtCost.setText("Cost:"+enviroment.getPlayerTeam().getSled().getValue());
+		txtCost.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCost.setColumns(10);
+		txtCost.setBounds(10, 264, 171, 27);
+		panelSled.add(txtCost);
+		
 	}
-
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Back");
@@ -96,5 +169,6 @@ public class InventoryScreen {
 			finishedWindow();
 		}
 	}
+	
 }
 
