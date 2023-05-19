@@ -50,8 +50,8 @@ public class StadiumTest {
         ArrayList<Contestant> activePlayerTeam = playerTeam.getActiveTeam();
         ArrayList<Contestant> activeComputerTeam = computerTeam.getActiveTeam();
 
-        Map<SledAttribute, Integer> playerSledAttributes = playerTeam.getSled().getAttributes();
-        Map<SledAttribute, Integer> computerSledAttributes = computerTeam.getSled().getAttributes();
+        Map<SledAttribute, Integer> playerSledAttributes = playerTeam.getSled().getAttribute();
+        Map<SledAttribute, Integer> computerSledAttributes = computerTeam.getSled().getAttribute();
 
         for (SledAttribute attr: playerSledAttributes.keySet()){
 
@@ -61,8 +61,8 @@ public class StadiumTest {
 
         for(int i = 0; i < BaseTeam.MAX_ACTIVE_SIZE; i++){
 
-            Map<ContestantAttribute, Integer> playerContestantAttr = activePlayerTeam.get(i).getAttributes();
-            Map<ContestantAttribute, Integer> computerContestantAttr = activeComputerTeam.get(i).getAttributes();
+            Map<ContestantAttribute, Integer> playerContestantAttr = activePlayerTeam.get(i).getAttribute();
+            Map<ContestantAttribute, Integer> computerContestantAttr = activeComputerTeam.get(i).getAttribute();
 
             for(ContestantAttribute attr: playerContestantAttr.keySet()) {
 
