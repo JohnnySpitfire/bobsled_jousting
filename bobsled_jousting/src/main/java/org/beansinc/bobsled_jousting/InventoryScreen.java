@@ -120,7 +120,7 @@ public class InventoryScreen {
 		
 		textRam = new JTextField();
 		textRam.setEditable(false);
-		textRam.setText("Ram:"+enviroment.getPlayerTeam().getSled().getRam());
+		textRam.setText("Ram:");
 		textRam.setHorizontalAlignment(SwingConstants.CENTER);
 		textRam.setColumns(10);
 		textRam.setBounds(10, 112, 171, 27);
@@ -128,7 +128,7 @@ public class InventoryScreen {
 		
 		txtArmour = new JTextField();
 		txtArmour.setEditable(false);
-		txtArmour.setText("Armour:"+enviroment.getPlayerTeam().getSled().getAttributes(SledAttribute.ARMOUR));
+		txtArmour.setText("Armour:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.ARMOUR));
 		txtArmour.setHorizontalAlignment(SwingConstants.CENTER);
 		txtArmour.setColumns(10);
 		txtArmour.setBounds(10, 150, 171, 27);
@@ -136,7 +136,7 @@ public class InventoryScreen {
 		
 		txtSpeed = new JTextField();
 		txtSpeed.setEditable(false);
-		txtSpeed.setText("Speed:"+enviroment.getPlayerTeam().getSled().getAttributes(SledAttribute.SPEED));
+		txtSpeed.setText("Speed:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.SPEED));
 		txtSpeed.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSpeed.setColumns(10);
 		txtSpeed.setBounds(10, 188, 171, 27);

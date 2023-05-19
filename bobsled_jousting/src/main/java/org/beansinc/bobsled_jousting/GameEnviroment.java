@@ -128,7 +128,7 @@ public class GameEnviroment {
 	}
    
    public void launchClubScreen() {
-   	InventoryScreen clubWindow = new InventoryScreen(this);
+	   ClubScreen clubWindow = new ClubScreen(this);
 	}
    
    public void closeClubScreen(ClubScreen clubWindow) {
@@ -153,5 +153,38 @@ public class GameEnviroment {
 	  playerSetupWindow.closeWindow();
 	  launchMainMenuScreen();
 	}
+
+public void launchSledStoreScreen() {
+	SledStoreScreen sledStoreWindow = new SledStoreScreen(this);
+	
+}
+
+public void launchItemStoreScreen() {
+	ItemStoreScreen itemStoreWindow = new ItemStoreScreen(this);
+	
+}
+
+public void launchPlayerStoreScreen() {
+	PlayerStoreScreen playerStoreWindow = new PlayerStoreScreen(this);
+	
+}
+
+public void closeItemStoreScreen(ItemStoreScreen itemStoreScreen) {
+	itemStoreScreen.closeWindow();
+	launchStoreScreen();
+	
+}
+
+public void closePlayerStoreScreen(PlayerStoreScreen playerStoreScreen) {
+	playerStoreScreen.closeWindow();
+	launchStoreScreen();
+}
+
+public void closeSledStoreScreen(SledStoreScreen sledStoreScreen) {
+	sledStoreScreen.closeWindow();
+	launchStoreScreen();
+}
+  
+  
 }
 
