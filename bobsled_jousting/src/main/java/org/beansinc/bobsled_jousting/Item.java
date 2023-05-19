@@ -7,12 +7,17 @@ import java.util.Random;
 
 public enum Item {
     
-    HEALTH_POTION(50);
+    ATTACK_POTION(50, "Temporarily increases a contestants offence by 20 for one match"),
+    DEFENCE_POTION(50, "Temporarily increases a contestants defence by 20 for one match"),
+    STANIMA_POTION(50, "Temporarily increases a contestants stanima by 20 for one match"),
+    SLIME_BOMB(100, "Slimes an enemy sled decreasing their offence and stanima by 40");
 
     public final int value;
+    public final String description;
 
-    Item(int value){
+    Item(int value, String description){
         this.value = value;
+        this.description = description;
     }
 
     public static final List<Item> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
@@ -21,4 +26,6 @@ public enum Item {
          
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
+
+    
 }

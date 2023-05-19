@@ -10,9 +10,7 @@ import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
 public class BaseTeam {
     
-    public static final int MIN_ACTIVE_SIZE = 4;
-    public static final int MAX_ACTIVE_SIZE = 4; //pls change me :(
-    public static final int MIN_RESERVE_SIZE = 0;
+    public static final int MAX_ACTIVE_SIZE = 4;
     public static final int MAX_RESERVE_SIZE = 5;
 
     private String teamName;
@@ -33,7 +31,7 @@ public class BaseTeam {
         this.teamName = name;
         this.activeContestants = new ArrayList<Contestant>();
         this.reserveContestants = new ArrayList<Contestant>();
-        this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+        this.teamSled = new Sled(name + "'s Sled");
         this.teamFunds = 1000;
         this.items = new ArrayList<Item>();
         this.rnd = random;
@@ -45,7 +43,7 @@ public class BaseTeam {
         this.teamName = name;
         this.activeContestants = new ArrayList<Contestant>();
         this.reserveContestants = new ArrayList<Contestant>();
-        this.teamSled = new Sled(name + "'s Sled", Ram.WOODEN_RAM);
+        this.teamSled = new Sled(name + "'s Sled");
         this.teamFunds = funds;
         this.items = new ArrayList<Item>();
         this.rnd = random;
@@ -97,8 +95,8 @@ public class BaseTeam {
 
     public void addActiveContestant(Contestant contestant) throws InvalidTeamSize {
 
-        if(this.activeContestants.size() + 1 > MAX_ACTIVE_SIZE) {
-            throw new InvalidTeamSize();
+        if(this.activeContestants.size() > MAX_ACTIVE_SIZE) {
+            throw new InvalidTeamSize(this);
         }
 
         this.activeContestants.add(contestant);
@@ -106,8 +104,8 @@ public class BaseTeam {
 
     public void addReserveContestant(Contestant contestant) throws InvalidTeamSize {
 
-        if(this.reserveContestants.size() + 1 > MAX_RESERVE_SIZE) {
-            throw new InvalidTeamSize();
+        if(this.reserveContestants.size() > MAX_RESERVE_SIZE) {
+            throw new InvalidTeamSize(this);
         }
 
         this.reserveContestants.add(contestant);
@@ -123,8 +121,8 @@ public class BaseTeam {
 
     public void removeReserveContestant(Contestant contestant) throws InvalidTeamSize, ContestantNotFound {
 
-        if(this.reserveContestants.size() - 1 < MIN_RESERVE_SIZE) {
-            throw new InvalidTeamSize();
+        if(this.reserveContestants.size() - 1 < 0) {
+            throw new InvalidTeamSize(this);
         }
         if (!this.reserveContestants.contains(contestant)) {
             throw new ContestantNotFound(contestant, teamName);

@@ -6,13 +6,22 @@ import java.util.Random;
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
-import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
+
+    private int score;
 
     public PlayerTeam(String name, int funds, Random random) throws InvalidObjectAttributeType, InvalidTeamSize {
         super(name, funds, random);
     }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void modifyScore(int difference) {
+        this.score += difference;
+    } 
 
     @Override
     public void onWeekEnd() {
@@ -28,49 +37,36 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public void onContestantPosSwap(Contestant contestant, ContestantPosition newPos) {
+    public void swapContestantTeam(Contestant contestant) throws InvalidTeamSize {
 
-        Contestant modifiedContestant = contestant;
-        modifiedContestant.setPosition(newPos);
-        this.modifyActiveContestant(modifiedContestant, contestant);
+        if (this.getActiveTeam().contains(contestant)) {
+
+            this.removeActiveContestant(contestant);
+            this.addReserveContestant(contestant);
+
+        } else if (this.getReserveTeam().contains(contestant)) {
+
+            this.removeReserveContestant(contestant);
+            this.addActiveContestant(contestant);
+            
+        }
     }
 
     @Override
     public void purchaseContestant(Contestant newContestant) throws InvalidTeamSize {
         
-        this.addActiveContestant(newContestant);
+        this.addReserveContestant(newContestant);
         this.modifyTotalFunds(-newContestant.getValue());
         
     }
 
     @Override
-    public void onItemPurchase(Item item, int cost) {
+    public void purchaseItem(Item item, int cost) {
         this.modifyTotalFunds(-item.value);
         this.addItem(item);
     }
 
-    @Override
-    public <T> void sellAsset(T asset) {
-
-        if(asset instanceof Contestant){
-
-            sellContestant((Contestant) asset);
-
-        } else if (asset instanceof Item) {
-
-            try {
-
-                this.removeItem((Item) asset);
-                
-            } catch (ItemNotFound e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void sellContestant(Contestant asset) {
+    public void sellContestant(Contestant asset) {
 
         if(this.getActiveTeam().contains(asset)){
 
@@ -98,7 +94,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
     
     @Override
-    public Contestant getNewRandomContestant(float difficulty) throws InvalidObjectAttributeType, InvalidTeamSize {
+    public Contestant getNewRandomContestant(float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
         
         float newContestantChance = (this.rnd.nextFloat(0.01f, 0.1f)) 
                                     * MAX_RESERVE_SIZE - this.getReserveTeam().size()
@@ -106,7 +102,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         
         if(newContestantChance > 0.1) {
 
-            Contestant newContestant = Utils.generateRandomContestant(this.rnd);
+            Contestant newContestant = Utils.generateRandomContestant(this.rnd, currentWeek);
             this.addReserveContestant(newContestant);
             return newContestant;
         }
@@ -152,11 +148,14 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
                         val += contestantStatIncrease;
                         modifiedContestant.editStat(attr, val);
                     }
+                
             });
+
+            modifiedContestant.updateValue();
 
             boolean isNotModified = modifiedContestant.getAttributes().entrySet().stream().noneMatch(
                 entry -> 
-                    oldContestant.getAttributes(entry.getKey()) != entry.getValue()
+                    oldContestant.getAttribute(entry.getKey()) != entry.getValue()
                 );
 
             if(!isNotModified){

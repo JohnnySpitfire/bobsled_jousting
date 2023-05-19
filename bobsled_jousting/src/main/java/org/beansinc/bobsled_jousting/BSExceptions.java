@@ -41,8 +41,10 @@ public class BSExceptions {
 
     public static class InvalidTeamSize extends Exception {
 
-        public InvalidTeamSize() {
-            super("Team must contain between 4 and 10 contestants and no more than 5 reserves");
+        public InvalidTeamSize(BaseTeam team) {
+            super(String.format("Active team (%s contestants) cannot contain more than %s contestants and the reserve team (%s contestants) cannot contain more than %s contestants",
+                                team.getActiveTeam().size(), BaseTeam.MAX_ACTIVE_SIZE,
+                                team.getReserveTeam().size(), BaseTeam.MAX_RESERVE_SIZE));
         }
     }
 

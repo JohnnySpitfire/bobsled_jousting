@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
+import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
 public class Market {
     
@@ -14,29 +15,46 @@ public class Market {
     private ArrayList<Contestant> contestantSaleArr;
     private ArrayList<Item> itemSaleArr;
 
-    private Random rnd;
-
-    public Market(Random rnd) throws InvalidObjectAttributeType {
-
-        this.rnd = rnd;
+    public Market(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
         
         PLAYER_SALE_COUNT = 3 + rnd.nextInt(2);
         ITEM_SALE_COUNT = 3 + rnd.nextInt(2);
 
-        for (int i = 0; i < PLAYER_SALE_COUNT - 1; i++) {
-            Contestant newContestant = Utils.generateRandomContestant(rnd);
-            contestantSaleArr.add(newContestant);
+        this.contestantSaleArr = new ArrayList<Contestant>();
+        this.itemSaleArr = new ArrayList<Item>();
+
+        for (int i = 0; i < PLAYER_SALE_COUNT; i++) {
+            Contestant newContestant = Utils.generateRandomContestant(rnd, currentWeek);
+            this.contestantSaleArr.add(newContestant);
         }
 
-        for (int i = 0; i < ITEM_SALE_COUNT - 1; i++) {
+        for (int i = 0; i < ITEM_SALE_COUNT; i++) {
             Item newItem = Item.getRandomItem(rnd);
-            itemSaleArr.add(newItem);
+            this.itemSaleArr.add(newItem);
         }
     }
 
-    public <T> void sellAsset(PlayerTeam team, T asset) {
+    public ArrayList<Contestant> getContestantSaleArray() {
+        return this.contestantSaleArr;
+    }
 
-        team.sellAsset(asset);
+    public ArrayList<Item> getItemSaleArray() {
+        return this.itemSaleArr;
+    }
+
+    public <T> void sellAsset(PlayerTeam team, T asset) throws ItemNotFound {
+
+        if(asset instanceof Contestant && (team.getActiveTeam().contains(asset) || team.getReserveTeam().contains(asset))) {
+
+            Contestant contestant = (Contestant) asset;
+            team.sellContestant(contestant);
+
+        } else if (asset instanceof Item && team.getItems().contains(asset)) {
+
+            Item item = (Item) asset;
+            team.removeItem(item);
+            team.modifyTotalFunds(item.value);
+        }
     }
 
     public <T> void buyAsset(PlayerTeam team, T asset) throws InvalidTeamSize {
@@ -50,9 +68,9 @@ public class Market {
         } else if (asset instanceof Item && this.itemSaleArr.contains(asset)) {
 
             Item item = (Item) asset;
-            this.contestantSaleArr.remove(asset);
+            this.itemSaleArr.remove(asset);
             team.addItem(item);
-            team.modifyTotalFunds(item.value);
+            team.modifyTotalFunds(-item.value);
         }
     }
 }

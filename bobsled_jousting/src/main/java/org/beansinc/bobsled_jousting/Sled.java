@@ -4,51 +4,48 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 public class Sled extends TeamMember<SledAttribute, SledModifier>{
 
-    private Ram ram;
+    private static final int SLED_BASE_VALUE = 100;
+    private static final int SLED_ATTRIBUTE_VALUE_FACTOR = 2;
 
     public Sled(String name) throws InvalidObjectAttributeType{
        
         super(name, SledAttribute.class, SledModifier.class);
-        this.ram = Ram.WOODEN_RAM;
-        this.setValue(this.ram.value);
-
-    }
-    
-    public Sled(String name, Ram ramInput) throws InvalidObjectAttributeType{
-       
-        super(name, SledAttribute.class, SledModifier.class);
-        this.setValue(ramInput.value);
-
+        this.setValue(this.generateSledValue());
     }
 
-    public Sled(String name, Ram ramInput, Object[][] attributes) throws InvalidObjectAttributeType {
+    public Sled(String name, Object[][] attributes) throws InvalidObjectAttributeType {
 
         super(name, attributes, SledAttribute.class, SledModifier.class);
-        this.ram = ramInput;
-        this.setValue(ramInput.value);
+        this.setValue(this.generateSledValue());
     }
 
     
-    public Sled(String name, Ram ramInput, Object[][] attributes, SledModifier[] modifiers) throws InvalidObjectAttributeType {
+    public Sled(String name, Object[][] attributes, SledModifier[] modifiers) throws InvalidObjectAttributeType {
 
         super(name, attributes, SledAttribute.class, SledModifier.class);
+        this.setValue(this.generateSledValue());
+    }
 
-        int sledValue = ramInput.value;
+    public Sled(Object[][] attributes) throws InvalidObjectAttributeType {
 
-        this.ram = ramInput;
-        for(SledModifier modifier : modifiers) {
-            this.addModifier(modifier);
-            sledValue += modifier.value;
+        super("PLACEHOLDER",attributes, SledAttribute.class, SledModifier.class);
+        this.setValue(this.generateSledValue());
+    }
+
+    private int generateSledValue() {
+
+        int ramValue = SLED_BASE_VALUE;
+
+        for(SledAttribute attr: this.getAttributes().keySet()) {
+
+            ramValue += this.getAttribute(attr) * SLED_ATTRIBUTE_VALUE_FACTOR;
         }
-        
-        this.setValue(sledValue);
-    }
 
-    public Ram getRam() {
-        return this.ram;
-    }
+        for(SledModifier mod: this.getModifiers()){
 
-    public void setRam(Ram ramInput) {
-        this.ram = ramInput;
+            ramValue += mod.value * SLED_ATTRIBUTE_VALUE_FACTOR;
+        }
+
+        return ramValue;
     }
 }

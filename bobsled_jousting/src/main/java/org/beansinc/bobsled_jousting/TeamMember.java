@@ -71,7 +71,7 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         return this.objectAttributes;
     }
 
-    public int getAttributes(A stat) {
+    public int getAttribute(A stat) {
         return this.objectAttributes.get(stat);
     }
 
@@ -124,14 +124,19 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     private void setObjectEnumMapAndEnumSet(Class<A> attributes, Class<M> modifiers) throws InvalidObjectAttributeType {
+
         if(attributes == ContestantAttribute.class && modifiers == ContestantModifer.class) {
+
             this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<ContestantAttribute, Integer>(ContestantAttribute.class);
             this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(ContestantModifer.class);
 
         } else if (attributes == SledAttribute.class && modifiers == SledModifier.class) {
+
             this.objectAttributes = (EnumMap<A, Integer>) new EnumMap<SledAttribute, Integer>(SledAttribute.class);
             this.objectModifiers = (EnumSet<M>) EnumSet.noneOf(SledModifier.class);
+
         } else {
+            
             throw new InvalidObjectAttributeType(attributes.getClass(), modifiers.getClass(), name);
         }
     }
