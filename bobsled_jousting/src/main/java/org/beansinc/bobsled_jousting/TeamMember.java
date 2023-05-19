@@ -71,7 +71,7 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         return this.objectAttributes;
     }
 
-    public int getAttributes(A stat) {
+    public int getAttribute(A stat) {
         return this.objectAttributes.get(stat);
     }
 

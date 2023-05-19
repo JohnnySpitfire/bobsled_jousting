@@ -8,7 +8,6 @@ import java.util.Map;
 import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
 import org.beansinc.bobsled_jousting.ContestantAttribute;
 import org.beansinc.bobsled_jousting.ContestantModifer;
-import org.beansinc.bobsled_jousting.ContestantPosition;
 import org.beansinc.bobsled_jousting.Utils;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 

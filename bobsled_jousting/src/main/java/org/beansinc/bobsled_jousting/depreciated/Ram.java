@@ -1,4 +1,4 @@
-package org.beansinc.bobsled_jousting;
+package org.beansinc.bobsled_jousting.depreciated;
 
 public enum Ram {
     

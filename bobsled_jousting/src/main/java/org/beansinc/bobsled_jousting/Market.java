@@ -15,7 +15,7 @@ public class Market {
     private ArrayList<Contestant> contestantSaleArr;
     private ArrayList<Item> itemSaleArr;
 
-    public Market(Random rnd) throws InvalidObjectAttributeType {
+    public Market(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
         
         PLAYER_SALE_COUNT = 3 + rnd.nextInt(2);
         ITEM_SALE_COUNT = 3 + rnd.nextInt(2);
@@ -24,7 +24,7 @@ public class Market {
         this.itemSaleArr = new ArrayList<Item>();
 
         for (int i = 0; i < PLAYER_SALE_COUNT; i++) {
-            Contestant newContestant = Utils.generateRandomContestant(rnd);
+            Contestant newContestant = Utils.generateRandomContestant(rnd, currentWeek);
             this.contestantSaleArr.add(newContestant);
         }
 

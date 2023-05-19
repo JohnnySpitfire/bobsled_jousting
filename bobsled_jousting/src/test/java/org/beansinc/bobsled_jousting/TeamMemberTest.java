@@ -1,11 +1,9 @@
 package org.beansinc.bobsled_jousting;
 
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
@@ -38,8 +36,6 @@ public class TeamMemberTest {
 
         this.sledAttributes.put(SledAttribute.ARMOUR, 100);
         this.sledAttributes.put(SledAttribute.SPEED, 100);
-        this.sledAttributes.put(SledAttribute.SEATS, 5);
-
 
         assertEquals(this.contestantAttributes, this.contestant.getAttributes());
         assertEquals(this.sledAttributes, this.sled.getAttributes());
@@ -63,8 +59,7 @@ public class TeamMemberTest {
         this.sled = new TeamMember<SledAttribute, SledModifier>("test", 
 
         new Object[][] {{SledAttribute.ARMOUR, 54},
-                        {SledAttribute.SPEED, 34},
-                        {SledAttribute.SEATS, 37}},
+                        {SledAttribute.SPEED, 34}},
                         
         SledAttribute.class,
          SledModifier.class);
@@ -75,7 +70,6 @@ public class TeamMemberTest {
  
          this.sledAttributes.put(SledAttribute.ARMOUR, 54);
          this.sledAttributes.put(SledAttribute.SPEED, 34);
-         this.sledAttributes.put(SledAttribute.SEATS, 37);
 
          assertEquals(this.contestantAttributes, this.contestant.getAttributes());
          assertEquals(this.sledAttributes, this.sled.getAttributes());        

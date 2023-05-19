@@ -6,12 +6,17 @@ import java.util.List;
 import java.util.Random;
 
 public enum ContestantModifer {
-    SLEEPY,
-    POISONED,
-    PARALYSED,
-    DRUNK,
-    TIPSY,
-    INJURED;
+
+    SLEEPY(-10),
+    POISONED(-30),
+    PARALYSED(-20),
+    INJURED(-15);
+
+    public final int value;
+
+    ContestantModifer(int value){
+        this.value = value;
+    }
 
     public static final List<ContestantModifer> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 

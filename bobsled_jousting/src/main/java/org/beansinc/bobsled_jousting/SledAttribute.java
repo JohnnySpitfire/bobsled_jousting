@@ -8,14 +8,12 @@ import java.util.Random;
 public enum SledAttribute {
     
     ARMOUR,
-    SPEED,
-    SEATS;
+    SPEED;
 
     public static Object[][] getDefaultAttributes(){
         return new Object[][]{
             {ARMOUR, 100},
             {SPEED, 100},
-            {SEATS, 5}
         };
     }
 
