@@ -18,6 +18,7 @@ public class GameEnviroment {
    private GameEnviroment game;
 
    Market market;
+   Stadium stadium;
 
    Random rnd;
 
@@ -25,9 +26,10 @@ public class GameEnviroment {
 
       this.rnd = new Random();
       this.totalSeasonWeeks = totalWeeks;
+      this.currentWeek = 0;
       this.difficulty = 1f - (float) (difficulty)/100f;
 
-      this.market = new Market(this.rnd);
+      this.market = new Market(this.rnd, this.currentWeek);
 
       int startingFunds = (int) (2000 + 1000 * this.difficulty);
 
@@ -86,8 +88,16 @@ public class GameEnviroment {
    }
 
    public void setMarket() throws InvalidObjectAttributeType {
-      this.market = new Market(this.rnd);
-   }   
+      this.market = new Market(this.rnd, this.currentWeek);
+   }
+   
+   public Stadium getStadium() {
+      return this.stadium;
+   }
+
+   public void setStadium() throws InvalidObjectAttributeType, InvalidTeamSize {
+      this.stadium = new Stadium(this.rnd, this.difficulty, this.currentWeek);
+   }
    
    public static void launchSetupScreen() {
 

@@ -82,7 +82,7 @@ public class PlayerSetupScreen implements MouseListener{
 	public PlayerSetupScreen(GameEnviroment incomingEnviroment) throws InvalidObjectAttributeType {
 		enviroment = incomingEnviroment;
 		for(int i=0; i<15; i++){
-            Contestant randContestant = Utils.generateRandomContestant(enviroment.getRandom());
+            Contestant randContestant = Utils.generateRandomContestant(enviroment.getRandom(), enviroment.getCurrentWeek());
             initialContestants.add(randContestant);
         }
 		for(int i = 0; i < initialContestants.size(); i++) {   
@@ -185,7 +185,7 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN.add(textStanimaIN);
 		
 		textOffenceVarIN = new JTextField();
-		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.OFFENCE));
+		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textOffenceVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
 		textOffenceVarIN.setEditable(false);
 		textOffenceVarIN.setColumns(10);
@@ -193,7 +193,7 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN.add(textOffenceVarIN);
 		
 		textDefenceVarIN = new JTextField();
-		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.DEFENCE));
+		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.DEFENCE));
 		textDefenceVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
 		textDefenceVarIN.setEditable(false);
 		textDefenceVarIN.setColumns(10);
@@ -201,7 +201,7 @@ public class PlayerSetupScreen implements MouseListener{
 		panelIN.add(textDefenceVarIN);
 		
 		textStanimaVarIN = new JTextField();
-		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.STANIMA));
+		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
 		textStanimaVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
 		textStanimaVarIN.setEditable(false);
 		textStanimaVarIN.setColumns(10);
@@ -556,9 +556,9 @@ public class PlayerSetupScreen implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		textNameVarIN.setText(""+initialContestants.get(initialIndex).getName());
-		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.OFFENCE));
-		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.DEFENCE));
-		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttributes(ContestantAttribute.STANIMA));
+		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.OFFENCE));
+		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.DEFENCE));
+		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
 		textPositionVarIN.setText(""+initialContestants.get(initialIndex).getPosition());
 		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textCostVarIN.setText(""+initialContestants.get(initialIndex).getValue());
@@ -575,9 +575,9 @@ public class PlayerSetupScreen implements MouseListener{
 		}
 		else {
 		textNameVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getName());
-		textOffenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttributes(ContestantAttribute.OFFENCE));
-		textDefenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttributes(ContestantAttribute.DEFENCE));
-		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttributes(ContestantAttribute.STANIMA));
+		textOffenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.OFFENCE));
+		textDefenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.DEFENCE));
+		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.STANIMA));
 		textPositionVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getPosition());
 		textModifiersVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getModifiers());
 		textCostVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());

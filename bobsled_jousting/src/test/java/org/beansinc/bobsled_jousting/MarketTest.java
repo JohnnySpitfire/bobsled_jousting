@@ -25,15 +25,16 @@ public class MarketTest {
     void initalize() throws InvalidObjectAttributeType, InvalidTeamSize {
         
         rnd = new Random();
-        market = new Market(rnd);
+        int currentWeek = rnd.nextInt(14);
+        market = new Market(rnd, 0);
         team = new PlayerTeam("test", 0, rnd);
 
-        for(int i = 0; i < 4; i++) {
-            team.addActiveContestant(Utils.generateRandomContestant(rnd));
+        for(int i = 0; i < BaseTeam.MAX_ACTIVE_SIZE; i++) {
+            team.addActiveContestant(Utils.generateRandomContestant(rnd,currentWeek));
         }
 
-        for(int i = 0; i < 10; i++) {
-            team.addReserveContestant(Utils.generateRandomContestant(rnd));
+        for(int i = 0; i < BaseTeam.MAX_RESERVE_SIZE; i++) {
+            team.addReserveContestant(Utils.generateRandomContestant(rnd,currentWeek));
         }
 
         for(int i = 0; i < 10; i++) {
