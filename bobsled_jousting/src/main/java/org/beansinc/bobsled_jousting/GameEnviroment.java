@@ -149,7 +149,8 @@ public class GameEnviroment {
 	   PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(game);
 	}
   
-  public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) {
+  public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) throws InvalidObjectAttributeType {
+	  market = new Market(rnd, 0);
 	  playerSetupWindow.closeWindow();
 	  launchMainMenuScreen();
 	}

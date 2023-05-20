@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
+
 
 public class PlayerStoreScreen {
 
@@ -18,6 +20,8 @@ public class PlayerStoreScreen {
 	private JTextField txtMoney;
 	private final Action Back = new SwingAction();
 	private JTextField txtName;
+	
+	private int contestantIndex = 0;
 	
 	public PlayerStoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;

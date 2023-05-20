@@ -49,8 +49,6 @@ public class ClubScreen implements MouseListener {
 	private JButton btnRAct;
 	private JTextField textActiveIndex;
 	
-	private int activeIndex = 0;
-	private int reserveIndex = 0;
 	private JPanel panelAct_1;
 	private JTextField textNameRes;
 	private JTextField textOffenceRes;
@@ -73,6 +71,9 @@ public class ClubScreen implements MouseListener {
 	private JTextField txtIsEmpty;
 	private JTextField txtIsFull;
 	private JButton btnReserve;
+	
+	private int activeIndex = 0;
+	private int reserveIndex = 0;
 
 	
 	public ClubScreen(GameEnviroment incomingEnviroment) {
