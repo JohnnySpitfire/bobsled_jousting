@@ -252,15 +252,17 @@ public class PlayerStoreScreen implements MouseListener{
 		btnPurchase.addMouseListener(this);
 		btnPurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (enviroment.getMarket().getContestantSaleArray().size() != 0 && enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getValue()) {
-					try {
-						enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getContestantSaleArray().get(contestantIndex));
-					} catch (InvalidTeamSize e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					if (contestantIndex == enviroment.getMarket().getContestantSaleArray().size() && enviroment.getMarket().getContestantSaleArray().size() != 0) {
-						contestantIndex -= 1;
+				if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() < 9) {
+					if (enviroment.getMarket().getContestantSaleArray().size() != 0 && enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getValue()) {
+						try {
+							enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getContestantSaleArray().get(contestantIndex));
+						} catch (InvalidTeamSize e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						if (contestantIndex == enviroment.getMarket().getContestantSaleArray().size() && enviroment.getMarket().getContestantSaleArray().size() != 0) {
+							contestantIndex -= 1;
+						}
 					}
 				}
 			}
@@ -271,14 +273,12 @@ public class PlayerStoreScreen implements MouseListener{
 		textNoMoney = new JTextField();
 		textNoMoney.setEditable(false);
 		textNoMoney.setHorizontalAlignment(SwingConstants.CENTER);
-		textNoMoney.setText("Poor");
 		textNoMoney.setBounds(47, 215, 124, 20);
 		frmPlayerStore.getContentPane().add(textNoMoney);
 		textNoMoney.setColumns(10);
 		
 		textPlayersFull = new JTextField();
 		textPlayersFull.setEditable(false);
-		textPlayersFull.setText("Team full");
 		textPlayersFull.setHorizontalAlignment(SwingConstants.CENTER);
 		textPlayersFull.setBounds(469, 215, 130, 20);
 		frmPlayerStore.getContentPane().add(textPlayersFull);

@@ -275,7 +275,7 @@ public class ClubScreen implements MouseListener {
 		btnSwapRes.addMouseListener(this);
 		btnSwapRes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (enviroment.getPlayerTeam().getReserveTeam().size() > 0) {
+				if (enviroment.getPlayerTeam().getReserveTeam().size() > 0 && enviroment.getPlayerTeam().getActiveTeam().size() < 4) {
 					try {
 						enviroment.getPlayerTeam().swapContestantTeam(enviroment.getPlayerTeam().getReserveTeam().get(reserveIndex));
 						if (reserveIndex == enviroment.getPlayerTeam().getReserveTeam().size() && enviroment.getPlayerTeam().getReserveTeam().size() != 0) {
@@ -455,7 +455,7 @@ public class ClubScreen implements MouseListener {
 		btnSwapAct.addMouseListener(this);
 		btnSwapAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (enviroment.getPlayerTeam().getActiveTeam().size() > 0) {
+				if (enviroment.getPlayerTeam().getActiveTeam().size() > 0 && enviroment.getPlayerTeam().getReserveTeam().size() < 6) {
 					try {
 						enviroment.getPlayerTeam().swapContestantTeam(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
 						if (activeIndex == enviroment.getPlayerTeam().getActiveTeam().size() && enviroment.getPlayerTeam().getActiveTeam().size() != 0) {
@@ -521,7 +521,7 @@ public class ClubScreen implements MouseListener {
 			textCostResVar.setText("");
 			textReserveIndex.setText(""+reserveIndex);
 			txtResState.setText("No Reserves");
-		}else if (enviroment.getPlayerTeam().getReserveTeam().size() == 4) {
+		}else if (enviroment.getPlayerTeam().getReserveTeam().size() == 5) {
 			txtResState.setText("Reserves Full");
 		}else {
 			txtResState.setText("");
