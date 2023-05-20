@@ -118,7 +118,7 @@ public class ItemStoreScreen implements MouseListener{
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getItemSaleArray().get(itemIndex).value) {
+					if (enviroment.getMarket().getItemSaleArray().size() != 0 && enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getItemSaleArray().get(itemIndex).value ) {
 						enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getItemSaleArray().get(itemIndex));
 						if (itemIndex == enviroment.getMarket().getItemSaleArray().size() && enviroment.getMarket().getItemSaleArray().size() != 0) {
 							itemIndex -= 1;
