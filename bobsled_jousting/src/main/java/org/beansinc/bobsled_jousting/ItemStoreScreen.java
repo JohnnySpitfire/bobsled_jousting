@@ -123,10 +123,7 @@ public class ItemStoreScreen implements MouseListener{
 						if (itemIndex == enviroment.getMarket().getItemSaleArray().size() && enviroment.getMarket().getItemSaleArray().size() != 0) {
 							itemIndex -= 1;
 						}
-						
 					}
-					
-					
 				} catch (InvalidTeamSize e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
