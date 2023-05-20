@@ -23,7 +23,7 @@ public class ItemStoreScreen implements MouseListener{
 	private JTextField txtMoney;
 	private final Action Back = new SwingAction();
 	private JTextField txtName;
-	private JTextField textItemDescription;
+	private JTextField textItemName;
 	
 	private int itemIndex = 0;
 	
@@ -106,13 +106,12 @@ public class ItemStoreScreen implements MouseListener{
 		frmItemStore.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
-		textItemDescription = new JTextField();
-		textItemDescription.setEditable(false);
-		textItemDescription.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
-		textItemDescription.setHorizontalAlignment(SwingConstants.CENTER);
-		textItemDescription.setBounds(259, 97, 115, 49);
-		frmItemStore.getContentPane().add(textItemDescription);
-		textItemDescription.setColumns(10);
+		textItemName = new JTextField();
+		textItemName.setEditable(false);
+		textItemName.setHorizontalAlignment(SwingConstants.CENTER);
+		textItemName.setBounds(259, 97, 115, 49);
+		frmItemStore.getContentPane().add(textItemName);
+		textItemName.setColumns(10);
 		
 		JButton btnBuy = new JButton("Buy");
 		btnBuy.addMouseListener(this);
@@ -170,18 +169,28 @@ public class ItemStoreScreen implements MouseListener{
 		textPrice = new JTextField();
 		textPrice.setEditable(false);
 		textPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		textPrice.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).value);
 		textPrice.setBounds(269, 154, 86, 20);
 		frmItemStore.getContentPane().add(textPrice);
 		textPrice.setColumns(10);
 		
 		textInformation = new JTextField();
 		textInformation.setHorizontalAlignment(SwingConstants.CENTER);
-		textInformation.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).description);
 		textInformation.setEditable(false);
-		textInformation.setBounds(190, 185, 249, 20);
+		textInformation.setBounds(112, 185, 398, 30);
 		frmItemStore.getContentPane().add(textInformation);
 		textInformation.setColumns(10);
+		
+		if (enviroment.getMarket().getItemSaleArray().size() > 0) {
+			textItemName.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
+			textPrice.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).value);
+			textInformation.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).description);
+		}
+		
+		if (enviroment.getMarket().getItemSaleArray().size() == 0) {
+			textItemName.setText("No More Items");
+			textPrice.setText("");
+			textInformation.setText("");
+		}
 	}
 
 	private class SwingAction extends AbstractAction {
@@ -197,18 +206,17 @@ public class ItemStoreScreen implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (enviroment.getMarket().getItemSaleArray().size() > 0) {
-			txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
-			textItemDescription.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
+			textItemName.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
 			textPrice.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).value);
 			textInformation.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).description);
 		}
 		
 		if (enviroment.getMarket().getItemSaleArray().size() == 0) {
-			txtMoney.setText("");
-			textItemDescription.setText("");
+			textItemName.setText("No More Items");
 			textPrice.setText("");
 			textInformation.setText("");
 		}
+		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 	}
 
 	@Override
