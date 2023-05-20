@@ -124,7 +124,7 @@ public class SetupScreen implements ChangeListener{
 		numWeeks.setValue(1);
 		numWeeks.setSnapToTicks(true);
 		numWeeks.setMinorTickSpacing(1);
-		numWeeks.setMinimum(1);
+		numWeeks.setMinimum(7);
 		numWeeks.setMaximum(14);
 		numWeeks.setBounds(172, 227, 200, 26);
 		frmSetupscreen.getContentPane().add(numWeeks);

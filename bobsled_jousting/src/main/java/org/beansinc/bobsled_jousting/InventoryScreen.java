@@ -11,10 +11,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
+import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class InventoryScreen {
+public class InventoryScreen implements MouseListener{
 
 	private JFrame frmInventory;
 	private final Action Back = new SwingAction();
@@ -23,12 +30,19 @@ public class InventoryScreen {
 	private JTextField txtMoney;
 	private JTextField textSled;
 	private JTextField txtSledName;
-	private JTextField textRam;
-	private JTextField txtArmour;
-	private JTextField txtSpeed;
-	private JTextField txtModifiers;
-	private JTextField txtCost;
+	private JTextField txtSledArmour;
+	private JTextField txtSledSpeed;
+	private JTextField txtSledModifiers;
+	private JTextField txtSledCost;
+	private JButton btnSell;
+	private JButton btnLeft;
+	private JTextField textItemInformation;
+	private JTextField textItemValue;
+	private JTextField textItemName;
+	private JButton btnRight;
 
+	
+	private int itemIndex;
 	
 	public InventoryScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -91,7 +105,6 @@ public class InventoryScreen {
 		txtMoney = new JTextField();
 		txtMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMoney.setEditable(false);
-		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 		txtMoney.setBounds(573, 11, 86, 20);
 		frmInventory.getContentPane().add(txtMoney);
 		txtMoney.setColumns(10);
@@ -112,52 +125,114 @@ public class InventoryScreen {
 		
 		txtSledName = new JTextField();
 		txtSledName.setEditable(false);
-		txtSledName.setText(""+enviroment.getPlayerTeam().getSled().getName());
+		
 		txtSledName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSledName.setBounds(10, 11, 171, 27);
 		panelSled.add(txtSledName);
 		txtSledName.setColumns(10);
 		
-		textRam = new JTextField();
-		textRam.setEditable(false);
-		textRam.setText("Ram:");
-		textRam.setHorizontalAlignment(SwingConstants.CENTER);
-		textRam.setColumns(10);
-		textRam.setBounds(10, 112, 171, 27);
-		panelSled.add(textRam);
+		txtSledArmour = new JTextField();
+		txtSledArmour.setEditable(false);
+		txtSledArmour.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSledArmour.setColumns(10);
+		txtSledArmour.setBounds(10, 150, 171, 27);
+		panelSled.add(txtSledArmour);
 		
-		txtArmour = new JTextField();
-		txtArmour.setEditable(false);
-		txtArmour.setText("Armour:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.ARMOUR));
-		txtArmour.setHorizontalAlignment(SwingConstants.CENTER);
-		txtArmour.setColumns(10);
-		txtArmour.setBounds(10, 150, 171, 27);
-		panelSled.add(txtArmour);
+		txtSledSpeed = new JTextField();
+		txtSledSpeed.setEditable(false);
+		txtSledSpeed.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSledSpeed.setColumns(10);
+		txtSledSpeed.setBounds(10, 188, 171, 27);
+		panelSled.add(txtSledSpeed);
 		
-		txtSpeed = new JTextField();
-		txtSpeed.setEditable(false);
-		txtSpeed.setText("Speed:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.SPEED));
-		txtSpeed.setHorizontalAlignment(SwingConstants.CENTER);
-		txtSpeed.setColumns(10);
-		txtSpeed.setBounds(10, 188, 171, 27);
-		panelSled.add(txtSpeed);
+		txtSledModifiers = new JTextField();
+		txtSledModifiers.setEditable(false);
+		txtSledModifiers.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSledModifiers.setColumns(10);
+		txtSledModifiers.setBounds(10, 226, 171, 27);
+		panelSled.add(txtSledModifiers);
 		
-		txtModifiers = new JTextField();
-		txtModifiers.setEditable(false);
-		txtModifiers.setText("Modifiers:"+enviroment.getPlayerTeam().getSled().getModifiers());
-		txtModifiers.setHorizontalAlignment(SwingConstants.CENTER);
-		txtModifiers.setColumns(10);
-		txtModifiers.setBounds(10, 226, 171, 27);
-		panelSled.add(txtModifiers);
+		txtSledCost = new JTextField();
+		txtSledCost.setEditable(false);
 		
-		txtCost = new JTextField();
-		txtCost.setEditable(false);
-		txtCost.setText("Cost:"+enviroment.getPlayerTeam().getSled().getValue());
-		txtCost.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCost.setColumns(10);
-		txtCost.setBounds(10, 264, 171, 27);
-		panelSled.add(txtCost);
+		txtSledCost.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSledCost.setColumns(10);
+		txtSledCost.setBounds(10, 264, 171, 27);
+		panelSled.add(txtSledCost);
 		
+		btnSell = new JButton("Sell");
+		btnSell.addMouseListener(this);
+		btnSell.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					if (enviroment.getPlayerTeam().getItems().size() != 0) {
+						try {
+							enviroment.getMarket().sellAsset(enviroment.getPlayerTeam(), enviroment.getPlayerTeam().getItems().get(itemIndex));
+						} catch (ItemNotFound e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						if (itemIndex == enviroment.getPlayerTeam().getItems().size() && enviroment.getPlayerTeam().getItems().size() != 0) {
+							itemIndex -= 1;
+						}
+					}
+			}
+		});
+		btnSell.setBounds(418, 286, 115, 63);
+		frmInventory.getContentPane().add(btnSell);
+		
+		btnLeft = new JButton("<==");
+		btnLeft.addMouseListener(this);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (itemIndex == 0 && 0 != (enviroment.getPlayerTeam().getItems().size())) {
+					itemIndex = enviroment.getPlayerTeam().getItems().size() - 1;
+				}
+				else if (0 != (enviroment.getPlayerTeam().getItems().size())) {
+					itemIndex -= 1;
+				}
+			}
+		});
+		btnLeft.setBounds(365, 200, 60, 23);
+		frmInventory.getContentPane().add(btnLeft);
+		
+		textItemInformation = new JTextField();
+		textItemInformation.setHorizontalAlignment(SwingConstants.CENTER);
+		textItemInformation.setEditable(false);
+		textItemInformation.setColumns(10);
+		textItemInformation.setBounds(261, 151, 398, 30);
+		frmInventory.getContentPane().add(textItemInformation);
+		
+		textItemValue = new JTextField();
+		textItemValue.setHorizontalAlignment(SwingConstants.CENTER);
+		textItemValue.setEditable(false);
+		textItemValue.setColumns(10);
+		textItemValue.setBounds(421, 123, 86, 20);
+		frmInventory.getContentPane().add(textItemValue);
+		
+		textItemName = new JTextField();
+		textItemName.setHorizontalAlignment(SwingConstants.CENTER);
+		textItemName.setEditable(false);
+		textItemName.setColumns(10);
+		textItemName.setBounds(404, 59, 115, 49);
+		frmInventory.getContentPane().add(textItemName);
+		
+		btnRight = new JButton("==>");
+		btnRight.addMouseListener(this);
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (itemIndex == (enviroment.getPlayerTeam().getItems().size() - 1)) {
+					itemIndex = 0;
+				}
+				else if (0 != (enviroment.getPlayerTeam().getItems().size())){
+					itemIndex += 1;
+				}
+			}
+		});
+		btnRight.setBounds(513, 200, 60, 23);
+		frmInventory.getContentPane().add(btnRight);
+		
+		mouseClicked(null);  //Text Manager
 	}
 	
 	private class SwingAction extends AbstractAction {
@@ -168,6 +243,52 @@ public class InventoryScreen {
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		txtSledName.setText(""+enviroment.getPlayerTeam().getSled().getName());
+		txtSledCost.setText("Cost:"+enviroment.getPlayerTeam().getSled().getValue());
+		txtSledArmour.setText("Armour:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.ARMOUR));
+		txtSledSpeed.setText("Speed:"+enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.SPEED));
+		txtSledModifiers.setText("Modifiers:"+enviroment.getPlayerTeam().getSled().getModifiers());
+		
+		if (enviroment.getPlayerTeam().getItems().size() > 0) {
+			textItemName.setText(""+enviroment.getPlayerTeam().getItems().get(itemIndex).name());
+			textItemValue.setText(""+enviroment.getPlayerTeam().getItems().get(itemIndex).value);
+			textItemInformation.setText(""+enviroment.getPlayerTeam().getItems().get(itemIndex).description);
+		}else {
+			textItemName.setText("No Items Owned");
+			textItemValue.setText("");
+			textItemInformation.setText("");
+			
+		}
+		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
