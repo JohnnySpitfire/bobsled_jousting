@@ -33,7 +33,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	private GameEnviroment enviroment;
 	private JTextField textNameIN;
 	private JTextField textOffenceIN;
-	private JTextField textPositionIN;
 	private JTextField textNameVarIN;
 	private JTextField textModifiersIN;
 	private JTextField textDefenceIN;
@@ -41,7 +40,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	private JTextField textOffenceVarIN;
 	private JTextField textDefenceVarIN;
 	private JTextField textStanimaVarIN;
-	private JTextField textPositionVarIN;
 	private JTextField textModifiersVarIN;
 	private JTextField textCostIN;
 	private JTextField textCostVarIN;
@@ -49,7 +47,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	
 	private JTextField textNameAct;
 	private JTextField textOffenceAct;
-	private JTextField textPositionAct;
 	private JTextField textNameVarAct;
 	private JTextField textModifiersAct;
 	private JTextField textDefenceAct;
@@ -57,7 +54,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	private JTextField textOffenceVarAct;
 	private JTextField textDefenceVarAct;
 	private JTextField textStanimaVarAct;
-	private JTextField textPositionVarAct;
 	private JTextField textModifiersVarAct;
 	private JTextField textCostAct;
 	private JTextField textCostVarAct;
@@ -149,13 +145,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textOffenceIN.setBounds(10, 42, 76, 20);
 		panelIN.add(textOffenceIN);
 		
-		textPositionIN = new JTextField();
-		textPositionIN.setText("Position:");
-		textPositionIN.setEditable(false);
-		textPositionIN.setColumns(10);
-		textPositionIN.setBounds(10, 126, 76, 20);
-		panelIN.add(textPositionIN);
-		
 		textNameVarIN = new JTextField();
 		textNameVarIN.addActionListener(this);
 		textNameVarIN.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,7 +157,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textModifiersIN.setText("Modifiers:");
 		textModifiersIN.setEditable(false);
 		textModifiersIN.setColumns(10);
-		textModifiersIN.setBounds(10, 157, 76, 20);
+		textModifiersIN.setBounds(10, 126, 76, 20);
 		panelIN.add(textModifiersIN);
 		
 		textDefenceIN = new JTextField();
@@ -209,20 +198,12 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textStanimaVarIN.setBounds(96, 93, 86, 20);
 		panelIN.add(textStanimaVarIN);
 		
-		textPositionVarIN = new JTextField();
-		textPositionVarIN.setText("");
-		textPositionVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
-		textPositionVarIN.setEditable(false);
-		textPositionVarIN.setColumns(10);
-		textPositionVarIN.setBounds(96, 126, 86, 20);
-		panelIN.add(textPositionVarIN);
-		
 		textModifiersVarIN = new JTextField();
 		textModifiersVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
 		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textModifiersVarIN.setEditable(false);
 		textModifiersVarIN.setColumns(10);
-		textModifiersVarIN.setBounds(96, 157, 86, 38);
+		textModifiersVarIN.setBounds(96, 126, 86, 38);
 		panelIN.add(textModifiersVarIN);
 		
 		textCostIN = new JTextField();
@@ -315,13 +296,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textOffenceAct.setBounds(10, 42, 76, 20);
 		panelIN_1.add(textOffenceAct);
 		
-		textPositionAct = new JTextField();
-		textPositionAct.setText("Position:");
-		textPositionAct.setEditable(false);
-		textPositionAct.setColumns(10);
-		textPositionAct.setBounds(10, 126, 76, 20);
-		panelIN_1.add(textPositionAct);
-		
 		textNameVarAct = new JTextField();
 		textNameVarAct.addActionListener(this);
 		textNameVarAct.setText("");
@@ -334,7 +308,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textModifiersAct.setText("Modifiers:");
 		textModifiersAct.setEditable(false);
 		textModifiersAct.setColumns(10);
-		textModifiersAct.setBounds(10, 157, 76, 20);
+		textModifiersAct.setBounds(10, 126, 76, 20);
 		panelIN_1.add(textModifiersAct);
 		
 		textDefenceAct = new JTextField();
@@ -375,20 +349,12 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textStanimaVarAct.setBounds(96, 93, 86, 20);
 		panelIN_1.add(textStanimaVarAct);
 		
-		textPositionVarAct = new JTextField();
-		textPositionVarAct.setText("");
-		textPositionVarAct.setHorizontalAlignment(SwingConstants.RIGHT);
-		textPositionVarAct.setEditable(false);
-		textPositionVarAct.setColumns(10);
-		textPositionVarAct.setBounds(96, 126, 86, 20);
-		panelIN_1.add(textPositionVarAct);
-		
 		textModifiersVarAct = new JTextField();
 		textModifiersVarAct.setText("");
 		textModifiersVarAct.setHorizontalAlignment(SwingConstants.RIGHT);
 		textModifiersVarAct.setEditable(false);
 		textModifiersVarAct.setColumns(10);
-		textModifiersVarAct.setBounds(96, 157, 86, 38);
+		textModifiersVarAct.setBounds(96, 126, 86, 42);
 		panelIN_1.add(textModifiersVarAct);
 		
 		textCostAct = new JTextField();
@@ -572,7 +538,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.DEFENCE));
 		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
-		textPositionVarIN.setText("");
 		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textCostVarIN.setText(""+initialContestants.get(initialIndex).getValue());
 		txtInitialNum.setText(""+initialIndex);
@@ -581,7 +546,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 			textOffenceVarAct.setText("");
 			textDefenceVarAct.setText("");
 			textStanimaVarAct.setText("");
-			textPositionVarAct.setText("");
 			textModifiersVarAct.setText("");
 			textCostVarAct.setText("");
 			textActiveNum.setText("");
@@ -591,7 +555,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textOffenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textDefenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.DEFENCE));
 		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.STANIMA));
-		textPositionVarAct.setText("");
 		textModifiersVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getModifiers());
 		textCostVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
 		textActiveNum.setText(""+activeIndex);
