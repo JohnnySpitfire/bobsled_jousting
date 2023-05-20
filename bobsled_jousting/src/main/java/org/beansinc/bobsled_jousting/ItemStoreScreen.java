@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,7 +25,14 @@ public class ItemStoreScreen implements MouseListener{
 	private JTextField txtName;
 	private JTextField textItemDescription;
 	
+	private int itemIndex = 0;
+	
+	
 	private int index = 0;
+	private JButton btnLeft;
+	private JButton btnRight;
+	private JTextField textPrice;
+	private JTextField textInformation;
 	
 	public ItemStoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -97,19 +107,81 @@ public class ItemStoreScreen implements MouseListener{
 		txtName.setColumns(10);
 		
 		textItemDescription = new JTextField();
+		textItemDescription.setEditable(false);
+		textItemDescription.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
 		textItemDescription.setHorizontalAlignment(SwingConstants.CENTER);
 		textItemDescription.setBounds(259, 97, 115, 49);
 		frmItemStore.getContentPane().add(textItemDescription);
 		textItemDescription.setColumns(10);
 		
 		JButton btnBuy = new JButton("Buy");
+		btnBuy.addMouseListener(this);
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					if (enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getItemSaleArray().get(itemIndex).value) {
+						enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getItemSaleArray().get(itemIndex));
+						if (itemIndex == enviroment.getMarket().getItemSaleArray().size() && enviroment.getMarket().getItemSaleArray().size() != 0) {
+							itemIndex -= 1;
+						}
+						
+					}
+					
+					
+				} catch (InvalidTeamSize e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		btnBuy.setBounds(259, 208, 115, 63);
+		btnBuy.setBounds(271, 375, 115, 63);
 		frmItemStore.getContentPane().add(btnBuy);
+		
+		btnLeft = new JButton("<==");
+		btnLeft.addMouseListener(this);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (itemIndex == 0 && 0 != (enviroment.getMarket().getItemSaleArray().size())) {
+					itemIndex = enviroment.getMarket().getItemSaleArray().size() - 1;
+				}
+				else if (0 != (enviroment.getMarket().getItemSaleArray().size())) {
+					itemIndex -= 1;
+				}
+			}
+		});
+		btnLeft.setBounds(216, 234, 60, 23);
+		frmItemStore.getContentPane().add(btnLeft);
+		
+		btnRight = new JButton("==>");
+		btnRight.addMouseListener(this);
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (itemIndex == (enviroment.getMarket().getItemSaleArray().size() - 1)) {
+					itemIndex = 0;
+				}
+				else if (0 != (enviroment.getMarket().getItemSaleArray().size())){
+					itemIndex += 1;
+				}
+			}
+		});
+		btnRight.setBounds(364, 234, 60, 23);
+		frmItemStore.getContentPane().add(btnRight);
+		
+		textPrice = new JTextField();
+		textPrice.setEditable(false);
+		textPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		textPrice.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).value);
+		textPrice.setBounds(269, 154, 86, 20);
+		frmItemStore.getContentPane().add(textPrice);
+		textPrice.setColumns(10);
+		
+		textInformation = new JTextField();
+		textInformation.setHorizontalAlignment(SwingConstants.CENTER);
+		textInformation.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).description);
+		textInformation.setEditable(false);
+		textInformation.setBounds(190, 185, 249, 20);
+		frmItemStore.getContentPane().add(textInformation);
+		textInformation.setColumns(10);
 	}
 
 	private class SwingAction extends AbstractAction {
@@ -124,8 +196,19 @@ public class ItemStoreScreen implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
+		if (enviroment.getMarket().getItemSaleArray().size() > 0) {
+			txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
+			textItemDescription.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex));
+			textPrice.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).value);
+			textInformation.setText(""+enviroment.getMarket().getItemSaleArray().get(itemIndex).description);
+		}
 		
+		if (enviroment.getMarket().getItemSaleArray().size() == 0) {
+			txtMoney.setText("");
+			textItemDescription.setText("");
+			textPrice.setText("");
+			textInformation.setText("");
+		}
 	}
 
 	@Override

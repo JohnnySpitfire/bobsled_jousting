@@ -438,7 +438,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		
 		
 	}
-	public void finishedWindow() {
+	public void finishedWindow() throws InvalidObjectAttributeType {
 		 enviroment.closePlayerSetupScreen(this);
 	}
 	
@@ -449,7 +449,12 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() == 4) {
-				finishedWindow();
+				try {
+					finishedWindow();
+				} catch (InvalidObjectAttributeType e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else {
 				textRequiredPlayers.setText("Atleast 4 Players Required to Start");
