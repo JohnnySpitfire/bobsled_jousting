@@ -9,7 +9,7 @@ public enum Item {
     
     ATTACK_POTION(50, "Temporarily increases a contestants offence by 20 for one match"),
     DEFENCE_POTION(50, "Temporarily increases a contestants defence by 20 for one match"),
-    STANIMA_POTION(50, "Temporarily increases a contestants stanima by 20 for one match"),
+    STANIMA_POTION(50, "Temporarily increases a contestants stamina by 20 for one match"),
     SLIME_BOMB(100, "Slimes an enemy sled decreasing their offence and stanima by 40");
 
     public final int value;

@@ -37,8 +37,8 @@ public class TeamMemberTest {
         this.sledAttributes.put(SledAttribute.ARMOUR, 100);
         this.sledAttributes.put(SledAttribute.SPEED, 100);
 
-        assertEquals(this.contestantAttributes, this.contestant.getAttribute());
-        assertEquals(this.sledAttributes, this.sled.getAttribute());
+        assertEquals(this.contestantAttributes, this.contestant.getAttributes());
+        assertEquals(this.sledAttributes, this.sled.getAttributes());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TeamMemberTest {
          this.sledAttributes.put(SledAttribute.ARMOUR, 54);
          this.sledAttributes.put(SledAttribute.SPEED, 34);
 
-         assertEquals(this.contestantAttributes, this.contestant.getAttribute());
-         assertEquals(this.sledAttributes, this.sled.getAttribute());        
+         assertEquals(this.contestantAttributes, this.contestant.getAttributes());
+         assertEquals(this.sledAttributes, this.sled.getAttributes());        
     }
 }
