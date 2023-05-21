@@ -4,17 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
@@ -471,8 +465,9 @@ public class ClubScreen implements MouseListener {
 		});
 		btnSwapAct.setBounds(93, 399, 116, 39);
 		frmClub.getContentPane().add(btnSwapAct);
+
 		
-		mouseClicked(null); //All text Management
+		mouseClicked(null); //Initial text Management
 	}
 
 	@Override
@@ -484,7 +479,7 @@ public class ClubScreen implements MouseListener {
 			textStanimaActVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.STANIMA));
 			textModifiersActVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getModifiers());
 			textCostActVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
-			textActiveIndex.setText(""+activeIndex);
+			textActiveIndex.setText(""+(activeIndex+1));
 		}
 		
 		if (enviroment.getPlayerTeam().getReserveTeam().size() != 0) {
@@ -494,7 +489,7 @@ public class ClubScreen implements MouseListener {
 			textStanimaResVar.setText(""+enviroment.getPlayerTeam().getReserveTeam().get(reserveIndex).getAttribute(ContestantAttribute.STANIMA));
 			textModifiersResVar.setText(""+enviroment.getPlayerTeam().getReserveTeam().get(reserveIndex).getModifiers());
 			textCostResVar.setText(""+enviroment.getPlayerTeam().getReserveTeam().get(reserveIndex).getValue());
-			textReserveIndex.setText(""+reserveIndex);
+			textReserveIndex.setText(""+(reserveIndex+1));
 		}
 		
 		if (enviroment.getPlayerTeam().getActiveTeam().size() == 0) {
@@ -504,7 +499,7 @@ public class ClubScreen implements MouseListener {
 			textStanimaActVar.setText("");
 			textModifiersActVar.setText("");
 			textCostActVar.setText("");
-			textActiveIndex.setText(""+activeIndex);
+			textActiveIndex.setText(""+(activeIndex+1));
 			txtActState.setText("No Active Players");
 		}else if (enviroment.getPlayerTeam().getActiveTeam().size() == 4) {
 			txtActState.setText("Active Team Full");
@@ -519,14 +514,13 @@ public class ClubScreen implements MouseListener {
 			textStanimaResVar.setText("");
 			textModifiersResVar.setText("");
 			textCostResVar.setText("");
-			textReserveIndex.setText(""+reserveIndex);
+			textReserveIndex.setText(""+(reserveIndex+1));
 			txtResState.setText("No Reserves");
 		}else if (enviroment.getPlayerTeam().getReserveTeam().size() == 5) {
 			txtResState.setText("Reserves Full");
 		}else {
 			txtResState.setText("");
 		}
-		
 		
 		
 		textMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());

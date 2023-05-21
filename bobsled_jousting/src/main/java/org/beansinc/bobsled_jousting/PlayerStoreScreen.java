@@ -330,7 +330,7 @@ public class PlayerStoreScreen implements MouseListener{
 		
 		
 		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
-		textIndex.setText(""+contestantIndex);
+		textIndex.setText(""+(contestantIndex+1));
 	}
 
 	@Override
