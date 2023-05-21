@@ -6,19 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JMenu;
-import javax.swing.JTree;
 import javax.swing.SwingConstants;
 
 public class MainMenuScreen {
@@ -33,6 +24,7 @@ public class MainMenuScreen {
 	private final Action Quit = new SwingAction_3();
 	private JTextField txtWeek;
 	private JTextField txtWeeksRemaining;
+	private JButton btnStadium;
 	
 	public MainMenuScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -132,6 +124,16 @@ public class MainMenuScreen {
 		txtWeeksRemaining.setBounds(362, 11, 130, 20);
 		frmMainmenu.getContentPane().add(txtWeeksRemaining);
 		txtWeeksRemaining.setColumns(10);
+		
+		btnStadium = new JButton("Stadium");
+		btnStadium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+				enviroment.launchStadiumScreen();
+			}
+		});
+		btnStadium.setBounds(234, 186, 170, 78);
+		frmMainmenu.getContentPane().add(btnStadium);
 	}
 	
 	private class SwingAction extends AbstractAction {

@@ -243,7 +243,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		txtInitialNum.setBounds(49, 298, 86, 20);
 		panelIN.add(txtInitialNum);
 		txtInitialNum.setHorizontalAlignment(SwingConstants.CENTER);
-		txtInitialNum.setText(""+initialIndex);
+		txtInitialNum.setText(""+(initialIndex+1));
 		txtInitialNum.setEditable(false);
 		txtInitialNum.setColumns(10);
 		
@@ -404,7 +404,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		
 		
 	}
-	public void finishedWindow() throws InvalidObjectAttributeType {
+	public void finishedWindow() throws InvalidObjectAttributeType, InvalidTeamSize {
 		 enviroment.closePlayerSetupScreen(this);
 	}
 	
@@ -418,6 +418,9 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 				try {
 					finishedWindow();
 				} catch (InvalidObjectAttributeType e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InvalidTeamSize e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -540,7 +543,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
 		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textCostVarIN.setText(""+initialContestants.get(initialIndex).getValue());
-		txtInitialNum.setText(""+initialIndex);
+		txtInitialNum.setText(""+(initialIndex+1));
 		if (enviroment.getPlayerTeam().getActiveTeam().size() < 1) {
 			textNameVarAct.setText("");
 			textOffenceVarAct.setText("");
@@ -557,7 +560,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.STANIMA));
 		textModifiersVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getModifiers());
 		textCostVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
-		textActiveNum.setText(""+activeIndex);
+		textActiveNum.setText(""+(activeIndex+1));
 		}
 		textMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 		textAfford.setText("");
