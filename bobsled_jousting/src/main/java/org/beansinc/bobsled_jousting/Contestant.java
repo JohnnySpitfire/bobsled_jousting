@@ -1,7 +1,6 @@
 package org.beansinc.bobsled_jousting;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
-import org.beansinc.bobsled_jousting.depreciated.ContestantPosition;
 
 public class Contestant extends TeamMember<ContestantAttribute, ContestantModifer>{
     

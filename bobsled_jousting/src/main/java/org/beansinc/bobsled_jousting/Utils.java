@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
-import org.beansinc.bobsled_jousting.depreciated.ContestantPosition;
 
 import com.github.javafaker.Faker;
 
@@ -28,8 +27,6 @@ public class Utils {
 
         Faker faker = new Faker();
         String randomName = faker.name().firstName();
-
-        ContestantPosition randomPosition = ContestantPosition.getRandomPosition(rnd);
   
         Object[][] randomAttributes = ContestantAttribute.getDefaultAttributes();
     

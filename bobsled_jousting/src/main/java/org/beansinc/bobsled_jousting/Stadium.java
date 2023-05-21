@@ -3,6 +3,7 @@ package org.beansinc.bobsled_jousting;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
@@ -32,7 +33,9 @@ public class Stadium {
     public ArrayList<ComputerTeam> getAvalibleMatches() {
         return this.availableMatches;
     } 
-    
+    //
+    //
+    //
 
     public boolean playMatch(PlayerTeam playerTeam, ComputerTeam computerTeam, ArrayList<Item> usedPlayerItems) {
 
@@ -65,9 +68,16 @@ public class Stadium {
             Map<ContestantAttribute, Integer> playerContestantAttr = activePlayerTeam.get(i).getAttributes();
             Map<ContestantAttribute, Integer> computerContestantAttr = activeComputerTeam.get(i).getAttributes();
 
-            for(ContestantAttribute attr: playerContestantAttr.keySet()) {
+            Set<ContestantAttribute> attrKeys = playerContestantAttr.keySet();
+            attrKeys.remove(ContestantAttribute.STANIMA);
+
+            for(ContestantAttribute attr: attrKeys) {
 
                 float attrDifference = (playerContestantAttr.get(attr) * this.difficulty) - computerContestantAttr.get(attr);
+
+                if(attrDifference < 0) {
+                    
+                }
                 matchScore += attrDifference * (1f-this.difficulty);
             }   
         }
