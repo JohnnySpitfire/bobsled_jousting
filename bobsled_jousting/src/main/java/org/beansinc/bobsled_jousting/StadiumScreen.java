@@ -14,6 +14,7 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class StadiumScreen implements MouseListener{
 
@@ -43,9 +44,16 @@ public class StadiumScreen implements MouseListener{
 	private JTextField textArmourComp;
 	private JTextField textSpeedComp;
 	private JTextField textModifiersComp;
+	private JButton btnPlay;
+	private JButton btn;
+	private JPanel panelConfirm;
+	private JTextField txtAreYouSure;
+	private JButton btnyes;
+	private JButton btnNo;
 	
 	private int teamIndex;
-
+	private boolean match = false;
+	private boolean bye = false;
 	
 	public StadiumScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -92,22 +100,69 @@ public class StadiumScreen implements MouseListener{
 		frmStadium.setTitle("Stadium");
 		frmStadium.setBounds(100, 100, 685, 488);
 		frmStadium.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmStadium.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Back");
+		btnNewButton.setBounds(570, 415, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
 			}
 		});
-		btnNewButton.setBounds(570, 415, 89, 23);
+		frmStadium.getContentPane().setLayout(null);
+		
+		panelConfirm = new JPanel();
+		panelConfirm.setVisible(false);
+		panelConfirm.setBounds(242, 146, 185, 148);
+		panelConfirm.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmStadium.getContentPane().add(panelConfirm);
+		panelConfirm.setLayout(null);
+		
+		txtAreYouSure = new JTextField();
+		txtAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
+		txtAreYouSure.setEditable(false);
+		txtAreYouSure.setText("Are You Sure?");
+		txtAreYouSure.setBounds(49, 11, 86, 20);
+		panelConfirm.add(txtAreYouSure);
+		txtAreYouSure.setColumns(10);
+		
+		btnyes = new JButton("Yes");
+		btnyes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (match) {
+					//Play game
+					
+					
+					//launch post-week screen
+					closeWindow();
+				}else if (bye) {
+					//bye week
+					
+					
+					//launch post-week screen
+					closeWindow();
+				}
+			}
+		});
+		btnyes.setBounds(10, 114, 66, 23);
+		panelConfirm.add(btnyes);
+		
+		btnNo = new JButton("No");
+		btnNo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelConfirm.setVisible(false);
+				match = false;
+				bye = false;
+			}
+		});
+		btnNo.setBounds(109, 114, 66, 23);
+		panelConfirm.add(btnNo);
 		frmStadium.getContentPane().add(btnNewButton);
 		
 		JPanel panelAct = new JPanel();
+		panelAct.setBounds(40, 43, 192, 327);
 		panelAct.setLayout(null);
 		panelAct.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panelAct.setBackground(SystemColor.menu);
-		panelAct.setBounds(40, 43, 192, 327);
 		frmStadium.getContentPane().add(panelAct);
 		
 		textOffenceAct = new JTextField();
@@ -160,7 +215,6 @@ public class StadiumScreen implements MouseListener{
 		textActiveTeamAvg.setColumns(10);
 		
 		textActiveSled = new JTextField();
-		textActiveSled.setText("Your Sled");
 		textActiveSled.setHorizontalAlignment(SwingConstants.CENTER);
 		textActiveSled.setEditable(false);
 		textActiveSled.setColumns(10);
@@ -189,10 +243,10 @@ public class StadiumScreen implements MouseListener{
 		panelAct.add(textModifiersAct);
 		
 		JPanel panelAct_1 = new JPanel();
+		panelAct_1.setBounds(437, 43, 192, 327);
 		panelAct_1.setLayout(null);
 		panelAct_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panelAct_1.setBackground(SystemColor.menu);
-		panelAct_1.setBounds(437, 43, 192, 327);
 		frmStadium.getContentPane().add(panelAct_1);
 		
 		textOffenceComp = new JTextField();
@@ -239,7 +293,7 @@ public class StadiumScreen implements MouseListener{
 		
 		textCompTeamAvg = new JTextField();
 		textCompTeamAvg.setEditable(false);
-		textCompTeamAvg.setText("Oppenent Team's Average Stats");
+		textCompTeamAvg.setText("Oppenent's Average Stats");
 		textCompTeamAvg.setHorizontalAlignment(SwingConstants.CENTER);
 		textCompTeamAvg.setColumns(10);
 		textCompTeamAvg.setBounds(10, 11, 172, 20);
@@ -274,33 +328,36 @@ public class StadiumScreen implements MouseListener{
 		textModifiersComp.setBounds(11, 250, 171, 27);
 		panelAct_1.add(textModifiersComp);
 		
-		JButton btnRAct = new JButton("==>");
-		btnRAct.addActionListener(new ActionListener() {
+		JButton btnRight = new JButton("==>");
+		btnRight.addMouseListener(this);
+		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == (enviroment.getStadium().getAvalibleMatches().size() - 1)) {
+				if (teamIndex == (enviroment.getMarket().getSledSaleArray().size() - 1)) {
 					teamIndex = 0;
 				}
-				else if (0 != (enviroment.getStadium().getAvalibleMatches().size())){
+				else if (0 != (enviroment.getMarket().getSledSaleArray().size())){
 					teamIndex += 1;
 				}
 			}
 		});
-		btnRAct.setBounds(117, 292, 65, 23);
-		panelAct_1.add(btnRAct);
+		btnRight.setBounds(117, 292, 65, 23);
+		panelAct_1.add(btnRight);
 		
-		JButton btnLAct = new JButton("<==");
-		btnLAct.addActionListener(new ActionListener() {
+		JButton btnLeft = new JButton("<==");
+		btnLeft.addMouseListener(this);
+		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == 0 && 0 != (enviroment.getStadium().getAvalibleMatches().size())) {
-					teamIndex = enviroment.getStadium().getAvalibleMatches().size() - 1;
+				if (teamIndex == 0 && 0 != (enviroment.getMarket().getSledSaleArray().size())) {
+					teamIndex = enviroment.getMarket().getSledSaleArray().size() - 1;
 				}
-				else if (0 != (enviroment.getStadium().getAvalibleMatches().size())) {
+				else if (0 != (enviroment.getMarket().getSledSaleArray().size())) {
 					teamIndex -= 1;
 				}
 			}
 		});
-		btnLAct.setBounds(10, 292, 57, 23);
-		panelAct_1.add(btnLAct);
+		btnLeft.setBounds(10, 292, 57, 23);
+		
+		panelAct_1.add(btnLeft);
 		
 		textCompTeamIndex = new JTextField();
 		textCompTeamIndex.setBounds(66, 292, 57, 20);
@@ -309,6 +366,28 @@ public class StadiumScreen implements MouseListener{
 		textCompTeamIndex.setEditable(false);
 		textCompTeamIndex.setColumns(10);
 		
+		btnPlay = new JButton("Play Match");
+		btnPlay.setBounds(275, 328, 116, 42);
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelConfirm.setVisible(true);
+				match = true;
+				bye = false;
+			}
+		});
+		frmStadium.getContentPane().add(btnPlay);
+		
+		btn = new JButton("Bye Week");
+		btn.setBounds(275, 43, 116, 42);
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelConfirm.setVisible(true);
+				bye = true;
+				match = false;
+			}
+		});
+		frmStadium.getContentPane().add(btn);
+		
 		
 		
 		mouseClicked(null);
@@ -316,21 +395,24 @@ public class StadiumScreen implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		textActiveTeamAvg.setText("DYNAMIC's Average Stats");
+		textActiveTeamAvg.setText(enviroment.getPlayerTeam().getName() + "'s Average Stats");
+		textActiveSled.setText(enviroment.getPlayerTeam().getName() + "'s Sled");
+		
+		
 		textOffenceActVar.setText("0");
 		textDefenceActVar.setText("0");
 		textStanimaActVar.setText("0");
-		textArmourAct.setText("Armour:0");
-		textSpeedAct.setText("Speed:0");
-		textModifiersAct.setText("Modifiers:[]");
+		textArmourAct.setText("Armour: " + enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.ARMOUR));
+		textSpeedAct.setText("Speed: " + enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.SPEED));
+		textModifiersAct.setText("Modifiers: " + enviroment.getPlayerTeam().getSled().getModifiers());
 		
 		
 		textOffenceCompVar.setText("0");
 		textDefenceCompVar.setText("0");
 		textStanimaCompVar.setText("0");
-		textArmourComp.setText("Armour:0");
-		textSpeedComp.setText("Speed:0");
-		textModifiersComp.setText("Modifiers:[]");
+		textArmourComp.setText("Armour: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getAttribute(SledAttribute.ARMOUR));
+		textSpeedComp.setText("Speed: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getAttribute(SledAttribute.SPEED));
+		textModifiersComp.setText("Modifiers: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getModifiers());
 		
 		
 		textCompTeamIndex.setText(""+(teamIndex + 1));
