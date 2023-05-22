@@ -61,8 +61,8 @@ public class GameEnviroment {
    public void gameWeek() throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
 
       for(int i = 0; i < 20; i++){
-         System.out.println(this.playerTeam.onAthleteStatIncrease(this.difficulty));
-         System.out.println(this.playerTeam.onContestantQuit(this.difficulty).getName());
+         System.out.println(this.playerTeam.randomContestantStatIncrease(this.difficulty));
+         System.out.println(this.playerTeam.randomContestantQuit(this.difficulty).getName());
       }
 
    }
@@ -157,6 +157,7 @@ public class GameEnviroment {
 	}
 
    public void launchSledStoreScreen() {
+
 		SledStoreScreen sledStoreWindow = new SledStoreScreen(this);
 		
 	}

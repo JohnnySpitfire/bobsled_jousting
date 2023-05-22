@@ -332,10 +332,10 @@ public class StadiumScreen implements MouseListener{
 		btnRight.addMouseListener(this);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == (enviroment.getMarket().getSledSaleArray().size() - 1)) {
+				if (teamIndex == (enviroment.getStadium().getAvailableMatches().size() - 1)) {
 					teamIndex = 0;
 				}
-				else if (0 != (enviroment.getMarket().getSledSaleArray().size())){
+				else if (0 != (enviroment.getStadium().getAvailableMatches().size())){
 					teamIndex += 1;
 				}
 			}
@@ -347,10 +347,10 @@ public class StadiumScreen implements MouseListener{
 		btnLeft.addMouseListener(this);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == 0 && 0 != (enviroment.getMarket().getSledSaleArray().size())) {
-					teamIndex = enviroment.getMarket().getSledSaleArray().size() - 1;
+				if (teamIndex == 0 && 0 != (enviroment.getStadium().getAvailableMatches().size())) {
+					teamIndex = enviroment.getStadium().getAvailableMatches().size() - 1;
 				}
-				else if (0 != (enviroment.getMarket().getSledSaleArray().size())) {
+				else if (0 != (enviroment.getStadium().getAvailableMatches().size())) {
 					teamIndex -= 1;
 				}
 			}
