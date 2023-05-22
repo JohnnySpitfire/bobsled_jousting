@@ -410,9 +410,9 @@ public class StadiumScreen implements MouseListener{
 		textOffenceCompVar.setText("0");
 		textDefenceCompVar.setText("0");
 		textStanimaCompVar.setText("0");
-		textArmourComp.setText("Armour: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getAttribute(SledAttribute.ARMOUR));
-		textSpeedComp.setText("Speed: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getAttribute(SledAttribute.SPEED));
-		textModifiersComp.setText("Modifiers: " + enviroment.getStadium().getAvalibleMatches().get(teamIndex).getSled().getModifiers());
+		textArmourComp.setText("Armour: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getAttribute(SledAttribute.ARMOUR));
+		textSpeedComp.setText("Speed: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getAttribute(SledAttribute.SPEED));
+		textModifiersComp.setText("Modifiers: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getModifiers());
 		
 		
 		textCompTeamIndex.setText(""+(teamIndex + 1));
