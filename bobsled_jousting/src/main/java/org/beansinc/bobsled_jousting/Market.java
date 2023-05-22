@@ -7,16 +7,37 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Market.
+ */
 public class Market {
     
+    /** The player sale count. */
     private static int PLAYER_SALE_COUNT;
+    
+    /** The item sale count. */
     private static int ITEM_SALE_COUNT;
+    
+    /** The sled sale count. */
     private static int SLED_SALE_COUNT;
 
+    /** The contestant sale arr. */
     private ArrayList<Contestant> contestantSaleArr;
+    
+    /** The item sale arr. */
     private ArrayList<Item> itemSaleArr;
+    
+    /** The sled sale arr. */
     private ArrayList<Sled> sledSaleArr;
 
+    /**
+     * Instantiates a new market.
+     *
+     * @param rnd the rnd
+     * @param currentWeek the current week
+     * @throws InvalidObjectAttributeType the invalid object attribute type
+     */
     public Market(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
         
         PLAYER_SALE_COUNT = 3 + rnd.nextInt(3);
@@ -43,18 +64,40 @@ public class Market {
         }
     }
 
+    
+    /** 
+     * @return ArrayList<Contestant>
+     */
     public ArrayList<Contestant> getContestantSaleArray() {
         return this.contestantSaleArr;
     }
 
+    /**
+     * Gets the item sale array.
+     *
+     * @return the item sale array
+     */
     public ArrayList<Item> getItemSaleArray() {
         return this.itemSaleArr;
     }
 
+    /**
+     * Gets the sled sale array.
+     *
+     * @return the sled sale array
+     */
     public ArrayList<Sled> getSledSaleArray() {
         return this.sledSaleArr;
     }
 
+    /**
+     * Sell asset.
+     *
+     * @param <T> the generic type
+     * @param team the team
+     * @param asset the asset
+     * @throws ItemNotFound the item not found
+     */
     public <T> void sellAsset(PlayerTeam team, T asset) throws ItemNotFound {
 
         if(asset instanceof Contestant && (team.getActiveTeam().contains(asset) || team.getReserveTeam().contains(asset))) {
@@ -73,6 +116,14 @@ public class Market {
         }
     }
 
+    /**
+     * Buy asset.
+     *
+     * @param <T> the generic type
+     * @param team the team
+     * @param asset the asset
+     * @throws InvalidTeamSize the invalid team size
+     */
     public <T> void buyAsset(PlayerTeam team, T asset) throws InvalidTeamSize {
 
         if(asset instanceof Contestant && this.contestantSaleArr.contains(asset)) {

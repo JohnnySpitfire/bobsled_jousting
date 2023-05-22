@@ -16,6 +16,10 @@ public class TeamMemberTest {
     EnumMap<ContestantAttribute, Integer> contestantAttributes;
     EnumMap<SledAttribute, Integer> sledAttributes;
 
+    
+    /** 
+     * @throws InvalidObjectAttributeType
+     */
     @Test
     void testDefaultStats() throws InvalidObjectAttributeType {
 

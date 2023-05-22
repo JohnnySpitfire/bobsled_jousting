@@ -8,16 +8,33 @@ import java.util.Set;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Stadium.
+ */
 public class Stadium {
 
+    /** The Constant BASE_STANIMA_LOSS. */
     public static final int BASE_STANIMA_LOSS = 50;
 
+    /** The funds reward factor. */
     private float fundsRewardFactor;
 
+    /** The available matches. */
     private ArrayList<ComputerTeam> availableMatches;
 
+    /** The difficulty. */
     private float difficulty;
     
+    /**
+     * Instantiates a new stadium.
+     *
+     * @param rnd the rnd
+     * @param difficulty the difficulty
+     * @param currentWeek the current week
+     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @throws InvalidTeamSize the invalid team size
+     */
     public Stadium(Random rnd, float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
 
         this.difficulty = difficulty;
@@ -35,12 +52,22 @@ public class Stadium {
 
     }
 
+    
+    /** 
+     * @return ArrayList<ComputerTeam>
+     */
     public ArrayList<ComputerTeam> getAvailableMatches() {
         return this.availableMatches;
     } 
-    //
-    //
-    //
+    
+    /**
+     *  
+     *
+     * @param playerTeam the player team
+     * @param computerTeam the computer team
+     * @param usedPlayerItems the used player items
+     * @return boolean
+     */
 
     public boolean playMatch(PlayerTeam playerTeam, ComputerTeam computerTeam, ArrayList<Item> usedPlayerItems) {
 

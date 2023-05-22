@@ -16,60 +16,143 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StadiumScreen.
+ */
 public class StadiumScreen implements MouseListener{
 
+	/** The frm stadium. */
 	private JFrame frmStadium;
 	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The text offence act. */
 	private JTextField textOffenceAct;
+	
+	/** The text defence act. */
 	private JTextField textDefenceAct;
+	
+	/** The text stanima act. */
 	private JTextField textStanimaAct;
+	
+	/** The text offence act var. */
 	private JTextField textOffenceActVar;
+	
+	/** The text defence act var. */
 	private JTextField textDefenceActVar;
+	
+	/** The text stanima act var. */
 	private JTextField textStanimaActVar;
+	
+	/** The text comp team index. */
 	private JTextField textCompTeamIndex;
+	
+	/** The text active team avg. */
 	private JTextField textActiveTeamAvg;
+	
+	/** The text stanima comp var. */
 	private JTextField textStanimaCompVar;
+	
+	/** The text stanima comp. */
 	private JTextField textStanimaComp;
+	
+	/** The text defence comp. */
 	private JTextField textDefenceComp;
+	
+	/** The text defence comp var. */
 	private JTextField textDefenceCompVar;
+	
+	/** The text offence comp var. */
 	private JTextField textOffenceCompVar;
+	
+	/** The text offence comp. */
 	private JTextField textOffenceComp;
+	
+	/** The text comp team avg. */
 	private JTextField textCompTeamAvg;
+	
+	/** The text active sled. */
 	private JTextField textActiveSled;
+	
+	/** The text armour act. */
 	private JTextField textArmourAct;
+	
+	/** The text speed act. */
 	private JTextField textSpeedAct;
+	
+	/** The text modifiers act. */
 	private JTextField textModifiersAct;
+	
+	/** The text comp sled. */
 	private JTextField textCompSled;
+	
+	/** The text armour comp. */
 	private JTextField textArmourComp;
+	
+	/** The text speed comp. */
 	private JTextField textSpeedComp;
+	
+	/** The text modifiers comp. */
 	private JTextField textModifiersComp;
+	
+	/** The btn play. */
 	private JButton btnPlay;
+	
+	/** The btn. */
 	private JButton btn;
+	
+	/** The panel confirm. */
 	private JPanel panelConfirm;
+	
+	/** The txt are you sure. */
 	private JTextField txtAreYouSure;
+	
+	/** The btnyes. */
 	private JButton btnyes;
+	
+	/** The btn no. */
 	private JButton btnNo;
 	
+	/** The team index. */
 	private int teamIndex;
+	
+	/** The match. */
 	private boolean match = false;
+	
+	/** The bye. */
 	private boolean bye = false;
 	
+	/**
+	 * Instantiates a new stadium screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public StadiumScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmStadium.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmStadium.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeStadiumScreen(this);
 	}
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -393,6 +476,12 @@ public class StadiumScreen implements MouseListener{
 		mouseClicked(null);
 	}
 	
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		textActiveTeamAvg.setText(enviroment.getPlayerTeam().getName() + "'s Average Stats");
@@ -418,24 +507,44 @@ public class StadiumScreen implements MouseListener{
 		textCompTeamIndex.setText(""+(teamIndex + 1));
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

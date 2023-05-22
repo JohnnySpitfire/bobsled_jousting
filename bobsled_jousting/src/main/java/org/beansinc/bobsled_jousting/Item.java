@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum Item.
+ */
 public enum Item {
     
     ATTACK_POTION(50, "Permamently increases a contestants offence by 20", true , true),
@@ -20,6 +24,14 @@ public enum Item {
     public final boolean appliesToPlayerTeam;
     public final boolean appliesToContestant;
 
+    /**
+     * Instantiates a new item.
+     *
+     * @param value the value
+     * @param description the description
+     * @param appliesToPlayerTeam the applies to player team
+     * @param appliesToContestant the applies to contestant
+     */
     Item(int value, String description, boolean appliesToPlayerTeam, boolean appliesToContestant){
         this.value = value;
         this.description = description;
@@ -27,13 +39,26 @@ public enum Item {
         this.appliesToContestant = appliesToContestant;
     }
 
+    /** The Constant VALUES. */
     public static final List<Item> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 
+    /**
+     * Gets the random item.
+     *
+     * @param rnd the rnd
+     * @return the random item
+     */
     public static Item getRandomItem(Random rnd) {
          
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
 
+    /**
+     * Apply item to team.
+     *
+     * @param team the team
+     * @param item the item
+     */
     public static void applyItemToTeam(BaseTeam team, Item item) {
 
         switch(item) {
@@ -55,6 +80,12 @@ public enum Item {
         }
     }
 
+    /**
+     * Apply item to contestant.
+     *
+     * @param contestant the contestant
+     * @param item the item
+     */
     public static void applyItemToContestant(Contestant contestant, Item item) {
 
         switch(item) {

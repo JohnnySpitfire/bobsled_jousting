@@ -52,6 +52,10 @@ public class ContestantOld {
         }
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
 
         return this.contestantName;

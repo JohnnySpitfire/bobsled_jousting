@@ -27,56 +27,148 @@ import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import javax.swing.JScrollBar;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlayerSetupScreen.
+ */
 public class PlayerSetupScreen implements MouseListener, ActionListener {
 
+	/** The frm playersetupscreen. */
 	private JFrame frmPlayersetupscreen;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The text name IN. */
 	private JTextField textNameIN;
+	
+	/** The text offence IN. */
 	private JTextField textOffenceIN;
+	
+	/** The text name var IN. */
 	private JTextField textNameVarIN;
+	
+	/** The text modifiers IN. */
 	private JTextField textModifiersIN;
+	
+	/** The text defence IN. */
 	private JTextField textDefenceIN;
+	
+	/** The text stanima IN. */
 	private JTextField textStanimaIN;
+	
+	/** The text offence var IN. */
 	private JTextField textOffenceVarIN;
+	
+	/** The text defence var IN. */
 	private JTextField textDefenceVarIN;
+	
+	/** The text stanima var IN. */
 	private JTextField textStanimaVarIN;
+	
+	/** The text modifiers var IN. */
 	private JTextField textModifiersVarIN;
+	
+	/** The text cost IN. */
 	private JTextField textCostIN;
+	
+	/** The text cost var IN. */
 	private JTextField textCostVarIN;
+	
+	/** The btn accept. */
 	private JButton btnAccept;
 	
+	/** The text name act. */
 	private JTextField textNameAct;
+	
+	/** The text offence act. */
 	private JTextField textOffenceAct;
+	
+	/** The text name var act. */
 	private JTextField textNameVarAct;
+	
+	/** The text modifiers act. */
 	private JTextField textModifiersAct;
+	
+	/** The text defence act. */
 	private JTextField textDefenceAct;
+	
+	/** The text stanima act. */
 	private JTextField textStanimaAct;
+	
+	/** The text offence var act. */
 	private JTextField textOffenceVarAct;
+	
+	/** The text defence var act. */
 	private JTextField textDefenceVarAct;
+	
+	/** The text stanima var act. */
 	private JTextField textStanimaVarAct;
+	
+	/** The text modifiers var act. */
 	private JTextField textModifiersVarAct;
+	
+	/** The text cost act. */
 	private JTextField textCostAct;
+	
+	/** The text cost var act. */
 	private JTextField textCostVarAct;
+	
+	/** The text active num. */
 	private JTextField textActiveNum;
 	
+	/** The Accept. */
 	private final Action Accept = new SwingAction();
+	
+	/** The text money. */
 	private JTextField textMoney;
 	
+	/** The initial contestants. */
 	ArrayList<Contestant> initialContestants = new ArrayList<Contestant>();
+	
+	/** The initial index. */
 	private int initialIndex = 0;
+	
+	/** The active index. */
 	private int activeIndex = 0;
+	
+	/** The a L initial. */
 	private final Action aLInitial = new SwingAction_2();
+	
+	/** The txt initial num. */
 	private JTextField txtInitialNum;
+	
+	/** The btn RIN. */
 	private JButton btnRIN;
+	
+	/** The a R initial. */
 	private final Action aRInitial = new SwingAction_3();
+	
+	/** The Add IN. */
 	private final Action AddIN = new SwingAction_1();
+	
+	/** The a L active. */
 	private final Action aLActive = new SwingAction_4();
+	
+	/** The a R active. */
 	private final Action aRActive = new SwingAction_5();
+	
+	/** The Remove act. */
 	private final Action RemoveAct = new SwingAction_6();
+	
+	/** The text afford. */
 	private JTextField textAfford;
+	
+	/** The text required players. */
 	private JTextField textRequiredPlayers;
 
 	
+	/**
+	 * Instantiates a new player setup screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 * @throws InvalidObjectAttributeType the invalid object attribute type
+	 */
 	public PlayerSetupScreen(GameEnviroment incomingEnviroment) throws InvalidObjectAttributeType {
 		enviroment = incomingEnviroment;
 		for(int i=0; i<15; i++){
@@ -88,11 +180,17 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		frmPlayersetupscreen.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmPlayersetupscreen.dispose();
 	}
+	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -404,15 +502,35 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		
 		
 	}
+	
+	/**
+	 *  
+	 *
+	 * @throws InvalidObjectAttributeType the invalid object attribute type
+	 * @throws InvalidTeamSize the invalid team size
+	 */
 	public void finishedWindow() throws InvalidObjectAttributeType, InvalidTeamSize {
 		 enviroment.closePlayerSetupScreen(this);
 	}
 	
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Accept");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() == 4) {
 				try {
@@ -431,11 +549,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 	
+	/**
+	 * The Class SwingAction_2.
+	 */
 	private class SwingAction_2 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 2.
+		 */
 		public SwingAction_2() {
 			putValue(NAME, "<==");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (initialIndex == 0) {
 				initialIndex = initialContestants.size() - 1;
@@ -446,12 +577,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 	
+	/**
+	 * The Class SwingAction_3.
+	 */
 	private class SwingAction_3 extends AbstractAction {
 
+		/**
+		 * Instantiates a new swing action 3.
+		 */
 		public SwingAction_3() {
 			putValue(NAME, "==>");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (initialIndex == (initialContestants.size() - 1)) {
 				initialIndex = 0;
@@ -462,11 +605,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 	
+	/**
+	 * The Class SwingAction_4.
+	 */
 	private class SwingAction_4 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 4.
+		 */
 		public SwingAction_4() {
 			putValue(NAME, "<==");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (activeIndex == 0 && 0 != (enviroment.getPlayerTeam().getActiveTeam().size())) {
 				activeIndex = enviroment.getPlayerTeam().getActiveTeam().size() - 1;
@@ -477,11 +633,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 	
+	/**
+	 * The Class SwingAction_5.
+	 */
 	private class SwingAction_5 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 5.
+		 */
 		public SwingAction_5() {
 			putValue(NAME, "==>");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (activeIndex == (enviroment.getPlayerTeam().getActiveTeam().size() - 1)) {
 				activeIndex = 0;
@@ -492,11 +661,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 
+	/**
+	 * The Class SwingAction_1.
+	 */
 	private class SwingAction_1 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 1.
+		 */
 		public SwingAction_1() {
 			putValue(NAME, "Add");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() < 4 ){
 					try {
@@ -516,11 +698,24 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 	
+	/**
+	 * The Class SwingAction_6.
+	 */
 	private class SwingAction_6 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 6.
+		 */
 		public SwingAction_6() {
 			putValue(NAME, "Remove");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (enviroment.getPlayerTeam().getActiveTeam().size() > 0) {
 				initialContestants.add(enviroment.getPlayerTeam().getActiveTeam().get(activeIndex));
@@ -534,6 +729,11 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		}
 	}
 
+	/**
+	 * Mouse clicked.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -569,6 +769,11 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		//enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
 	}
 	
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (textNameVarIN.getText() != "" && textNameVarAct.getText() != "") {
@@ -580,24 +785,44 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

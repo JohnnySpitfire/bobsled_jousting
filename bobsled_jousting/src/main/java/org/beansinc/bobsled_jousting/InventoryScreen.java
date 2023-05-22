@@ -21,43 +21,96 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InventoryScreen.
+ */
 public class InventoryScreen implements MouseListener{
 
+	/** The frm inventory. */
 	private JFrame frmInventory;
+	
+	/** The Back. */
 	private final Action Back = new SwingAction();
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The text name. */
 	private JTextField textName;
+	
+	/** The txt money. */
 	private JTextField txtMoney;
+	
+	/** The text sled. */
 	private JTextField textSled;
+	
+	/** The txt sled name. */
 	private JTextField txtSledName;
+	
+	/** The txt sled armour. */
 	private JTextField txtSledArmour;
+	
+	/** The txt sled speed. */
 	private JTextField txtSledSpeed;
+	
+	/** The txt sled modifiers. */
 	private JTextField txtSledModifiers;
+	
+	/** The txt sled cost. */
 	private JTextField txtSledCost;
+	
+	/** The btn sell. */
 	private JButton btnSell;
+	
+	/** The btn left. */
 	private JButton btnLeft;
+	
+	/** The text item information. */
 	private JTextField textItemInformation;
+	
+	/** The text item value. */
 	private JTextField textItemValue;
+	
+	/** The text item name. */
 	private JTextField textItemName;
+	
+	/** The btn right. */
 	private JButton btnRight;
 
 	
+	/** The item index. */
 	private int itemIndex;
 	
+	/**
+	 * Instantiates a new inventory screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public InventoryScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmInventory.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmInventory.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeInventoryScreen(this);
 	}
+	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -235,16 +288,35 @@ public class InventoryScreen implements MouseListener{
 		mouseClicked(null);  //Text Manager
 	}
 	
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Back");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}
 	}
 
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		txtSledName.setText(""+enviroment.getPlayerTeam().getSled().getName());
@@ -267,24 +339,44 @@ public class InventoryScreen implements MouseListener{
 		
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

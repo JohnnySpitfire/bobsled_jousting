@@ -9,11 +9,26 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 import com.github.javafaker.Faker;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Utils.
+ */
 public class Utils {
 
+    /** The Constant MIN_RANDOM_ATTRIBUTE. */
     private static final int MIN_RANDOM_ATTRIBUTE = 50;
+    
+    /** The Constant MAX_RANDOM_ATTRIBUTE. */
     private static final int MAX_RANDOM_ATTRIBUTE = 200;
  
+    
+    /**
+     *  
+     *
+     * @param <T> the generic type
+     * @param defaultStatsArr the default stats arr
+     * @return Map<?, ?>
+     */
     @SuppressWarnings("unchecked")
     public static <T extends Enum<T>> Map<?, ?> write2DArrayToMap(Object[][] defaultStatsArr)  {
         //Uses a stream to map the 2D array of ContestantAttributes and their respective values to the contestantStats map
@@ -23,6 +38,15 @@ public class Utils {
         return defaultStats;
     }
 
+    
+    /**
+     *  
+     *
+     * @param rnd the rnd
+     * @param currentWeek the current week
+     * @return Contestant
+     * @throws InvalidObjectAttributeType the invalid object attribute type
+     */
     public static Contestant generateRandomContestant(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
 
         Faker faker = new Faker();
@@ -47,7 +71,15 @@ public class Utils {
         
         return randomContestant;
     }
-
+    
+    /**
+     *  
+     *
+     * @param rnd the rnd
+     * @param currentWeek the current week
+     * @return Contestant
+     * @throws InvalidObjectAttributeType the invalid object attribute type
+     */
     public static Sled generateRandomSled(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
           
         Object[][] randomAttributes = SledAttribute.getDefaultAttributes();

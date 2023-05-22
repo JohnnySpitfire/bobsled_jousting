@@ -1,11 +1,17 @@
 package org.beansinc.bobsled_jousting;
 
+// TODO: Auto-generated Javadoc
 /**
- * Hello world!
- *
+ * Hello world!.
  */
 public class App 
 {
+    
+    /**
+     *  
+     *
+     * @param args the arguments
+     */
     public static void main( String[] args )
     {      
     	GameEnviroment.launchSetupScreen();
