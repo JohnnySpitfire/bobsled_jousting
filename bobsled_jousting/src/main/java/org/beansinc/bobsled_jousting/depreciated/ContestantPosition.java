@@ -12,9 +12,9 @@ public enum ContestantPosition {
 
     public static final List<ContestantPosition> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 
-    public static ContestantPosition getRandomPosition(Random rn) {
+    public static ContestantPosition getRandomPosition(Random rnd) {
          
-        return VALUES.get(rn.nextInt(VALUES.size()));
+        return VALUES.get(rnd.nextInt(VALUES.size()));
     }
     
 }

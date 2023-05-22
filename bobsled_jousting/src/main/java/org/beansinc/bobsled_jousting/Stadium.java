@@ -10,6 +10,10 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 public class Stadium {
 
+    public static final int BASE_STANIMA_LOSS = 50;
+
+    private float fundsRewardFactor;
+
     private ArrayList<ComputerTeam> availableMatches;
 
     private float difficulty;
@@ -17,6 +21,7 @@ public class Stadium {
     public Stadium(Random rnd, float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
 
         this.difficulty = difficulty;
+        this.fundsRewardFactor = 3 * (1f - difficulty);
         this.availableMatches = new ArrayList<ComputerTeam>();
 
         int numOfMatches = 3 + rnd.nextInt(3);
@@ -30,7 +35,7 @@ public class Stadium {
 
     }
 
-    public ArrayList<ComputerTeam> getAvalibleMatches() {
+    public ArrayList<ComputerTeam> getAvailableMatches() {
         return this.availableMatches;
     } 
     //
@@ -41,14 +46,17 @@ public class Stadium {
 
         float matchScore = 0;
 
-        //TODO: Make sure player team is full before calling playMatch()
         if(!playerTeam.isActiveTeamFull()) {
             return false;
         }
 
         for(Item item: usedPlayerItems){
             
-
+            if(item.appliesToPlayerTeam){
+                Item.applyItemToTeam(playerTeam, item);
+            } else {
+                Item.applyItemToTeam(computerTeam, item);
+            }
         }
 
         ArrayList<Contestant> activePlayerTeam = playerTeam.getActiveTeam();
@@ -69,20 +77,36 @@ public class Stadium {
             Map<ContestantAttribute, Integer> computerContestantAttr = activeComputerTeam.get(i).getAttributes();
 
             Set<ContestantAttribute> attrKeys = playerContestantAttr.keySet();
-            attrKeys.remove(ContestantAttribute.STANIMA);
+
+            int modifiedStanimaVal = activeComputerTeam.get(i).getAttribute(ContestantAttribute.STANIMA);
 
             for(ContestantAttribute attr: attrKeys) {
+
+                if(attr == ContestantAttribute.STANIMA || attr == ContestantAttribute.MAX_STANIMA) {
+                    break;
+                }
 
                 float attrDifference = (playerContestantAttr.get(attr) * this.difficulty) - computerContestantAttr.get(attr);
 
                 if(attrDifference < 0) {
-                    
+                    modifiedStanimaVal -= attrDifference;
                 }
+
                 matchScore += attrDifference * (1f-this.difficulty);
-            }   
+            }
+
+            activeComputerTeam.get(i).editAttribute(ContestantAttribute.STANIMA, modifiedStanimaVal - BASE_STANIMA_LOSS);
+
+            if(activePlayerTeam.get(i).getAttribute(ContestantAttribute.STANIMA) >= 0) {
+
+                activeComputerTeam.get(i).addModifier(ContestantModifer.INJURED);
+
+            }
         }
 
         matchScore *= this.difficulty;
+        playerTeam.modifyTotalFunds((int) (matchScore * fundsRewardFactor));
+
 
         if (matchScore >= 0) {
             return true;

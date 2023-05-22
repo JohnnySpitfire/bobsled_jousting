@@ -13,7 +13,7 @@ public interface TeamBehaviour {
     public void purchaseItem(Item item, int cost);
     public void purchaseContestant(Contestant contestant) throws InvalidTeamSize;
     public Contestant getNewRandomContestant(float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize;
-    public Contestant onContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType;
-    public ArrayList<Contestant[]> onAthleteStatIncrease(float difficulty);
+    public Contestant randomContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType;
+    public ArrayList<Contestant[]> randomContestantStatIncrease(float difficulty);
     public void sellContestant(Contestant contestant);
 }

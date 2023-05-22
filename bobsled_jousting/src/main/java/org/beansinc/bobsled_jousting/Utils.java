@@ -42,6 +42,9 @@ public class Utils {
   
         Contestant randomContestant = new Contestant(randomName, randomAttributes);
         
+        int maxStanima = randomContestant.getAttribute(ContestantAttribute.MAX_STANIMA);
+        randomContestant.editAttribute(ContestantAttribute.STANIMA, maxStanima);
+        
         return randomContestant;
     }
 

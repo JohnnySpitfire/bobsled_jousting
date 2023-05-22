@@ -9,6 +9,8 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
+    private static final int CONTESTANT_TRAIN_ATTRIBUTE_INCREASE = 50;
+
     private int score;
 
     public PlayerTeam(String name, int funds, Random random) throws InvalidObjectAttributeType, InvalidTeamSize {
@@ -31,9 +33,11 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         for(Contestant contestant : activeTeam){
             
             Contestant modifiedContestant = contestant;
-            modifiedContestant.editStat(ContestantAttribute.STANIMA, 100);
+            int maxStanima = contestant.getAttribute(ContestantAttribute.MAX_STANIMA);
+            modifiedContestant.editAttribute(ContestantAttribute.STANIMA, maxStanima);
             this.modifyActiveContestant(modifiedContestant, contestant);
         }
+        
     }
 
     @Override
@@ -66,6 +70,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         this.addItem(item);
     }
 
+    @Override
     public void sellContestant(Contestant asset) {
 
         if(this.getActiveTeam().contains(asset)){
@@ -110,7 +115,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public Contestant onContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
+    public Contestant randomContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
 
         float contestantQuitChance = (this.rnd.nextFloat(0.01f, 0.5f)) * (1f - difficulty);
 
@@ -130,7 +135,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     }
 
     @Override
-    public ArrayList<Contestant[]> onAthleteStatIncrease(float difficulty) {
+    public ArrayList<Contestant[]> randomContestantStatIncrease(float difficulty) {
 
         ArrayList<Contestant[]> leveledUpContestants = new ArrayList<Contestant[]>();
 
@@ -146,7 +151,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
                     if(contestantStatIncreaseChance > 0.17) {
 
                         val += contestantStatIncrease;
-                        modifiedContestant.editStat(attr, val);
+                        modifiedContestant.editAttribute(attr, val);
                     }
                 
             });
@@ -167,6 +172,20 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
         return leveledUpContestants;
        
+    }
+
+    public Contestant trainContestant(Contestant contestant) {
+
+        int oldOffenceVal = contestant.getAttribute(ContestantAttribute.OFFENCE);
+        int oldDefenceVal = contestant.getAttribute(ContestantAttribute.DEFENCE);
+        int oldMaxStanimaVal = contestant.getAttribute(ContestantAttribute.MAX_STANIMA);
+
+        contestant.editAttribute(ContestantAttribute.OFFENCE, oldOffenceVal + CONTESTANT_TRAIN_ATTRIBUTE_INCREASE);
+        contestant.editAttribute(ContestantAttribute.DEFENCE, oldDefenceVal + CONTESTANT_TRAIN_ATTRIBUTE_INCREASE);
+        contestant.editAttribute(ContestantAttribute.MAX_STANIMA, oldMaxStanimaVal + CONTESTANT_TRAIN_ATTRIBUTE_INCREASE);
+
+        return contestant;
+
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 public enum ContestantAttribute {
     OFFENCE,
     DEFENCE,
+    MAX_STANIMA,
     STANIMA;
 
     public static final List<ContestantAttribute> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
@@ -21,6 +22,7 @@ public enum ContestantAttribute {
         return new Object[][]{
             {OFFENCE, 100},
             {DEFENCE, 100},
+            {MAX_STANIMA, 100},
             {STANIMA, 100}
         };
     }

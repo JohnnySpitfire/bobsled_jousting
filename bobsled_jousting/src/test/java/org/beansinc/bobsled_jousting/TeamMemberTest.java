@@ -32,7 +32,9 @@ public class TeamMemberTest {
 
         this.contestantAttributes.put(ContestantAttribute.OFFENCE, 100);
         this.contestantAttributes.put(ContestantAttribute.DEFENCE, 100);
+        this.contestantAttributes.put(ContestantAttribute.MAX_STANIMA, 100);
         this.contestantAttributes.put(ContestantAttribute.STANIMA, 100);
+
 
         this.sledAttributes.put(SledAttribute.ARMOUR, 100);
         this.sledAttributes.put(SledAttribute.SPEED, 100);
@@ -51,6 +53,7 @@ public class TeamMemberTest {
         
         new Object[][] {{ContestantAttribute.OFFENCE, 54},
                         {ContestantAttribute.DEFENCE, 34},
+                        {ContestantAttribute.MAX_STANIMA, 37},
                         {ContestantAttribute.STANIMA, 37}},
 
         ContestantAttribute.class,
@@ -66,7 +69,9 @@ public class TeamMemberTest {
 
          this.contestantAttributes.put(ContestantAttribute.OFFENCE, 54);
          this.contestantAttributes.put(ContestantAttribute.DEFENCE, 34);
+         this.contestantAttributes.put(ContestantAttribute.MAX_STANIMA, 37);
          this.contestantAttributes.put(ContestantAttribute.STANIMA, 37);
+
  
          this.sledAttributes.put(SledAttribute.ARMOUR, 54);
          this.sledAttributes.put(SledAttribute.SPEED, 34);

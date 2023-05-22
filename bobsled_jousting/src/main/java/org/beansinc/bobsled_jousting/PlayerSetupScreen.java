@@ -191,7 +191,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		panelIN.add(textDefenceVarIN);
 		
 		textStanimaVarIN = new JTextField();
-		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
+		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.MAX_STANIMA));
 		textStanimaVarIN.setHorizontalAlignment(SwingConstants.RIGHT);
 		textStanimaVarIN.setEditable(false);
 		textStanimaVarIN.setColumns(10);
@@ -540,7 +540,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textNameVarIN.setText(""+initialContestants.get(initialIndex).getName());
 		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.DEFENCE));
-		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.STANIMA));
+		textStanimaVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.MAX_STANIMA));
 		textModifiersVarIN.setText(""+initialContestants.get(initialIndex).getModifiers());
 		textCostVarIN.setText(""+initialContestants.get(initialIndex).getValue());
 		txtInitialNum.setText(""+(initialIndex+1));
@@ -557,7 +557,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textNameVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getName());
 		textOffenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textDefenceVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.DEFENCE));
-		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.STANIMA));
+		textStanimaVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getAttribute(ContestantAttribute.MAX_STANIMA));
 		textModifiersVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getModifiers());
 		textCostVarAct.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).getValue());
 		textActiveNum.setText(""+(activeIndex+1));

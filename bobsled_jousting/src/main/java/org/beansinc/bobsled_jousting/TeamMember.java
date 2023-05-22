@@ -85,9 +85,9 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         this.objectAttributes.put(stat, value);
     }
 
-    public void removeStat(A stat) {
+    public void removeAttribute(A attr) {
 
-        this.objectAttributes.remove(stat);
+        this.objectAttributes.remove(attr);
     }
 
     public void addModifier(M effect) {
@@ -95,11 +95,11 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
         this.objectModifiers.add(effect);
     }
 
-    public void editStat(A stat, int newVal) {
+    public void editAttribute(A stat, int newVal) {
         this.objectAttributes.replace(stat, newVal);
     }
 
-    public void removeEffect(M effect) throws ObjectEffectNotFound {
+    public void removeModifier(M effect) throws ObjectEffectNotFound {
 
         if(!this.objectModifiers.contains(effect)) {
             throw new ObjectEffectNotFound(effect);

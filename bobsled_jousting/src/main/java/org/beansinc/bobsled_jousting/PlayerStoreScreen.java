@@ -303,7 +303,7 @@ public class PlayerStoreScreen implements MouseListener{
 			textNameVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getName());
 			textOffenceVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getAttribute(ContestantAttribute.OFFENCE));
 			textDefenceVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getAttribute(ContestantAttribute.DEFENCE));
-			textStanimaVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getAttribute(ContestantAttribute.STANIMA));
+			textStanimaVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getAttribute(ContestantAttribute.MAX_STANIMA));
 			textCostVar.setText(""+enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getValue());
 			
 			

@@ -7,17 +7,24 @@ import java.util.Random;
 
 public enum Item {
     
-    ATTACK_POTION(50, "Temporarily increases a contestants offence by 20 for one match"),
-    DEFENCE_POTION(50, "Temporarily increases a contestants defence by 20 for one match"),
-    STANIMA_POTION(50, "Temporarily increases a contestants stamina by 20 for one match"),
-    SLIME_BOMB(100, "Slimes an enemy sled decreasing their offence and stanima by 40");
+    ATTACK_POTION(50, "Permamently increases a contestants offence by 20", true , true),
+    DEFENCE_POTION(50, "Permamently increases a contestants defence by 20", true, true),
+    STANIMA_POTION(50, "Permamently increases a contestants stanima by 20", true, true),
+    HEALTH_POTION(200, "Heals a player, and remvoves the INJURED modifier" ,true, true),
+
+    SLIME_BOMB(100, "Slimes an enemy sled decreasing their offence and reducing their sled's speed by 40", false, false);
+
 
     public final int value;
     public final String description;
+    public final boolean appliesToPlayerTeam;
+    public final boolean appliesToContestant;
 
-    Item(int value, String description){
+    Item(int value, String description, boolean appliesToPlayerTeam, boolean appliesToContestant){
         this.value = value;
         this.description = description;
+        this.appliesToPlayerTeam = appliesToPlayerTeam;
+        this.appliesToContestant = appliesToContestant;
     }
 
     public static final List<Item> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
@@ -25,6 +32,54 @@ public enum Item {
     public static Item getRandomItem(Random rnd) {
          
         return VALUES.get(rnd.nextInt(VALUES.size()));
+    }
+
+    public static void applyItemToTeam(BaseTeam team, Item item) {
+
+        switch(item) {
+
+            case SLIME_BOMB:
+
+                Sled modifiedSled = team.getSled();
+                modifiedSled.addModifier(SledModifier.SLIME);
+                modifiedSled.editAttribute(SledAttribute.SPEED, modifiedSled.getAttribute(SledAttribute.SPEED) - 40);
+
+                for(Contestant contestant : team.getActiveTeam()) {
+
+                    contestant.editAttribute(ContestantAttribute.OFFENCE, contestant.getAttribute(ContestantAttribute.OFFENCE) - 40);
+                }
+
+            default:
+                break;
+
+        }
+    }
+
+    public static void applyItemToContestant(Contestant contestant, Item item) {
+
+        switch(item) {
+
+            case HEALTH_POTION:
+                contestant.removeModifier(ContestantModifer.INJURED);
+
+            case ATTACK_POTION:
+                int currentOffenceVal = contestant.getAttribute(ContestantAttribute.OFFENCE);
+                contestant.editAttribute(ContestantAttribute.OFFENCE, currentOffenceVal + ATTACK_POTION.value);
+                contestant.updateValue();
+
+            case DEFENCE_POTION:
+                int currentDefenceVal = contestant.getAttribute(ContestantAttribute.DEFENCE);
+                contestant.editAttribute(ContestantAttribute.DEFENCE, currentDefenceVal + DEFENCE_POTION.value);
+                contestant.updateValue();
+
+            case STANIMA_POTION:
+                int currentStanimaVal = contestant.getAttribute(ContestantAttribute.MAX_STANIMA);
+                contestant.editAttribute(ContestantAttribute.MAX_STANIMA, currentStanimaVal + DEFENCE_POTION.value);
+                contestant.updateValue();
+
+            default:
+                break;
+        }
     }
 
     
