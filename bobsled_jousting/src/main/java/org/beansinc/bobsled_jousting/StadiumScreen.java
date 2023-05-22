@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.JCheckBox;
 
 public class StadiumScreen implements MouseListener{
 
@@ -50,10 +52,13 @@ public class StadiumScreen implements MouseListener{
 	private JTextField txtAreYouSure;
 	private JButton btnyes;
 	private JButton btnNo;
+	private JCheckBox chckbUseSlime;
 	
 	private int teamIndex;
 	private boolean match = false;
 	private boolean bye = false;
+	private ArrayList<Item> items = new ArrayList<Item>();
+	
 	
 	public StadiumScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -129,8 +134,11 @@ public class StadiumScreen implements MouseListener{
 		btnyes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (match) {
-					//Play game
-					
+					if (chckbUseSlime.isSelected()) {
+						items.add(Item.SLIME_BOMB);
+					}
+					//remove slime bomb from player inventory
+					enviroment.getStadium().playMatch(enviroment.getPlayerTeam(), enviroment.getStadium().getAvailableMatches().get(teamIndex), items);
 					
 					//launch post-week screen
 					closeWindow();
@@ -241,6 +249,11 @@ public class StadiumScreen implements MouseListener{
 		textModifiersAct.setColumns(10);
 		textModifiersAct.setBounds(11, 250, 171, 27);
 		panelAct.add(textModifiersAct);
+		
+		chckbUseSlime = new JCheckBox("Use Slime Bomb");
+		chckbUseSlime.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbUseSlime.setBounds(10, 297, 172, 23);
+		panelAct.add(chckbUseSlime);
 		
 		JPanel panelAct_1 = new JPanel();
 		panelAct_1.setBounds(437, 43, 192, 327);
@@ -414,8 +427,13 @@ public class StadiumScreen implements MouseListener{
 		textSpeedComp.setText("Speed: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getAttribute(SledAttribute.SPEED));
 		textModifiersComp.setText("Modifiers: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getModifiers());
 		
-		
+		if (enviroment.getPlayerTeam().getItems().contains(Item.SLIME_BOMB)) {
+			chckbUseSlime.setVisible(true);
+		}else {
+			chckbUseSlime.setVisible(false);
+		}
 		textCompTeamIndex.setText(""+(teamIndex + 1));
+		panelConfirm.setVisible(false);
 	}
 
 	@Override

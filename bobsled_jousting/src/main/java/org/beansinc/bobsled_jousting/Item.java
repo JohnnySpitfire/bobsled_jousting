@@ -10,7 +10,7 @@ public enum Item {
     ATTACK_POTION(50, "Permamently increases a contestants offence by 20", true , true),
     DEFENCE_POTION(50, "Permamently increases a contestants defence by 20", true, true),
     STANIMA_POTION(50, "Permamently increases a contestants stanima by 20", true, true),
-    HEALTH_POTION(200, "Heals a player, and remvoves the INJURED modifier" ,true, true),
+    HEALTH_POTION(200, "Heals a player; removing the INJURED modifier" ,true, true),
 
     SLIME_BOMB(100, "Slimes an enemy sled decreasing their offence and reducing their sled's speed by 40", false, false);
 
@@ -48,6 +48,7 @@ public enum Item {
 
                     contestant.editAttribute(ContestantAttribute.OFFENCE, contestant.getAttribute(ContestantAttribute.OFFENCE) - 40);
                 }
+                break;
 
             default:
                 break;
@@ -64,18 +65,21 @@ public enum Item {
 
             case ATTACK_POTION:
                 int currentOffenceVal = contestant.getAttribute(ContestantAttribute.OFFENCE);
-                contestant.editAttribute(ContestantAttribute.OFFENCE, currentOffenceVal + ATTACK_POTION.value);
+                contestant.editAttribute(ContestantAttribute.OFFENCE, currentOffenceVal + 20);
                 contestant.updateValue();
+                break;
 
             case DEFENCE_POTION:
                 int currentDefenceVal = contestant.getAttribute(ContestantAttribute.DEFENCE);
-                contestant.editAttribute(ContestantAttribute.DEFENCE, currentDefenceVal + DEFENCE_POTION.value);
+                contestant.editAttribute(ContestantAttribute.DEFENCE, currentDefenceVal + 20);
                 contestant.updateValue();
+                break;
 
             case STANIMA_POTION:
                 int currentStanimaVal = contestant.getAttribute(ContestantAttribute.MAX_STANIMA);
-                contestant.editAttribute(ContestantAttribute.MAX_STANIMA, currentStanimaVal + DEFENCE_POTION.value);
+                contestant.editAttribute(ContestantAttribute.MAX_STANIMA, currentStanimaVal + 20);
                 contestant.updateValue();
+                break;
 
             default:
                 break;
