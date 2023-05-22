@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.SystemColor;
+import javax.swing.border.MatteBorder;
 
 public class InventoryScreen implements MouseListener{
 
@@ -35,7 +37,6 @@ public class InventoryScreen implements MouseListener{
 	private JTextField txtSledModifiers;
 	private JTextField txtSledCost;
 	private JButton btnSell;
-	private JButton btnLeft;
 	private JTextField textItemInformation;
 	private JTextField textItemValue;
 	private JTextField textItemName;
@@ -43,6 +44,18 @@ public class InventoryScreen implements MouseListener{
 
 	
 	private int itemIndex;
+	private int contIndex;
+	private JTextField textNameCont;
+	private JTextField textOffenceCont;
+	private JTextField textNameContVar;
+	private JTextField textModifiersCont;
+	private JTextField textDefenceCont;
+	private JTextField textStanimaCont;
+	private JTextField textOffenceContVar;
+	private JTextField textDefenceContVar;
+	private JTextField textStanimaContVar;
+	private JTextField textModifiersContVar;
+	private JButton btnLeft;
 	
 	public InventoryScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
@@ -88,6 +101,113 @@ public class InventoryScreen implements MouseListener{
 		frmInventory.setBounds(100, 100, 685, 488);
 		frmInventory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInventory.getContentPane().setLayout(null);
+		
+		JPanel panelCont = new JPanel();
+		panelCont.setBounds(369, 214, 191, 224);
+		frmInventory.getContentPane().add(panelCont);
+		panelCont.setLayout(null);
+		panelCont.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelCont.setBackground(SystemColor.menu);
+		
+		textNameCont = new JTextField();
+		textNameCont.setText("Name:");
+		textNameCont.setEditable(false);
+		textNameCont.setColumns(10);
+		textNameCont.setBounds(10, 11, 62, 20);
+		panelCont.add(textNameCont);
+		
+		textOffenceCont = new JTextField();
+		textOffenceCont.setText("OFFENCE:");
+		textOffenceCont.setEditable(false);
+		textOffenceCont.setColumns(10);
+		textOffenceCont.setBounds(10, 42, 76, 20);
+		panelCont.add(textOffenceCont);
+		
+		textNameContVar = new JTextField();
+		textNameContVar.setEditable(false);
+		textNameContVar.setHorizontalAlignment(SwingConstants.CENTER);
+		textNameContVar.setColumns(10);
+		textNameContVar.setBounds(68, 11, 114, 20);
+		panelCont.add(textNameContVar);
+		
+		textModifiersCont = new JTextField();
+		textModifiersCont.setText("Modifiers:");
+		textModifiersCont.setEditable(false);
+		textModifiersCont.setColumns(10);
+		textModifiersCont.setBounds(10, 126, 76, 20);
+		panelCont.add(textModifiersCont);
+		
+		textDefenceCont = new JTextField();
+		textDefenceCont.setText("DEFENCE:");
+		textDefenceCont.setEditable(false);
+		textDefenceCont.setColumns(10);
+		textDefenceCont.setBounds(10, 68, 76, 20);
+		panelCont.add(textDefenceCont);
+		
+		textStanimaCont = new JTextField();
+		textStanimaCont.setText("STANIMA:");
+		textStanimaCont.setEditable(false);
+		textStanimaCont.setColumns(10);
+		textStanimaCont.setBounds(10, 95, 76, 20);
+		panelCont.add(textStanimaCont);
+		
+		textOffenceContVar = new JTextField();
+		textOffenceContVar.setHorizontalAlignment(SwingConstants.RIGHT);
+		textOffenceContVar.setEditable(false);
+		textOffenceContVar.setColumns(10);
+		textOffenceContVar.setBounds(96, 42, 86, 20);
+		panelCont.add(textOffenceContVar);
+		
+		textDefenceContVar = new JTextField();
+		textDefenceContVar.setHorizontalAlignment(SwingConstants.RIGHT);
+		textDefenceContVar.setEditable(false);
+		textDefenceContVar.setColumns(10);
+		textDefenceContVar.setBounds(96, 68, 86, 20);
+		panelCont.add(textDefenceContVar);
+		
+		textStanimaContVar = new JTextField();
+		textStanimaContVar.setHorizontalAlignment(SwingConstants.RIGHT);
+		textStanimaContVar.setEditable(false);
+		textStanimaContVar.setColumns(10);
+		textStanimaContVar.setBounds(96, 93, 86, 20);
+		panelCont.add(textStanimaContVar);
+		
+		textModifiersContVar = new JTextField();
+		textModifiersContVar.setHorizontalAlignment(SwingConstants.RIGHT);
+		textModifiersContVar.setEditable(false);
+		textModifiersContVar.setColumns(10);
+		textModifiersContVar.setBounds(96, 126, 86, 20);
+		panelCont.add(textModifiersContVar);
+		
+		JButton btnLeftCont = new JButton("<==");
+		btnLeftCont.addMouseListener(this);
+		btnLeftCont.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (contIndex == 0 && 0 != (enviroment.getPlayerTeam().getActiveTeam().size())) {
+					contIndex = enviroment.getPlayerTeam().getActiveTeam().size() - 1;
+				}
+				else if (0 != (enviroment.getPlayerTeam().getActiveTeam().size())) {
+					contIndex -= 1;
+				}
+			}
+		});
+		btnLeftCont.setBounds(29, 167, 57, 23);
+		panelCont.add(btnLeftCont);
+		
+		JButton btnRightCont = new JButton("==>");
+		btnRightCont.addMouseListener(this);
+		btnRightCont.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (contIndex == (enviroment.getPlayerTeam().getActiveTeam().size() - 1)) {
+					contIndex = 0;
+				}
+				else if (0 != (enviroment.getPlayerTeam().getActiveTeam().size())){
+					contIndex += 1;
+				}
+			}
+		});
+		btnRightCont.setBounds(96, 167, 65, 23);
+		panelCont.add(btnRightCont);
 		
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.setAction(Back);
@@ -178,23 +298,8 @@ public class InventoryScreen implements MouseListener{
 					}
 			}
 		});
-		btnSell.setBounds(418, 286, 115, 63);
+		btnSell.setBounds(414, 304, 115, 63);
 		frmInventory.getContentPane().add(btnSell);
-		
-		btnLeft = new JButton("<==");
-		btnLeft.addMouseListener(this);
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (itemIndex == 0 && 0 != (enviroment.getPlayerTeam().getItems().size())) {
-					itemIndex = enviroment.getPlayerTeam().getItems().size() - 1;
-				}
-				else if (0 != (enviroment.getPlayerTeam().getItems().size())) {
-					itemIndex -= 1;
-				}
-			}
-		});
-		btnLeft.setBounds(365, 200, 60, 23);
-		frmInventory.getContentPane().add(btnLeft);
 		
 		textItemInformation = new JTextField();
 		textItemInformation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -217,6 +322,63 @@ public class InventoryScreen implements MouseListener{
 		textItemName.setBounds(404, 59, 115, 49);
 		frmInventory.getContentPane().add(textItemName);
 		
+		JButton btnUse = new JButton("Use Item");
+		btnUse.addMouseListener(this);
+		btnUse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (enviroment.getPlayerTeam().getItems().size() > 0 && enviroment.getPlayerTeam().getActiveTeam().size() > 0 && enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.SLIME_BOMB) {
+					panelCont.setVisible(true);
+					btnSell.setVisible(false);
+					btnUse.setVisible(false);
+					
+					textNameContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getName());
+					textOffenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.OFFENCE));
+					textStanimaContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.STANIMA));
+					textDefenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.DEFENCE));
+					textModifiersContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers());
+				}
+				
+			}
+		});
+		btnUse.setBounds(414, 234, 115, 63);
+		
+		JButton btnApply = new JButton("Apply");
+		btnApply.addMouseListener(this);
+		btnApply.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.SLIME_BOMB) {
+					if (enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.HEALTH_POTION)
+					Item.applyItemToContestant(enviroment.getPlayerTeam().getActiveTeam().get(contIndex), enviroment.getPlayerTeam().getItems().get(itemIndex));
+				}else if (enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers().contains(ContestantModifer.INJURED)) {
+					Item.applyItemToContestant(enviroment.getPlayerTeam().getActiveTeam().get(contIndex), enviroment.getPlayerTeam().getItems().get(itemIndex));
+				}
+				panelCont.setVisible(false);
+				btnSell.setVisible(true);
+				btnUse.setVisible(true);
+			}
+		});
+		btnApply.setBounds(49, 190, 86, 23);
+		panelCont.add(btnApply);
+		frmInventory.getContentPane().add(btnUse);
+		
+		btnLeft = new JButton("<==");
+		btnLeft.addMouseListener(this);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (itemIndex == 0 && 0 != (enviroment.getPlayerTeam().getItems().size())) {
+					itemIndex = enviroment.getPlayerTeam().getItems().size() - 1;
+				}
+				else if (0 != (enviroment.getPlayerTeam().getItems().size())) {
+					itemIndex -= 1;
+				}
+				panelCont.setVisible(false);
+				btnSell.setVisible(true);
+				btnUse.setVisible(true);
+			}
+		});
+		btnLeft.setBounds(346, 192, 73, 23);
+		frmInventory.getContentPane().add(btnLeft);
+		
 		btnRight = new JButton("==>");
 		btnRight.addMouseListener(this);
 		btnRight.addActionListener(new ActionListener() {
@@ -227,11 +389,15 @@ public class InventoryScreen implements MouseListener{
 				else if (0 != (enviroment.getPlayerTeam().getItems().size())){
 					itemIndex += 1;
 				}
+				panelCont.setVisible(false);
+				btnSell.setVisible(true);
+				btnUse.setVisible(true);
 			}
 		});
-		btnRight.setBounds(513, 200, 60, 23);
+		btnRight.setBounds(523, 192, 60, 23);
 		frmInventory.getContentPane().add(btnRight);
 		
+		panelCont.setVisible(false);
 		mouseClicked(null);  //Text Manager
 	}
 	
@@ -264,7 +430,11 @@ public class InventoryScreen implements MouseListener{
 			
 		}
 		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
-		
+		textNameContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getName());
+		textOffenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.OFFENCE));
+		textStanimaContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.STANIMA));
+		textDefenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.DEFENCE));
+		textModifiersContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers());
 	}
 
 	@Override
@@ -290,6 +460,5 @@ public class InventoryScreen implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
 
