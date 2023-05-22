@@ -4,8 +4,8 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 public class Contestant extends TeamMember<ContestantAttribute, ContestantModifer>{
     
-    private static final int CONTESTANT_BASE_VALUE = 50;
-    private static final int CONTESTANT_ATTRIBUTE_VALUE_FACTOR = 8;
+    private static final int CONTESTANT_BASE_VALUE = 200;
+    private static final int CONTESTANT_ATTRIBUTE_VALUE_FACTOR = 1;
 
     private String nickname;
 

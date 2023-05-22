@@ -10,8 +10,5 @@ public class App
     {      
     	GameEnviroment.launchSetupScreen();
     }
-    
-    
-    
    
 }

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
@@ -20,6 +21,8 @@ public class StadiumTest {
     PlayerTeam playerTeam;
     ComputerTeam computerTeam;
 
+    ArrayList<Item> usedPlayerItems;
+
     float difficulty;
 
     @BeforeEach
@@ -29,6 +32,8 @@ public class StadiumTest {
         this.difficulty = rnd.nextFloat();
         int currentWeek = rnd.nextInt(14);
 
+        usedPlayerItems = new ArrayList<Item>();
+
         this.testStadium = new Stadium(rnd, difficulty, currentWeek);
         this.playerTeam = new PlayerTeam("test", 0, rnd);
 
@@ -37,8 +42,8 @@ public class StadiumTest {
             this.playerTeam.addActiveContestant(newContestant);
         }
 
-        int rndComputerTeamIndex = rnd.nextInt(this.testStadium.getAvalibleMatches().size());
-        this.computerTeam = this.testStadium.getAvalibleMatches().get(rndComputerTeamIndex);
+        int rndComputerTeamIndex = rnd.nextInt(this.testStadium.getAvailableMatches().size());
+        this.computerTeam = this.testStadium.getAvailableMatches().get(rndComputerTeamIndex);
     }
 
     @RepeatedTest(2000)
@@ -46,6 +51,15 @@ public class StadiumTest {
     void testPlayMatch() {
 
         float matchScore = 0;
+
+        for(Item item: usedPlayerItems){
+            
+            if(item.appliesToPlayerTeam){
+                Item.applyItemToTeam(playerTeam, item);
+            } else {
+                Item.applyItemToTeam(computerTeam, item);
+            }
+        }
 
         ArrayList<Contestant> activePlayerTeam = playerTeam.getActiveTeam();
         ArrayList<Contestant> activeComputerTeam = computerTeam.getActiveTeam();
@@ -64,16 +78,35 @@ public class StadiumTest {
             Map<ContestantAttribute, Integer> playerContestantAttr = activePlayerTeam.get(i).getAttributes();
             Map<ContestantAttribute, Integer> computerContestantAttr = activeComputerTeam.get(i).getAttributes();
 
-            for(ContestantAttribute attr: playerContestantAttr.keySet()) {
+            Set<ContestantAttribute> attrKeys = playerContestantAttr.keySet();
+
+            for(ContestantAttribute attr: attrKeys) {
+
+                if(attr == ContestantAttribute.STANIMA || attr == ContestantAttribute.MAX_STANIMA) {
+                    continue;
+                }
 
                 float attrDifference = (playerContestantAttr.get(attr) * this.difficulty) - computerContestantAttr.get(attr);
+
+                if(attrDifference < 0) {
+                    
+                }
                 matchScore += attrDifference * (1f-this.difficulty);
-            }   
+            }
+
+            int oldStanimaVal = activeComputerTeam.get(i).getAttribute(ContestantAttribute.STANIMA);
+
+            activeComputerTeam.get(i).editAttribute(ContestantAttribute.STANIMA, oldStanimaVal - Stadium.BASE_STANIMA_LOSS);
+
+            if(activePlayerTeam.get(i).getAttribute(ContestantAttribute.STANIMA) >= 0) {
+
+                activeComputerTeam.get(i).addModifier(ContestantModifer.INJURED);
+
+            }
         }
-        
+
         matchScore *= this.difficulty;
-        boolean playerWon = testStadium.playMatch(this.playerTeam, this.computerTeam, new ArrayList<Item>());
-        
+        boolean playerWon = this.testStadium.playMatch(playerTeam, computerTeam, new ArrayList<Item>());
 
         if (matchScore >= 0) {
             assertTrue(playerWon);

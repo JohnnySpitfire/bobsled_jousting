@@ -277,10 +277,10 @@ public class StadiumScreen implements MouseListener{
 		JButton btnRAct = new JButton("==>");
 		btnRAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == (enviroment.getStadium().getAvalibleMatches().size() - 1)) {
+				if (teamIndex == (enviroment.getStadium().getAvailableMatches().size() - 1)) {
 					teamIndex = 0;
 				}
-				else if (0 != (enviroment.getStadium().getAvalibleMatches().size())){
+				else if (0 != (enviroment.getStadium().getAvailableMatches().size())){
 					teamIndex += 1;
 				}
 			}
@@ -291,10 +291,10 @@ public class StadiumScreen implements MouseListener{
 		JButton btnLAct = new JButton("<==");
 		btnLAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (teamIndex == 0 && 0 != (enviroment.getStadium().getAvalibleMatches().size())) {
-					teamIndex = enviroment.getStadium().getAvalibleMatches().size() - 1;
+				if (teamIndex == 0 && 0 != (enviroment.getStadium().getAvailableMatches().size())) {
+					teamIndex = enviroment.getStadium().getAvailableMatches().size() - 1;
 				}
-				else if (0 != (enviroment.getStadium().getAvalibleMatches().size())) {
+				else if (0 != (enviroment.getStadium().getAvailableMatches().size())) {
 					teamIndex -= 1;
 				}
 			}
