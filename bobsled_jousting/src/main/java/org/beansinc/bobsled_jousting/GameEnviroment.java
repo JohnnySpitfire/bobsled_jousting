@@ -149,53 +149,53 @@ public class GameEnviroment {
 	   PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(game);
 	}
   
-  public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) throws InvalidObjectAttributeType {
-	  market = new Market(rnd, 0);
-	  playerSetupWindow.closeWindow();
-	  launchMainMenuScreen();
+   public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) throws InvalidObjectAttributeType, InvalidTeamSize {
+	   market = new Market(rnd, 0);
+ 	   game.setStadium();
+	   playerSetupWindow.closeWindow();
+	   launchMainMenuScreen();
 	}
 
    public void launchSledStoreScreen() {
-      SledStoreScreen sledStoreWindow = new SledStoreScreen(this);
-      
-   }
 
-   public void launchItemStoreScreen() {
-      ItemStoreScreen itemStoreWindow = new ItemStoreScreen(this);
-      
-   }
+		SledStoreScreen sledStoreWindow = new SledStoreScreen(this);
+		
+	}
 
-   public void launchPlayerStoreScreen() {
-      PlayerStoreScreen playerStoreWindow = new PlayerStoreScreen(this);
-      
-   }
+	public void launchItemStoreScreen() {
+		ItemStoreScreen itemStoreWindow = new ItemStoreScreen(this);
+		
+	}
 
-   public void closeItemStoreScreen(ItemStoreScreen itemStoreScreen) {
-      itemStoreScreen.closeWindow();
-      launchStoreScreen();
-      
-   }
+	public void launchPlayerStoreScreen() {
+		PlayerStoreScreen playerStoreWindow = new PlayerStoreScreen(this);
+		
+	}
 
-   public void closePlayerStoreScreen(PlayerStoreScreen playerStoreScreen) {
-      playerStoreScreen.closeWindow();
-      launchStoreScreen();
-   }
+	public void closeItemStoreScreen(ItemStoreScreen itemStoreScreen) {
+		itemStoreScreen.closeWindow();
+		launchStoreScreen();
+		
+	}
 
-   public void closeSledStoreScreen(SledStoreScreen sledStoreScreen) {
-      sledStoreScreen.closeWindow();
-      launchStoreScreen();
-   }
+	public void closePlayerStoreScreen(PlayerStoreScreen playerStoreScreen) {
+		playerStoreScreen.closeWindow();
+		launchStoreScreen();
+	}
 
+	public void closeSledStoreScreen(SledStoreScreen sledStoreScreen) {
+		sledStoreScreen.closeWindow();
+		launchStoreScreen();
+	}
 
-   public void launchStadiumScreen() {
-      StadiumScreen stadiumWindow = new StadiumScreen(this);
-      }
-      
-   public void closeStadiumScreen(StadiumScreen stadiumWindow) {
-      stadiumWindow.closeWindow();
-      launchMainMenuScreen();
-      }
-  
+	public void launchStadiumScreen() {
+		StadiumScreen stadiumWindow = new StadiumScreen(this);
+		}
+	   
+	public void closeStadiumScreen(StadiumScreen stadiumWindow) {
+		stadiumWindow.closeWindow();
+		launchMainMenuScreen();
+		}
   
 }
 
