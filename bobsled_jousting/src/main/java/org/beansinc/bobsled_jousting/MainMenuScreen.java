@@ -12,35 +12,74 @@ import javax.swing.Action;
 import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainMenuScreen.
+ */
 public class MainMenuScreen {
 
+	/** The frm mainmenu. */
 	private JFrame frmMainmenu;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The txt name. */
 	private JTextField txtName;
+	
+	/** The text money. */
 	private JTextField textMoney;
+	
+	/** The Inventory. */
 	private final Action Inventory = new SwingAction();
+	
+	/** The Club. */
 	private final Action Club = new SwingAction_1();
+	
+	/** The Store. */
 	private final Action Store = new SwingAction_2();
+	
+	/** The Quit. */
 	private final Action Quit = new SwingAction_3();
+	
+	/** The txt week. */
 	private JTextField txtWeek;
+	
+	/** The txt weeks remaining. */
 	private JTextField txtWeeksRemaining;
+	
+	/** The btn stadium. */
 	private JButton btnStadium;
 	
+	/**
+	 * Instantiates a new main menu screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public MainMenuScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmMainmenu.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmMainmenu.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeMainMenuScreen(this);
 	}
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -136,41 +175,96 @@ public class MainMenuScreen {
 		frmMainmenu.getContentPane().add(btnStadium);
 	}
 	
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Inventory");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			enviroment.launchInventoryScreen();
 			finishedWindow();
 		}
 	}
+	
+	/**
+	 * The Class SwingAction_1.
+	 */
 	private class SwingAction_1 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 1.
+		 */
 		public SwingAction_1() {
 			putValue(NAME, "Club");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			enviroment.launchClubScreen();
 			finishedWindow();
 		}
 	}
+	
+	/**
+	 * The Class SwingAction_2.
+	 */
 	private class SwingAction_2 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 2.
+		 */
 		public SwingAction_2() {
 			putValue(NAME, "Store");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			enviroment.launchStoreScreen();
 			finishedWindow();
 		}
 	}
+	
+	/**
+	 * The Class SwingAction_3.
+	 */
 	private class SwingAction_3 extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action 3.
+		 */
 		public SwingAction_3() {
 			putValue(NAME, "Quit");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}

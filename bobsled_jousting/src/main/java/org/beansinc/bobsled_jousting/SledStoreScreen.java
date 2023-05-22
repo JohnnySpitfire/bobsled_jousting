@@ -19,44 +19,103 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SledStoreScreen.
+ */
 public class SledStoreScreen implements MouseListener{
 
+	/** The frm sled store. */
 	private JFrame frmSledStore;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The txt money. */
 	private JTextField txtMoney;
+	
+	/** The Back. */
 	private final Action Back = new SwingAction();
+	
+	/** The txt name. */
 	private JTextField txtName;
+	
+	/** The text your sled. */
 	private JTextField textYourSled;
+	
+	/** The panel sled. */
 	private JPanel panelSled;
+	
+	/** The text armour curr. */
 	private JTextField textArmourCurr;
+	
+	/** The text speed curr. */
 	private JTextField textSpeedCurr;
+	
+	/** The text modifiers curr. */
 	private JTextField textModifiersCurr;
+	
+	/** The text cost curr. */
 	private JTextField textCostCurr;
+	
+	/** The txt purchasable sled. */
 	private JTextField txtPurchasableSled;
+	
+	/** The panel sled 1. */
 	private JPanel panelSled_1;
+	
+	/** The text armour shop. */
 	private JTextField textArmourShop;
+	
+	/** The text speed shop. */
 	private JTextField textSpeedShop;
+	
+	/** The text modifiers shop. */
 	private JTextField textModifiersShop;
+	
+	/** The text cost shop. */
 	private JTextField textCostShop;
+	
+	/** The text index. */
 	private JTextField textIndex;
 	
+	/** The index. */
 	private int index;
+	
+	/** The btn purchase. */
 	private JButton btnPurchase;
+	
+	/** The text funds. */
 	private JTextField textFunds;
 	
+	/**
+	 * Instantiates a new sled store screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public SledStoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmSledStore.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmSledStore.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeSledStoreScreen(this);
 	}
 	
+	/**
+	 * Refresh window.
+	 */
 	public void refreshWindow() {
 		frmSledStore.dispose();
 		enviroment.launchSledStoreScreen();
@@ -64,6 +123,8 @@ public class SledStoreScreen implements MouseListener{
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -265,16 +326,35 @@ public class SledStoreScreen implements MouseListener{
 		mouseClicked(null);
 	}
 
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Back");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}
 	}
 
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (enviroment.getPlayerTeam().getTotalFunds() < enviroment.getMarket().getSledSaleArray().get(index).getValue() - enviroment.getPlayerTeam().getSled().getValue()) {
@@ -302,24 +382,44 @@ public class SledStoreScreen implements MouseListener{
 		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

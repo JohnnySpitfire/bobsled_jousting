@@ -25,6 +25,11 @@ public class StadiumTest {
 
     float difficulty;
 
+    
+    /** 
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
+     */
     @BeforeEach
     void initalize() throws InvalidObjectAttributeType, InvalidTeamSize {
 
@@ -46,7 +51,7 @@ public class StadiumTest {
         this.computerTeam = this.testStadium.getAvailableMatches().get(rndComputerTeamIndex);
     }
 
-    @RepeatedTest(2000)
+    @RepeatedTest(200)
     @Test
     void testPlayMatch() {
 

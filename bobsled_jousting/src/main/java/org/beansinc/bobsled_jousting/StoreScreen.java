@@ -14,29 +14,61 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StoreScreen.
+ */
 public class StoreScreen {
 
+	/** The frm store. */
 	private JFrame frmStore;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The txt money. */
 	private JTextField txtMoney;
+	
+	/** The Back. */
 	private final Action Back = new SwingAction();
+	
+	/** The txt name. */
 	private JTextField txtName;
+	
+	/** The btn sled. */
 	private JButton btnSled;
+	
+	/** The btn items. */
 	private JButton btnItems;
 	
+	/**
+	 * Instantiates a new store screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public StoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmStore.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmStore.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeStoreScreen(this);
 	}
 	
+	/**
+	 * Refresh window.
+	 */
 	public void refreshWindow() {
 		frmStore.dispose();
 		enviroment.launchStoreScreen();
@@ -44,6 +76,8 @@ public class StoreScreen {
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -127,11 +161,24 @@ public class StoreScreen {
 		frmStore.getContentPane().add(btnPlayers);
 	}
 
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Back");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}
