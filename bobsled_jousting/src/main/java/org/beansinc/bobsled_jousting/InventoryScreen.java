@@ -19,7 +19,6 @@ import java.awt.event.MouseListener;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InventoryScreen.
  */
@@ -335,7 +334,6 @@ public class InventoryScreen implements MouseListener{
 						try {
 							enviroment.getMarket().sellAsset(enviroment.getPlayerTeam(), enviroment.getPlayerTeam().getItems().get(itemIndex));
 						} catch (ItemNotFound e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						if (itemIndex == enviroment.getPlayerTeam().getItems().size() && enviroment.getPlayerTeam().getItems().size() != 0) {
@@ -393,11 +391,14 @@ public class InventoryScreen implements MouseListener{
 		btnApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.SLIME_BOMB) {
-					if (enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.HEALTH_POTION)
+
+					if (enviroment.getPlayerTeam().getItems().get(itemIndex) != Item.HEALTH_POTION) {
 					Item.applyItemToContestant(enviroment.getPlayerTeam().getActiveTeam().get(contIndex), enviroment.getPlayerTeam().getItems().get(itemIndex));
-				}else if (enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers().contains(ContestantModifer.INJURED)) {
+					
+					} else if (enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers().contains(ContestantModifer.INJURED)) {
 					Item.applyItemToContestant(enviroment.getPlayerTeam().getActiveTeam().get(contIndex), enviroment.getPlayerTeam().getItems().get(itemIndex));
-				}
+				} 
+			}
 				panelCont.setVisible(false);
 				btnSell.setVisible(true);
 				btnUse.setVisible(true);
@@ -526,7 +527,6 @@ public class InventoryScreen implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -537,7 +537,6 @@ public class InventoryScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -548,7 +547,6 @@ public class InventoryScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -559,7 +557,6 @@ public class InventoryScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

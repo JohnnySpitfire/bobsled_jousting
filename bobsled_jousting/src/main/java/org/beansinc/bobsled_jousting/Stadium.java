@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.text.rtf.RTFEditorKit;
+
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
@@ -14,7 +16,7 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 public class Stadium {
 
     /** The base amount of stanima lost on each game. */
-    public static final int BASE_STANIMA_LOSS = 100;
+    public static final int BASE_STANIMA_LOSS = 20;
 
     /** The funds reward factor. */
     private float fundsRewardFactor;
@@ -119,7 +121,7 @@ public class Stadium {
                 float attrDifference = (playerContestantAttr.get(attr) * this.difficulty) - computerContestantAttr.get(attr);
 
                 if(attrDifference < 0) {
-                    modifiedStanimaVal += attrDifference;
+                    modifiedStanimaVal += (attrDifference * 0.5);
                 }
 
 
@@ -138,8 +140,13 @@ public class Stadium {
         }
 
         matchScore *= this.difficulty;
-        playerTeam.modifyTotalFunds((int) (matchScore * fundsRewardFactor));
-        playerTeam.modifyScore((int) matchScore);
+
+        if(matchScore > 0) {
+
+            playerTeam.modifyTotalFunds((int) (matchScore * fundsRewardFactor));
+            playerTeam.modifyScore((int) matchScore);
+
+        }
 
 
         if (matchScore >= 0) {
