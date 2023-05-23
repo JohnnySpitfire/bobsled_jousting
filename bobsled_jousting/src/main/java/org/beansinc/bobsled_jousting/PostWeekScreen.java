@@ -131,8 +131,6 @@ public class PostWeekScreen implements MouseListener{
 	 * @throws InvalidObjectAttributeType 
 	 */
 	private void initialize() throws InvalidObjectAttributeType, ContestantNotFound, InvalidTeamSize {
-		playerQuit = enviroment.getPlayerTeam().randomContestantQuit(enviroment.getDifficulty());
-		leveledUp = enviroment.getPlayerTeam().randomContestantStatIncrease(enviroment.getDifficulty());
 		
 		
 		frmPostweek = new JFrame();
@@ -276,6 +274,10 @@ public class PostWeekScreen implements MouseListener{
 			textScore.setBounds(233, 62, 170, 28);
 			frmPostweek.getContentPane().add(textScore);
 		}else{
+			
+		playerQuit = enviroment.getPlayerTeam().randomContestantQuit(enviroment.getDifficulty());
+		leveledUp = enviroment.getPlayerTeam().randomContestantStatIncrease(enviroment.getDifficulty());
+		enviroment.getPlayerTeam().onWeekEnd();
 		panelOld = new JPanel();
 		panelOld.setLayout(null);
 		panelOld.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -630,25 +632,25 @@ public class PostWeekScreen implements MouseListener{
 				textNameQuit.setText(playerQuit.getName() + "'s Stats");
 				textOffenceQuitVar.setText("" + playerQuit.getAttribute(ContestantAttribute.OFFENCE));
 				textDenfenceQuitVar.setText("" + playerQuit.getAttribute(ContestantAttribute.DEFENCE));
-				textStanimaQuitVar.setText("" + playerQuit.getAttribute(ContestantAttribute.MAX_STANIMA));
+				textStanimaQuitVar.setText("" + playerQuit.getAttribute(ContestantAttribute.STANIMA));
 				textQuit.setText("Player Who Has Left The Team:");
 			}
 			
 			textNameSelect.setText(enviroment.getPlayerTeam().getActiveTeam().get(selectIndex).getName() + "'s Stats");
 			textOffenceSelectVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(selectIndex).getAttribute(ContestantAttribute.OFFENCE));
 			textDefenceSelectVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(selectIndex).getAttribute(ContestantAttribute.DEFENCE));
-			textStanimaSelectVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(selectIndex).getAttribute(ContestantAttribute.MAX_STANIMA));
+			textStanimaSelectVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(selectIndex).getAttribute(ContestantAttribute.STANIMA));
 
 			
 			if (leveledUp.size() != 0) {
 				textNameOld.setText(leveledUp.get(levelUpIndex)[1].getName() + "'s Old Stats");
 				textOffenceOldVar.setText("" + leveledUp.get(levelUpIndex)[1].getAttribute(ContestantAttribute.OFFENCE));
 				textDefenceOldVar.setText("" + leveledUp.get(levelUpIndex)[1].getAttribute(ContestantAttribute.DEFENCE));
-				textStanimaOldVar.setText("" + leveledUp.get(levelUpIndex)[1].getAttribute(ContestantAttribute.MAX_STANIMA));
+				textStanimaOldVar.setText("" + leveledUp.get(levelUpIndex)[1].getAttribute(ContestantAttribute.STANIMA));
 				textNameNew.setText(leveledUp.get(levelUpIndex)[0].getName() + "'s New Stats");
 				textOffenceNewVar.setText("" + leveledUp.get(levelUpIndex)[0].getAttribute(ContestantAttribute.OFFENCE));
 				textDefenceNewVar.setText("" + leveledUp.get(levelUpIndex)[0].getAttribute(ContestantAttribute.DEFENCE));
-				textStanimaNewVar.setText("" + leveledUp.get(levelUpIndex)[0].getAttribute(ContestantAttribute.MAX_STANIMA));
+				textStanimaNewVar.setText("" + leveledUp.get(levelUpIndex)[0].getAttribute(ContestantAttribute.STANIMA));
 				textLeveledUp.setText("Leveled Up players");
 			}else {
 				textNameOld.setText("");

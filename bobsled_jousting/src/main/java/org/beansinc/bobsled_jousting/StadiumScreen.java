@@ -507,13 +507,21 @@ public class StadiumScreen implements MouseListener{
 		btnPlay.setBounds(275, 328, 116, 42);
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean injured = false;
+				for (int i = 0; i < enviroment.getPlayerTeam().getActiveTeam().size(); i++) {
+					if(enviroment.getPlayerTeam().getActiveTeam().get(i).getModifiers().contains(ContestantModifer.INJURED)) {
+						injured = true;
+					}
+				}
 				if (enviroment.getPlayerTeam().getActiveTeam().size() < 4) {
 					textReason.setText("Active Team Not Full");
 				}else if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() > 9) {
 					textReason.setText("Reserve Team Over Full");
+				}else if (injured) {
+					textReason.setText("Player(s) Injured");
 				}else {
-				panelConfirm.setVisible(true);
-				match = true;
+					panelConfirm.setVisible(true);
+					match = true;
 				}
 			}
 		});
