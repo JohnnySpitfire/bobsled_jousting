@@ -27,8 +27,6 @@ public class ItemStoreScreen implements MouseListener{
 	
 	private int itemIndex = 0;
 	
-	
-	private int index = 0;
 	private JButton btnLeft;
 	private JButton btnRight;
 	private JTextField textPrice;

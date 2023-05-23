@@ -4,17 +4,13 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
-
 import javax.swing.JPanel;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
@@ -143,6 +139,7 @@ public class PlayerStoreScreen implements MouseListener{
 		panelAct.add(textOffence);
 		
 		textNameVar = new JTextField();
+		textNameVar.setEditable(false);
 		textNameVar.setHorizontalAlignment(SwingConstants.CENTER);
 		textNameVar.setColumns(10);
 		textNameVar.setBounds(68, 11, 114, 20);
@@ -252,7 +249,7 @@ public class PlayerStoreScreen implements MouseListener{
 		btnPurchase.addMouseListener(this);
 		btnPurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() < 9) {
+				if (enviroment.getPlayerTeam().getReserveTeam().size() < 5) {
 					if (enviroment.getMarket().getContestantSaleArray().size() != 0 && enviroment.getPlayerTeam().getTotalFunds() >= enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getValue()) {
 						try {
 							enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getContestantSaleArray().get(contestantIndex));
@@ -308,7 +305,7 @@ public class PlayerStoreScreen implements MouseListener{
 			
 			
 			if (enviroment.getMarket().getContestantSaleArray().get(contestantIndex).getValue() > enviroment.getPlayerTeam().getTotalFunds()) {
-				textNoMoney.setText("You Poor My Guy");
+				textNoMoney.setText("Insufficient Funds");
 			}else {
 				textNoMoney.setText("");
 			}
@@ -320,7 +317,7 @@ public class PlayerStoreScreen implements MouseListener{
 			textStanimaVar.setText("");
 			textCostVar.setText("");
 		}
-		if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() == 9) {
+		if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() > 8) {
 			textPlayersFull.setText("Team is Full");
 		}else {
 			textPlayersFull.setText("");

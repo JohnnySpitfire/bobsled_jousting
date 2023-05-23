@@ -1,6 +1,7 @@
 package org.beansinc.bobsled_jousting;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
@@ -19,6 +20,9 @@ public class GameEnviroment {
 
    Market market;
    Stadium stadium;
+   
+   private boolean playedMatch;
+   private boolean matchOutcome;
 
    Random rnd;
 
@@ -98,6 +102,30 @@ public class GameEnviroment {
    public void setStadium() throws InvalidObjectAttributeType, InvalidTeamSize {
       this.stadium = new Stadium(this.rnd, this.difficulty, this.currentWeek);
    }
+   
+   public boolean getPlayedMatch() {
+		return playedMatch;
+	}
+
+	public void setPlayedMatch(boolean playedMatch) {
+		this.playedMatch = playedMatch;
+	}
+	
+	public boolean getMatchOutcome() {
+		return this.matchOutcome;
+	}
+
+	public void setMatchOutcome(boolean matchOutcome) {
+		this.matchOutcome = matchOutcome;
+	}
+	
+	public void addWeek() {
+		this.currentWeek += 1;
+	}
+	
+	public float getDifficulty() {
+		return this.difficulty;
+	}
    
    public static void launchSetupScreen() {
 
@@ -196,6 +224,54 @@ public class GameEnviroment {
 		stadiumWindow.closeWindow();
 		launchMainMenuScreen();
 		}
-  
+	
+	public void afterMatchWindow(StadiumScreen stadiumScreen) throws InvalidObjectAttributeType, InvalidTeamSize {
+		stadiumScreen.closeWindow();
+		launchPostWeekScreen();
+	}
+	
+	public void launchPostWeekScreen() throws InvalidObjectAttributeType, InvalidTeamSize {
+		PostWeekScreen postWeekWindow = new PostWeekScreen(this);
+		game.setMarket();
+		game.setStadium();
+		}
+	   
+	public void closePostWeekScreen(PostWeekScreen postWeekWindow) throws InvalidObjectAttributeType {
+		
+		game.addWeek();
+		int playersToFullTeam = 4 - (game.getPlayerTeam().getActiveTeam().size() + game.getPlayerTeam().getReserveTeam().size());
+
+		if (game.getCurrentWeek() <= game.getTotalWeeks()) {
+			if (playersToFullTeam < 1) {
+				launchMainMenuScreen();
+			}else {
+				ArrayList<Integer> cheapestPlayers = new ArrayList<Integer>();
+				for(int i = 0; i < game.getMarket().getContestantSaleArray().size(); i++) {
+					cheapestPlayers.add(game.getMarket().getContestantSaleArray().get(i).getValue());
+				}
+				Collections.sort(cheapestPlayers);
+				int sum = 0;
+				for(int i = 0; i < playersToFullTeam; i++) {
+					sum += cheapestPlayers.get(i);
+				}
+				if (cheapestPlayers.size() > playersToFullTeam && sum < game.getPlayerTeam().getTotalFunds()) {
+					launchMainMenuScreen();
+				}else {
+					launchEndScreen();
+				}
+			}
+		}else {
+			launchEndScreen();
+		}
+		postWeekWindow.closeWindow();
+		}
+	
+	public void launchEndScreen() throws InvalidObjectAttributeType {
+		EndScreen endWindow = new EndScreen(this);
+	}
+
+	public void closeEndScreen(EndScreen endWindow) {
+		endWindow.closeWindow();
+		}
 }
 

@@ -1,16 +1,11 @@
 package org.beansinc.bobsled_jousting;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
-
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -21,11 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.EnumMap;
-
 import javax.swing.Action;
-import java.awt.event.MouseAdapter;
-import javax.swing.JScrollBar;
 
 public class PlayerSetupScreen implements MouseListener, ActionListener {
 
@@ -75,6 +66,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	private final Action RemoveAct = new SwingAction_6();
 	private JTextField textAfford;
 	private JTextField textRequiredPlayers;
+	private JTextField textInfo;
 
 	
 	public PlayerSetupScreen(GameEnviroment incomingEnviroment) throws InvalidObjectAttributeType {
@@ -399,6 +391,14 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 		textActiveNum.setBounds(49, 298, 86, 20);
 		panelIN_1.add(textActiveNum);
 		
+		textInfo = new JTextField();
+		textInfo.setEditable(false);
+		textInfo.setText("Select 4 players");
+		textInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		textInfo.setBounds(233, 11, 176, 40);
+		frmPlayersetupscreen.getContentPane().add(textInfo);
+		textInfo.setColumns(10);
+		
 		
 		
 		
@@ -571,11 +571,11 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (textNameVarIN.getText() != "" && textNameVarAct.getText() != "") {
+		if (textNameVarIN.getText().matches("[a-zA-Z]+")) {
 			initialContestants.get(initialIndex).setName(textNameVarIN.getText());
-			if (enviroment.getPlayerTeam().getActiveTeam().size() != 0) {
-				enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
-			}
+		}
+		if (enviroment.getPlayerTeam().getActiveTeam().size() != 0 && textNameVarAct.getText().matches("[a-zA-Z]+")) {
+			enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameVarAct.getText());
 		}
 		
 	}
