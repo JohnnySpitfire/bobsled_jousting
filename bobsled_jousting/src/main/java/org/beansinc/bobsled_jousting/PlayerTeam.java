@@ -7,24 +7,51 @@ import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
+/**
+ * This class provides the behaviour necessary for the player to control their team.
+ * Much of the GUI's behavior is dependent on this class.
+ */
 public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
+    /** The amount that the stats are increases when a contestant is trained. */
     private static final int CONTESTANT_TRAIN_ATTRIBUTE_INCREASE = 50;
 
+    /** The player's score. */
     private int score;
 
+    /**
+     * Instantiates a new player team.
+     *
+     * @param name the name of the team
+     * @param funds the starting funds of the team
+     * @param random the random object from GameEnviroment
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
+     */
     public PlayerTeam(String name, int funds, Random random) throws InvalidObjectAttributeType, InvalidTeamSize {
         super(name, funds, random);
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getScore() {
         return this.score;
     }
 
+    /**
+     * Modify score.
+     *
+     * @param difference the difference
+     */
     public void modifyScore(int difference) {
         this.score += difference;
     } 
 
+    /**
+     * Methods to run at the end of the week.
+     */
     @Override
     public void onWeekEnd() {
 
@@ -40,6 +67,12 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         
     }
 
+    /**
+     * Swaps contestant between the active and reserve teams.
+     *
+     * @param contestant the contestant to be swapped
+     * @throws InvalidTeamSize
+     */
     @Override
     public void swapContestantTeam(Contestant contestant) throws InvalidTeamSize {
 
@@ -56,20 +89,37 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         }
     }
 
+    /**
+     * Adds a contestant to the reserve team.
+     *
+     * @param contestant the contestant to be added
+     * @throws InvalidTeamSize
+     */
     @Override
-    public void purchaseContestant(Contestant newContestant) throws InvalidTeamSize {
+    public void addContestant(Contestant newContestant) throws InvalidTeamSize {
         
         this.addReserveContestant(newContestant);
         this.modifyTotalFunds(-newContestant.getValue());
         
     }
 
+    /**
+     * Purchase an item.
+     *
+     * @param item the item
+     * @param cost the cost
+     */
     @Override
     public void purchaseItem(Item item, int cost) {
         this.modifyTotalFunds(-item.value);
         this.addItem(item);
     }
 
+    /**
+     * Sells a contestant.
+     *
+     * @param contestant the contestant to be sold
+     */
     @Override
     public void sellContestant(Contestant asset) {
 
@@ -81,7 +131,6 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
                 this.modifyTotalFunds(asset.getValue());
 
             } catch (ContestantNotFound e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } else if (this.getReserveTeam().contains(asset)){
@@ -92,12 +141,20 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
                 this.modifyTotalFunds(asset.getValue());
 
             } catch(ContestantNotFound | InvalidTeamSize e) {
-                // TODO catch_block
                 e.printStackTrace();
             }
         }
     }
     
+    /**
+     * Gets the new random contestant.
+     *
+     * @param difficulty the difficulty of the game
+     * @param currentWeek the current week
+     * @return Contestant the new random contestant
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
+     */
     @Override
     public Contestant getNewRandomContestant(float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
         
@@ -114,6 +171,15 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         return new Contestant("null");
     }
 
+    /**
+     * Checks if a random contestant quit. If they quit they get removed from the team.
+     *
+     * @param difficulty the difficulty
+     * @return Contestant If the a contestant quit, then that contestant would be returned. Otherwise, a new contestant with the name "null" will be returned.
+     * @throws ContestantNotFound the contestant not found
+     * @throws InvalidTeamSize the invalid team size
+     * @throws InvalidObjectAttributeType the invalid object attribute type
+     */
     @Override
     public Contestant randomContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
 
@@ -134,6 +200,12 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
         return new Contestant("null");
     }
 
+    /**
+     * Randomly increases the stats of selected contestants.
+     *
+     * @param difficulty the difficulty
+     * @return ArrayList<Contestant[]> An ArrayList of {Upgraded Contestant, Old contestant} pairs. Not upgraded contestants are not included.
+     */
     @Override
     public ArrayList<Contestant[]> randomContestantStatIncrease(float difficulty) {
 
@@ -174,6 +246,13 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
        
     }
 
+    /**
+     * Trains a contestant.
+     *
+     * @param contestant the contestant to be trained
+     * @return Contestant - the newly trained contestant
+     */
+    @Override
     public Contestant trainContestant(Contestant contestant) {
 
         int oldOffenceVal = contestant.getAttribute(ContestantAttribute.OFFENCE);

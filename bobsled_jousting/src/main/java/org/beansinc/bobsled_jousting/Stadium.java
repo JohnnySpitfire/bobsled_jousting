@@ -8,16 +8,33 @@ import java.util.Set;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
+// TODO: Auto-generated Javadoc
+/**
+ * This class controls the matches avalible to the player, as well as the behaviour of the matches themselves.
+ */
 public class Stadium {
 
-    public static final int BASE_STANIMA_LOSS = 50;
+    /** The base amount of stanima lost on each game. */
+    public static final int BASE_STANIMA_LOSS = 100;
 
+    /** The funds reward factor. */
     private float fundsRewardFactor;
 
+    /** The available matches. */
     private ArrayList<ComputerTeam> availableMatches;
 
+    /** The difficulty. */
     private float difficulty;
     
+    /**
+     * Instantiates a new stadium.
+     *
+     * @param rnd the Random object from GameEnviroment
+     * @param difficulty the difficulty of the game
+     * @param currentWeek the current week
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
+     */
     public Stadium(Random rnd, float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
 
         this.difficulty = difficulty;
@@ -35,12 +52,26 @@ public class Stadium {
 
     }
 
+    
+    /** 
+     * @return ArrayList<ComputerTeam>
+     */
     public ArrayList<ComputerTeam> getAvailableMatches() {
         return this.availableMatches;
     } 
-    //
-    //
-    //
+    
+    /**
+     *  Plays a match between the player and a generated computer team.
+     *  The match compares the offence and defence attributes of the players of the two teams and compares them.
+     *  The difference is then modified by a difficulty factor, and subtracted from the players stanima.
+     *  The score is then modified by the difficulty again, and added to the players team.
+     * 
+     *
+     * @param playerTeam the player team
+     * @param computerTeam the computer team
+     * @param usedPlayerItems Items which the player has used (Must only apply to teams, individual items are applied in the club screen)
+     * @return boolean Whether the player has won or lost the match (True if they won, False if they lost)
+     */
 
     public boolean playMatch(PlayerTeam playerTeam, ComputerTeam computerTeam, ArrayList<Item> usedPlayerItems) {
 
@@ -92,7 +123,9 @@ public class Stadium {
                     modifiedStanimaVal -= attrDifference;
                 }
 
+
                 matchScore += attrDifference;
+
             }
 
             activeComputerTeam.get(i).editAttribute(ContestantAttribute.STANIMA, modifiedStanimaVal - BASE_STANIMA_LOSS);

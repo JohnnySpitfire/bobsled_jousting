@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Stores Items.
+ */
 public enum Item {
     
     ATTACK_POTION(50, "Permamently increases a contestants offence by 20", true , true),
@@ -20,6 +23,14 @@ public enum Item {
     public final boolean appliesToPlayerTeam;
     public final boolean appliesToContestant;
 
+    /**
+     * Instantiates a new item.
+     *
+     * @param value the value of the item
+     * @param description the description
+     * @param appliesToPlayerTeam whether the item applies to the player team
+     * @param appliesToContestant whether the item applies to an individual contestant
+     */
     Item(int value, String description, boolean appliesToPlayerTeam, boolean appliesToContestant){
         this.value = value;
         this.description = description;
@@ -27,12 +38,27 @@ public enum Item {
         this.appliesToContestant = appliesToContestant;
     }
 
+    /** A list of values used to generate a random item */
     public static final List<Item> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 
+    /**
+     * Gets a random item.
+     *
+     * @param rnd A random object from GameEnviroment
+     * @return the random item
+     */
     public static Item getRandomItem(Random rnd) {
          
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
+
+    /**
+     * Applies an item to a team.
+     * Controls the the behaviour of the item, and the effect it has on a team.
+     * 
+     * @param team the team the item is applied to.
+     * @param item the item used
+     */
 
     public static void applyItemToTeam(BaseTeam team, Item item) {
 
@@ -55,6 +81,14 @@ public enum Item {
 
         }
     }
+
+    /**
+     * Applies an item to a contestant.
+     * Controls the the behaviour of the item, and the effect it has on a contestant.
+     * 
+     * @param contestant the contestant the item is applied to.
+     * @param item the item used.
+     */
 
     public static void applyItemToContestant(Contestant contestant, Item item) {
 

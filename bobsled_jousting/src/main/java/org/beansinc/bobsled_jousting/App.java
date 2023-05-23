@@ -1,12 +1,17 @@
 package org.beansinc.bobsled_jousting;
 
 /**
- * Hello world!
- *
+ * The Starting point of the game
  */
 public class App 
 {
-    public static void main( String[] args )
+    
+    /**
+     *  Starts the Game
+     *
+     * @param args these have no effect
+     */
+    public static void main(String[] args )
     {      
     	GameEnviroment.launchSetupScreen();
     }

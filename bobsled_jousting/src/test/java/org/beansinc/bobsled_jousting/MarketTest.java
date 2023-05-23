@@ -21,6 +21,11 @@ public class MarketTest {
     Market market;
     Random rnd;
     
+    
+    /** 
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
+     */
     @BeforeEach 
     void initalize() throws InvalidObjectAttributeType, InvalidTeamSize {
         

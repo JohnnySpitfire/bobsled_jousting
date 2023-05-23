@@ -16,19 +16,48 @@ import javax.swing.event.ChangeListener;
 import javax.swing.SwingConstants;
 import javax.swing.JSlider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetupScreen.
+ */
 public class SetupScreen implements ChangeListener{
 
+	/** The frm setupscreen. */
 	private JFrame frmSetupscreen;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The dif. */
 	private int dif;
+	
+	/** The team name. */
 	private String teamName;
+	
+	/** The weeks. */
 	private int weeks;
+	
+	/** The Team name. */
 	//private final Action Accept = new SwingAction();
 	private JTextField TeamName;
+	
+	/** The setup contestants. */
+	private ArrayList<Contestant> setupContestants;
+	
+	/** The text difficulty. */
+
 	private JTextField textDifficulty;
+	
+	/** The text num weeks. */
 	private JTextField textNumWeeks;
+	
+	/** The difficulty. */
 	private JSlider difficulty;
+	
+	/** The num weeks. */
 	private JSlider numWeeks;
+	
+	/** The Accept. */
 	private final Action Accept = new SwingAction();
 	private JTextField textDifficultyInfo;
 	private JTextField textWeekInfo;
@@ -36,12 +65,20 @@ public class SetupScreen implements ChangeListener{
 	private JTextField textNameInfo2;
 	
 	
+	/**
+	 * Instantiates a new setup screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public SetupScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmSetupscreen.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmSetupscreen.dispose();
 	}
@@ -51,6 +88,8 @@ public class SetupScreen implements ChangeListener{
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -161,25 +200,55 @@ public class SetupScreen implements ChangeListener{
 		difficulty.addChangeListener((ChangeListener) this);
 		numWeeks.addChangeListener((ChangeListener) this);
 	}
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		textNumWeeks.setText(Integer.toString(numWeeks.getValue()));
 		textDifficulty.setText(Integer.toString(difficulty.getValue()));
 	}
 	
+	/**
+	 * Finished window.
+	 *
+	 * @throws InvalidObjectAttributeType the invalid object attribute type
+	 */
 	public void finishedWindow() throws InvalidObjectAttributeType {
 		 enviroment.closeSetupScreen(this);
 		
 	}
 
+	/**
+	 * Gets the game enviroment.
+	 *
+	 * @return the game enviroment
+	 */
 	public GameEnviroment getGameEnviroment() {
 		return enviroment;
 	}
+	
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Accept");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			String name = TeamName.getText();
 			if (name.matches("[a-zA-Z]+")) {

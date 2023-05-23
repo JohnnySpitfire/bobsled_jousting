@@ -16,35 +16,77 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ItemStoreScreen.
+ */
 public class ItemStoreScreen implements MouseListener{
 
+	/** The frm item store. */
 	private JFrame frmItemStore;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The txt money. */
 	private JTextField txtMoney;
+	
+	/** The Back. */
 	private final Action Back = new SwingAction();
+	
+	/** The txt name. */
 	private JTextField txtName;
+	
+	/** The text item name. */
 	private JTextField textItemName;
 	
+	/** The item index. */
 	private int itemIndex = 0;
 	
+	/** The index. */
+	private int index = 0;
+	
+	/** The btn left. */
+
 	private JButton btnLeft;
+	
+	/** The btn right. */
 	private JButton btnRight;
+	
+	/** The text price. */
 	private JTextField textPrice;
+	
+	/** The text information. */
 	private JTextField textInformation;
 	
+	/**
+	 * Instantiates a new item store screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public ItemStoreScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmItemStore.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmItemStore.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeItemStoreScreen(this);
 	}
 	
+	/**
+	 * Refresh window.
+	 */
 	public void refreshWindow() {
 		frmItemStore.dispose();
 		enviroment.launchItemStoreScreen();
@@ -52,6 +94,8 @@ public class ItemStoreScreen implements MouseListener{
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -188,16 +232,35 @@ public class ItemStoreScreen implements MouseListener{
 		}
 	}
 
+	/**
+	 * The Class SwingAction.
+	 */
 	private class SwingAction extends AbstractAction {
+		
+		/**
+		 * Instantiates a new swing action.
+		 */
 		public SwingAction() {
 			putValue(NAME, "Back");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			finishedWindow();
 		}
 	}
 
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (enviroment.getMarket().getItemSaleArray().size() > 0) {
@@ -214,24 +277,44 @@ public class ItemStoreScreen implements MouseListener{
 		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

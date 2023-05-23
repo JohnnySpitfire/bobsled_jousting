@@ -18,69 +18,172 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.SystemColor;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClubScreen.
+ */
 public class ClubScreen implements MouseListener, ActionListener {
 
+
+
+
+	/** The frm club. */
 	private JFrame frmClub;
+	
+	/** The text name. */
 	private JTextField textName;
+	
+	/** The enviroment. */
 	private GameEnviroment enviroment;
+	
+	/** The text money. */
 	private JTextField textMoney;
+	
+	/** The panel act. */
 	private JPanel panelAct;
+	
+	/** The text name act. */
 	private JTextField textNameAct;
+	
+	/** The text offence act. */
 	private JTextField textOffenceAct;
+	
+	/** The text name act var. */
 	private JTextField textNameActVar;
+	
+	/** The text modifiers act. */
 	private JTextField textModifiersAct;
+	
+	/** The text defence act. */
 	private JTextField textDefenceAct;
+	
+	/** The text stanima act. */
 	private JTextField textStanimaAct;
+	
+	/** The text offence act var. */
 	private JTextField textOffenceActVar;
+	
+	/** The text defence act var. */
 	private JTextField textDefenceActVar;
+	
+	/** The text stanima act var. */
 	private JTextField textStanimaActVar;
+	
+	/** The text modifiers act var. */
 	private JTextField textModifiersActVar;
+	
+	/** The text cost act. */
 	private JTextField textCostAct;
+	
+	/** The text cost act var. */
 	private JTextField textCostActVar;
+	
+	/** The btn L act. */
 	private JButton btnLAct;
+	
+	/** The btn R act. */
 	private JButton btnRAct;
+	
+	/** The text active index. */
 	private JTextField textActiveIndex;
 	
+	/** The panel act 1. */
 	private JPanel panelAct_1;
+	
+	/** The text name res. */
 	private JTextField textNameRes;
+	
+	/** The text offence res. */
 	private JTextField textOffenceRes;
+	
+	/** The text name res var. */
 	private JTextField textNameResVar;
+	
+	/** The text modifiers res. */
 	private JTextField textModifiersRes;
+	
+	/** The text defence res. */
 	private JTextField textDefenceRes;
+	
+	/** The text stanima res. */
 	private JTextField textStanimaRes;
+	
+	/** The text offence res var. */
 	private JTextField textOffenceResVar;
+	
+	/** The text defence res var. */
 	private JTextField textDefenceResVar;
+	
+	/** The text stanima res var. */
 	private JTextField textStanimaResVar;
+	
+	/** The text modifiers res var. */
 	private JTextField textModifiersResVar;
+	
+	/** The text cost res. */
 	private JTextField textCostRes;
+	
+	/** The text cost res var. */
 	private JTextField textCostResVar;
+	
+	/** The btn sell res. */
 	private JButton btnSellRes;
+	
+	/** The btn L res. */
 	private JButton btnLRes;
+	
+	/** The btn R res. */
 	private JButton btnRRes;
+	
+	/** The text reserve index. */
 	private JTextField textReserveIndex;
+	
+	/** The txt res state. */
 	private JTextField txtResState;
+	
+	/** The txt act state. */
 	private JTextField txtActState;
 	
+	/** The active index. */
 	private int activeIndex = 0;
+	
+	/** The reserve index. */
 	private int reserveIndex = 0;
+	
+	/** The btn swap act. */
 	private JButton btnSwapAct;
 
 	
+	/**
+	 * Instantiates a new club screen.
+	 *
+	 * @param incomingEnviroment the incoming enviroment
+	 */
 	public ClubScreen(GameEnviroment incomingEnviroment) {
 		enviroment = incomingEnviroment;
 		initialize();
 		frmClub.setVisible(true);
 	}
 	
+	/**
+	 * Close window.
+	 */
 	public void closeWindow() {
 		frmClub.dispose();
 	}
+	
+	/**
+	 * Finished window.
+	 */
 	public void finishedWindow() {
 		enviroment.closeClubScreen(this);
 	}
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -472,6 +575,12 @@ public class ClubScreen implements MouseListener, ActionListener {
 		mouseClicked(null); //Initial text Management
 	}
 
+	
+	/**
+	 *  
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (enviroment.getPlayerTeam().getActiveTeam().size() != 0) {
@@ -535,24 +644,44 @@ public class ClubScreen implements MouseListener, ActionListener {
 		
 	}
 
+	/**
+	 * Mouse pressed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse released.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse entered.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Mouse exited.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
