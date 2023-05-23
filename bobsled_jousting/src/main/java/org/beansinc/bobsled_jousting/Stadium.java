@@ -120,7 +120,7 @@ public class Stadium {
                 float attrDifference = (playerContestantAttr.get(attr) * this.difficulty) - computerContestantAttr.get(attr);
 
                 if(attrDifference < 0) {
-                    modifiedStanimaVal -= attrDifference;
+                    modifiedStanimaVal += attrDifference;
                 }
 
 
@@ -128,11 +128,12 @@ public class Stadium {
 
             }
 
-            activeComputerTeam.get(i).editAttribute(ContestantAttribute.STANIMA, modifiedStanimaVal - BASE_STANIMA_LOSS);
+            playerTeam.getActiveTeam().get(i).editAttribute(ContestantAttribute.STANIMA, modifiedStanimaVal - BASE_STANIMA_LOSS);
 
-            if(activePlayerTeam.get(i).getAttribute(ContestantAttribute.STANIMA) >= 0) {
+            if(playerTeam.getActiveTeam().get(i).getAttribute(ContestantAttribute.STANIMA) <= 0) {
 
-                activeComputerTeam.get(i).addModifier(ContestantModifer.INJURED);
+            	playerTeam.getActiveTeam().get(i).addModifier(ContestantModifer.INJURED);
+            	playerTeam.getActiveTeam().get(i).editAttribute(ContestantAttribute.STANIMA, 0);
 
             }
         }

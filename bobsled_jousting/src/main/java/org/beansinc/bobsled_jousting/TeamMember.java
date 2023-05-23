@@ -68,8 +68,8 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
      * Instantiates a new team member.
      *
      * @param name the team member's name
-     * @param attributes custom attributes to be instaniated, this one is already in a map, and does not need to be converted
-     * @param modifiers custom modifiers to be instaniated, this one is already in a set, and does not need to be converted
+     * @param attributes custom attributes to be instantiated, this one is already in a map, and does not need to be converted
+     * @param modifiers custom modifiers to be instantiated, this one is already in a set, and does not need to be converted
      * @param value the funds value of the team member
      */
     public TeamMember(String name, Map<ContestantAttribute, Integer> attributes, EnumSet<ContestantModifer> modifiers, int value) {
