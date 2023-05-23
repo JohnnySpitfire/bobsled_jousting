@@ -5,26 +5,26 @@ import java.util.EnumSet;
 import java.util.Map;
 
 
-import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
+import org.beansinc.bobsled_jousting.BSExceptions.ObjectModifierNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class TeamMember.
- *
- * @param <A> the generic type
- * @param <M> the generic type
+ * Provides the basic functionality for all team members (Sleds and Contestants).
+ * Has generic types so different attributes and modifiers can be given to a team member
+ * 
+ * @param <A> the generic type of attributes (Must be an enummerator)
+ * @param <M> the generic type of modifiers (Must be an enummerator)
  */
 @SuppressWarnings("unchecked")
 public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     
-    /** The name. */
+    /** The Team Members name. */
     private String name;
     
-    /** The object attributes. */
+    /** The object attributes, A map of the generic attribute type and an integer. */
     private EnumMap<A, Integer> objectAttributes;
     
-    /** The object modifiers. */
+    /** The object modifiers, A set of the generic modifier type. */
     private EnumSet<M> objectModifiers;
     
     /** The value. */
@@ -33,10 +33,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     /**
      * Instantiates a new team member.
      *
-     * @param name the name
-     * @param attributesClass the attributes class
-     * @param modifiersClass the modifiers class
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the team member's name
+     * @param attributesClass the generic attribute type class
+     * @param modifiersClass the generic modifier type class
+     * @throws InvalidObjectAttributeType Throws if the generic type is invaild (not sled or contestant attributes)
      */
     public TeamMember(String name, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
@@ -48,11 +48,11 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     /**
      * Instantiates a new team member.
      *
-     * @param name the name
-     * @param attributes the attributes
-     * @param attributesClass the attributes class
-     * @param modifiersClass the modifiers class
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the team member's name
+     * @param attributes custom attributes to be instaniated in the class, must be a 2D array of {AttributeType, Integer}
+     * @param attributesClass the generic attribute type class
+     * @param modifiersClass the generic modifier type class
+     * @throws InvalidObjectAttributeType Throws if the generic type is invaild (not sled or contestant attributes)
      */
     public TeamMember(String name, Object[][] attributes, Class<A> attributesClass, Class<M> modifiersClass) throws InvalidObjectAttributeType {
 
@@ -67,10 +67,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     /**
      * Instantiates a new team member.
      *
-     * @param name the name
-     * @param attributes the attributes
-     * @param modifiers the modifiers
-     * @param value the value
+     * @param name the team member's name
+     * @param attributes custom attributes to be instaniated, this one is already in a map, and does not need to be converted
+     * @param modifiers custom modifiers to be instaniated, this one is already in a set, and does not need to be converted
+     * @param value the funds value of the team member
      */
     public TeamMember(String name, Map<ContestantAttribute, Integer> attributes, EnumSet<ContestantModifer> modifiers, int value) {
 
@@ -108,7 +108,9 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     
-    /** 
+    /**
+     * Returns the funds value of the team member 
+     * 
      * @return int
      */
     public int getValue() {
@@ -116,7 +118,7 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Sets the value.
+     * Sets the funds value.
      *
      * @param val the new value
      */
@@ -135,9 +137,9 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Gets the attribute.
+     * Gets an attribute value.
      *
-     * @param stat the stat
+     * @param stat the attribute to check
      * @return the attribute
      */
     public int getAttribute(A stat) {
@@ -155,10 +157,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Adds the attribute.
+     * Adds an attribute.
      *
-     * @param stat the stat
-     * @param value the value
+     * @param stat the attribute to add
+     * @param value the value of the attribute
      */
     public void addAttribute(A stat, int value){
 
@@ -166,9 +168,9 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Removes the attribute.
+     * Removes an attribute.
      *
-     * @param attr the attr
+     * @param attr the attribute to be removed
      */
     public void removeAttribute(A attr) {
 
@@ -176,7 +178,7 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Adds the modifier.
+     * Adds a modifier.
      *
      * @param effect the effect
      */
@@ -186,32 +188,33 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Edits the attribute.
+     * Edits an attribute.
      *
-     * @param stat the stat
-     * @param newVal the new val
+     * @param stat the attribute to be modified
+     * @param newVal the new value
      */
     public void editAttribute(A stat, int newVal) {
         this.objectAttributes.replace(stat, newVal);
     }
 
     /**
-     * Removes the modifier.
+     * Removes a modifier.
      *
-     * @param effect the effect
-     * @throws ObjectEffectNotFound the object effect not found
+     * @param modifier the modifier to be removed
+     * @throws ObjectModifierNotFound throws if the specified modifier was not found
      */
-    public void removeModifier(M effect) throws ObjectEffectNotFound {
+    public void removeModifier(M modifier) throws ObjectModifierNotFound {
 
-        if(!this.objectModifiers.contains(effect)) {
-            throw new ObjectEffectNotFound(effect);
+        if(!this.objectModifiers.contains(modifier)) {
+            throw new ObjectModifierNotFound(modifier);
         } else {
-            this.objectModifiers.remove(effect);
+            this.objectModifiers.remove(modifier);
         }
     }
  
     /**
-     * Generate default stats map.
+     * Generate the default stats map.
+     * This gets the default attribute values from the attributes class, and converts it into a Map
      *
      * @param attributes the attributes
      * @return the enum map
@@ -232,11 +235,11 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Sets the object enum map and enum set.
+     * Sets the types of the Attribute map and Modifier set (either Sled or Contestant attributes and modifiers)
      *
-     * @param attributes the attributes
-     * @param modifiers the modifiers
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param attributes the attributes class
+     * @param modifiers the modifiers class
+     * @throws InvalidObjectAttributeType throws if the classes are not valid (not Sled or Contestant attributes and modifiers)
      */
     private void setObjectEnumMapAndEnumSet(Class<A> attributes, Class<M> modifiers) throws InvalidObjectAttributeType {
 
@@ -257,10 +260,10 @@ public class TeamMember<A extends Enum<A>, M extends Enum<M>> {
     }
 
     /**
-     * Populate object attributes with input.
+     * Populates defined ObjectAttributes Map with input from a 2D Object array.
      *
-     * @param stats the stats
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param stats the 2D attributes array containing {Attribute, Integer} pairs
+     * @throws InvalidObjectAttributeType throws if the classes are not valid (not enumerators)
      */
     private void populateObjectAttributesWithInput(Object[][] stats) throws InvalidObjectAttributeType {
         for (Object[] stat : stats) {

@@ -9,23 +9,23 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GameEnviroment.
+ * Controls the flow of the game, and stores important varibables, such as the Random Object, the difficulty of the game, and the PlayerTeam
  */
 public class GameEnviroment {
 
-   /** The total season weeks. */
+   /** The total number of weeks in the season. */
    private int totalSeasonWeeks;
    
-   /** The current week. */
+   /** The current week inedx. */
    private int currentWeek;
 
-   /** The difficulty. */
+   /** The difficulty from 0 to 1. */
    private float difficulty;
 
    /** The player team. */
    private PlayerTeam playerTeam;
    
-   /** The game. */
+   /** The game enviroment. */
    private GameEnviroment game;
 
    /** The market. */
@@ -34,16 +34,16 @@ public class GameEnviroment {
    /** The stadium. */
    Stadium stadium;
 
-   /** The rnd. */
+   /** The Random object. */
    Random rnd;
 
    /**
     * Instantiates a new game enviroment.
     *
-    * @param teamName the team name
-    * @param totalWeeks the total weeks
+    * @param teamName the player's team name
+    * @param totalWeeks the total number of weeks
     * @param difficulty the difficulty
-    * @throws InvalidObjectAttributeType the invalid object attribute type
+    * @throws InvalidObjectAttributeType
     */
    public GameEnviroment(String teamName, int totalWeeks, int difficulty) throws InvalidObjectAttributeType {
 
@@ -59,50 +59,11 @@ public class GameEnviroment {
       try {
          this.playerTeam = new PlayerTeam(teamName, startingFunds, this.rnd);
       } catch (InvalidObjectAttributeType e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       } catch (InvalidTeamSize e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
-
       
-   }
-
-   
-   /**
-    *  
-    *
-    * @param activeContestants the active contestants
-    * @param reserveContestants the reserve contestants
-    * @throws InvalidTeamSize the invalid team size
-    */
-   public void gameStart(ArrayList<Contestant> activeContestants, ArrayList<Contestant> reserveContestants) throws InvalidTeamSize {
-
-      for(Contestant contestant : activeContestants) {
-         this.playerTeam.addActiveContestant(contestant);
-      }
-
-      for(Contestant contestant : reserveContestants) {
-         this.playerTeam.addReserveContestant(contestant);
-      }
-
-   }
-
-   /**
-    * Game week.
-    *
-    * @throws ContestantNotFound the contestant not found
-    * @throws InvalidTeamSize the invalid team size
-    * @throws InvalidObjectAttributeType the invalid object attribute type
-    */
-   public void gameWeek() throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
-
-      for(int i = 0; i < 20; i++){
-         System.out.println(this.playerTeam.randomContestantStatIncrease(this.difficulty));
-         System.out.println(this.playerTeam.randomContestantQuit(this.difficulty).getName());
-      }
-
    }
 
    /**
@@ -124,7 +85,7 @@ public class GameEnviroment {
    }
 
    /**
-    * Gets the random.
+    * Gets the random object.
     *
     * @return the random
     */
@@ -133,7 +94,7 @@ public class GameEnviroment {
    }
 
    /**
-    * Gets the total weeks.
+    * Gets the total number of weeks.
     *
     * @return the total weeks
     */
@@ -142,7 +103,7 @@ public class GameEnviroment {
    }
 
    /**
-    * Gets the market.
+    * Gets the market object.
     *
     * @return the market
     */
@@ -153,14 +114,14 @@ public class GameEnviroment {
    /**
     * Sets the market.
     *
-    * @throws InvalidObjectAttributeType the invalid object attribute type
+    * @throws InvalidObjectAttributeType
     */
    public void setMarket() throws InvalidObjectAttributeType {
       this.market = new Market(this.rnd, this.currentWeek);
    }
    
    /**
-    * Gets the stadium.
+    * Gets the stadium object.
     *
     * @return the stadium
     */
@@ -171,8 +132,8 @@ public class GameEnviroment {
    /**
     * Sets the stadium.
     *
-    * @throws InvalidObjectAttributeType the invalid object attribute type
-    * @throws InvalidTeamSize the invalid team size
+    * @throws InvalidObjectAttributeType
+    * @throws InvalidTeamSize
     */
    public void setStadium() throws InvalidObjectAttributeType, InvalidTeamSize {
       this.stadium = new Stadium(this.rnd, this.difficulty, this.currentWeek);
@@ -190,7 +151,7 @@ public class GameEnviroment {
     * Close setup screen.
     *
     * @param setupWindow the setup window
-    * @throws InvalidObjectAttributeType the invalid object attribute type
+    * @throws InvalidObjectAttributeTypee
     */
    public void closeSetupScreen(SetupScreen setupWindow) throws InvalidObjectAttributeType {
    		game = setupWindow.getGameEnviroment();
@@ -268,7 +229,7 @@ public class GameEnviroment {
    /**
     * Launch player setup screen.
     *
-    * @throws InvalidObjectAttributeType the invalid object attribute type
+    * @throws InvalidObjectAttributeType
     */
    public void launchPlayerSetupScreen() throws InvalidObjectAttributeType {
 	   PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(game);
@@ -278,8 +239,8 @@ public class GameEnviroment {
     * Close player setup screen.
     *
     * @param playerSetupWindow the player setup window
-    * @throws InvalidObjectAttributeType the invalid object attribute type
-    * @throws InvalidTeamSize the invalid team size
+    * @throws InvalidObjectAttributeType
+    * @throws InvalidTeamSize
     */
    public void closePlayerSetupScreen(PlayerSetupScreen playerSetupWindow) throws InvalidObjectAttributeType, InvalidTeamSize {
 	   market = new Market(rnd, 0);

@@ -5,9 +5,8 @@ import java.util.Random;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ComputerTeam.
+ * Creates a new computer team for the matches.
  */
 public class ComputerTeam extends BaseTeam {
     
@@ -15,10 +14,10 @@ public class ComputerTeam extends BaseTeam {
      * Instantiates a new computer team.
      *
      * @param name the name
-     * @param rnd the rnd
+     * @param rnd the Random object from GameEnviroment
      * @param currentWeek the current week
-     * @throws InvalidObjectAttributeType the invalid object attribute type
-     * @throws InvalidTeamSize the invalid team size
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
      */
     public ComputerTeam(String name, Random rnd, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
 
@@ -30,11 +29,11 @@ public class ComputerTeam extends BaseTeam {
 
     
     /**
-     *  
+     *  Generates a new active team for the computer
      *
      * @param currentWeek the current week
-     * @throws InvalidObjectAttributeType the invalid object attribute type
-     * @throws InvalidTeamSize the invalid team size
+     * @throws InvalidObjectAttributeType
+     * @throws InvalidTeamSize
      */
     private void generateActiveTeam(int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize{
         
@@ -44,15 +43,5 @@ public class ComputerTeam extends BaseTeam {
             this.addActiveContestant(newContestant);
             
         }
-    }
-
-    /**
-     * Apply player item.
-     *
-     * @param item the item
-     */
-    public void applyPlayerItem(Item item) {
-
-        
     }
 }

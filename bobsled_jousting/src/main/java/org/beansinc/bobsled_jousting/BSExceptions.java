@@ -4,21 +4,18 @@ import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class BSExceptions.
+ * Customs exceptions used for the application.
  */
 public class BSExceptions {
 
     /**
-     * The Class ContestantNotFound.
+     * Throws if the contestant has not been found
      */
     public static class ContestantNotFound extends NoSuchElementException {
 
         /**
-         * Instantiates a new contestant not found.
-         *
-         * @param contestant the contestant
+         * @param contestant the contestant not found
          * @param teamName the team name
          */
         public ContestantNotFound(Contestant contestant, String teamName) {
@@ -27,29 +24,25 @@ public class BSExceptions {
     }
 
     /**
-     * The Class ObjectEffectNotFound.
+     * Throws if the object modifier has not been found
      */
-    public static class ObjectEffectNotFound extends NoSuchElementException {
+    public static class ObjectModifierNotFound extends NoSuchElementException {
 
-        /**
-         * Instantiates a new object effect not found.
-         *
-         * @param <T> the generic type
-         * @param effect the effect
+        /**         *
+         * @param <T> the generic type of object modifier
+         * @param modifier the modifier not forund
          */
-        public <T> ObjectEffectNotFound(T effect){
-            super(String.format("Effect \"%s\" not bound to contestant", effect));
+        public <T> ObjectModifierNotFound(T modifier){
+            super(String.format("Effect \"%s\" not bound to contestant", modifier));
         }
     }
 
     /**
-     * The Class InvalidObjectAttributeType.
+     * Throws if the attribute type is not valid for the member
      */
     public static class InvalidObjectAttributeType extends InvalidObjectException {
 
-        /**
-         * Instantiates a new invalid object attribute type.
-         *
+        /**         *
          * @param <T> the generic type
          * @param attributeClass the attribute class
          * @param name the name
@@ -61,9 +54,7 @@ public class BSExceptions {
                                 name));
         }
 
-        /**
-         * Instantiates a new invalid object attribute type.
-         *
+        /**         *
          * @param <T> the generic type
          * @param attributeClass the attribute class
          * @param modifierClass the modifier class
@@ -80,13 +71,11 @@ public class BSExceptions {
     }
 
     /**
-     * The Class InvalidTeamSize.
+     * Throws if the team size is invalid
      */
     public static class InvalidTeamSize extends Exception {
 
-        /**
-         * Instantiates a new invalid team size.
-         *
+        /**         *
          * @param team the team
          */
         public InvalidTeamSize(BaseTeam team) {
@@ -97,13 +86,11 @@ public class BSExceptions {
     }
 
     /**
-     * The Class ItemNotFound.
-     */
+     * Throws if an item has not been found in a list
+    */
     public static class ItemNotFound extends Exception {
         
-        /**
-         * Instantiates a new item not found.
-         *
+        /**         *
          * @param item the item
          * @param itemList the item list
          */

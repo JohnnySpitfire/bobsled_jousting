@@ -2,23 +2,22 @@ package org.beansinc.bobsled_jousting;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Sled.
+ * Provides the constructors for sleds.
  */
 public class Sled extends TeamMember<SledAttribute, SledModifier>{
 
-    /** The Constant SLED_BASE_VALUE. */
+    /** Base funds value of a sled. */
     private static final int SLED_BASE_VALUE = 100;
     
-    /** The Constant SLED_ATTRIBUTE_VALUE_FACTOR. */
+    /** How much each point of an attribute is worth. */
     private static final int SLED_ATTRIBUTE_VALUE_FACTOR = 2;
 
     /**
      * Instantiates a new sled.
      *
-     * @param name the name
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the name of the sled
+     * @throws InvalidObjectAttributeType
      */
     public Sled(String name) throws InvalidObjectAttributeType{
        
@@ -30,8 +29,8 @@ public class Sled extends TeamMember<SledAttribute, SledModifier>{
      * Instantiates a new sled.
      *
      * @param name the name
-     * @param attributes the attributes
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param attributes Custom sled attributes, contains {Attributes, Integer} pairs
+     * @throws InvalidObjectAttributeType
      */
     public Sled(String name, Object[][] attributes) throws InvalidObjectAttributeType {
 
@@ -44,9 +43,9 @@ public class Sled extends TeamMember<SledAttribute, SledModifier>{
      * Instantiates a new sled.
      *
      * @param name the name
-     * @param attributes the attributes
-     * @param modifiers the modifiers
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param attributes Custom sled attributes, contains {Attributes, Integer} pairs
+     * @param modifiers List of sled Modifiers
+     * @throws InvalidObjectAttributeType
      */
     public Sled(String name, Object[][] attributes, SledModifier[] modifiers) throws InvalidObjectAttributeType {
 
@@ -57,7 +56,7 @@ public class Sled extends TeamMember<SledAttribute, SledModifier>{
     /**
      * Instantiates a new sled.
      *
-     * @param attributes the attributes
+     * @param attributes Custom sled attributes, contains {Attributes, Integer} pairs
      * @throws InvalidObjectAttributeType the invalid object attribute type
      */
     public Sled(Object[][] attributes) throws InvalidObjectAttributeType {
@@ -68,7 +67,9 @@ public class Sled extends TeamMember<SledAttribute, SledModifier>{
 
     
     /** 
-     * @return int
+     * Generates the funds value of a sled.
+     * 
+     * @return int 
      */
     private int generateSledValue() {
 

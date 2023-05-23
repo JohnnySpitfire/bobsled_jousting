@@ -9,9 +9,8 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
 import com.github.javafaker.Faker;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Utils.
+ * General methods used throughout the application
  */
 public class Utils {
 
@@ -23,29 +22,29 @@ public class Utils {
  
     
     /**
-     *  
+     * Uses a stream to map the 2D array of ContestantAttributes and their respective values to the contestantStats map
+     * Using a map for easy and consistent access to the contestantStats data
      *
-     * @param <T> the generic type
-     * @param defaultStatsArr the default stats arr
-     * @return Map<?, ?>
+     * @param <T> A generic type, must be an enumerator (should be Contestant or Sled Attributes)
+     * @param defaultStatsArr A 2D array from an attributes class, containing {Attribute, Integer} pairs
+     * @return Map<T, Integer> A generic map of Attributes mapped onto integers
      */
     @SuppressWarnings("unchecked")
     public static <T extends Enum<T>> Map<?, ?> write2DArrayToMap(Object[][] defaultStatsArr)  {
-        //Uses a stream to map the 2D array of ContestantAttributes and their respective values to the contestantStats map
-        //Using a map for easy and consistent access to the contestantStats data
-        Map<?, ?> defaultStats = Stream.of(defaultStatsArr).collect(Collectors.toMap(data -> (T) data[0], 
+
+        Map<T, Integer> defaultStats = Stream.of(defaultStatsArr).collect(Collectors.toMap(data -> (T) data[0], 
                                                                                     data -> (Integer) data[1]));
         return defaultStats;
     }
 
     
     /**
-     *  
+     *  Generates a random contestant
      *
-     * @param rnd the rnd
-     * @param currentWeek the current week
-     * @return Contestant
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param rnd The persistent random object created in GameEnviroment
+     * @param currentWeek The current week
+     * @return randomContestant The newly generated Contestant
+     * @throws InvalidObjectAttributeType
      */
     public static Contestant generateRandomContestant(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
 
@@ -73,11 +72,11 @@ public class Utils {
     }
     
     /**
-     *  
+     *  Generates a random sled
      *
-     * @param rnd the rnd
+     * @param rnd The persistent random object created in GameEnviroment
      * @param currentWeek the current week
-     * @return Contestant
+     * @return randomSled the newly generated sled
      * @throws InvalidObjectAttributeType the invalid object attribute type
      */
     public static Sled generateRandomSled(Random rnd, int currentWeek) throws InvalidObjectAttributeType {

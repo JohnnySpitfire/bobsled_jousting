@@ -7,36 +7,36 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Market.
+ * Generates and stores Items, Sleds, and Contestants which can be sold to the Player
+ * Controls the behaviour necssary for the player to interact with the market.
  */
 public class Market {
     
-    /** The player sale count. */
+    /* *The number of players to be sold. */
     private static int PLAYER_SALE_COUNT;
     
-    /** The item sale count. */
+    /* *The number of items to be sold. */
     private static int ITEM_SALE_COUNT;
     
-    /** The sled sale count. */
+    /* *The number of sleds to be sold. */
     private static int SLED_SALE_COUNT;
 
-    /** The contestant sale arr. */
+    /** The contestants for sale. */
     private ArrayList<Contestant> contestantSaleArr;
     
-    /** The item sale arr. */
+    /** The items for sale. */
     private ArrayList<Item> itemSaleArr;
     
-    /** The sled sale arr. */
+    /** The sleds for sale. */
     private ArrayList<Sled> sledSaleArr;
 
     /**
      * Instantiates a new market.
      *
-     * @param rnd the rnd
+     * @param rnd the Random object from GameEnviroment
      * @param currentWeek the current week
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @throws InvalidObjectAttributeType
      */
     public Market(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
         
@@ -91,12 +91,12 @@ public class Market {
     }
 
     /**
-     * Sell asset.
+     * Sells an asset from the player without replacement.
      *
-     * @param <T> the generic type
-     * @param team the team
-     * @param asset the asset
-     * @throws ItemNotFound the item not found
+     * @param <T> the generic type of Asset, either Contestant or Item 
+     * @param team the player's team
+     * @param asset the asset to be sold
+     * @throws ItemNotFound
      */
     public <T> void sellAsset(PlayerTeam team, T asset) throws ItemNotFound {
 
@@ -117,12 +117,12 @@ public class Market {
     }
 
     /**
-     * Buy asset.
+     * Buy asset from the market.
+     * If the asset is the sled, it will swap the sled out from the player's team, and add the price difference to their funds.
      *
-     * @param <T> the generic type
-     * @param team the team
-     * @param asset the asset
-     * @throws InvalidTeamSize the invalid team size
+     * @param <T> the generic type of Asset, either Contestant, Item, or Sled
+     * @param asset the asset to be sold
+     * @throws InvalidTeamSize
      */
     public <T> void buyAsset(PlayerTeam team, T asset) throws InvalidTeamSize {
 
@@ -130,7 +130,7 @@ public class Market {
 
             Contestant contestant = (Contestant) asset;
             this.contestantSaleArr.remove(asset);
-            team.purchaseContestant(contestant);
+            team.addContestant(contestant);
 
         } else if (asset instanceof Item && this.itemSaleArr.contains(asset)) {
 
