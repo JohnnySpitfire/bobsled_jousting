@@ -11,7 +11,6 @@ import javax.swing.Action;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StoreScreen.
  */

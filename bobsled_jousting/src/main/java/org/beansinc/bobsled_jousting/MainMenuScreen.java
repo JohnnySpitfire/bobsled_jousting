@@ -12,7 +12,6 @@ import javax.swing.Action;
 import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MainMenuScreen.
  */

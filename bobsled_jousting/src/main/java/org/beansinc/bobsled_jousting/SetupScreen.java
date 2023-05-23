@@ -16,7 +16,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.SwingConstants;
 import javax.swing.JSlider;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SetupScreen.
  */
@@ -258,13 +257,11 @@ public class SetupScreen implements ChangeListener{
 					try {
 						enviroment = new GameEnviroment(teamName, weeks, dif);
 					} catch (InvalidObjectAttributeType e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 					try {
 						finishedWindow();
 					} catch (InvalidObjectAttributeType e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 			}

@@ -160,10 +160,8 @@ public class PostWeekScreen implements MouseListener{
 				try {
 					finishedWindow();
 				} catch (InvalidObjectAttributeType e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (InvalidTeamSize e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -675,25 +673,21 @@ public class PostWeekScreen implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }
