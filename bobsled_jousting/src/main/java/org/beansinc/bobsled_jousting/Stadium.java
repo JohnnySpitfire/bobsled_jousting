@@ -123,7 +123,9 @@ public class Stadium {
                     modifiedStanimaVal -= attrDifference;
                 }
 
-                matchScore += attrDifference * this.difficulty;
+
+                matchScore += attrDifference;
+
             }
 
             activeComputerTeam.get(i).editAttribute(ContestantAttribute.STANIMA, modifiedStanimaVal - BASE_STANIMA_LOSS);
@@ -137,6 +139,7 @@ public class Stadium {
 
         matchScore *= this.difficulty;
         playerTeam.modifyTotalFunds((int) (matchScore * fundsRewardFactor));
+        playerTeam.modifyScore((int) matchScore);
 
 
         if (matchScore >= 0) {

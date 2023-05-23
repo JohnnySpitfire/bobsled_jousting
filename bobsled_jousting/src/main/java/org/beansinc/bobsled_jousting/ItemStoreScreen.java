@@ -43,11 +43,11 @@ public class ItemStoreScreen implements MouseListener{
 	/** The item index. */
 	private int itemIndex = 0;
 	
-	
 	/** The index. */
 	private int index = 0;
 	
 	/** The btn left. */
+
 	private JButton btnLeft;
 	
 	/** The btn right. */

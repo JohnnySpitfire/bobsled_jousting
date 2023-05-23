@@ -11,12 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-
-import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
-
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -282,8 +278,8 @@ public class InventoryScreen implements MouseListener{
 		textSled = new JTextField();
 		textSled.setEditable(false);
 		textSled.setHorizontalAlignment(SwingConstants.CENTER);
-		textSled.setText("Sled");
-		textSled.setBounds(92, 59, 86, 20);
+		textSled.setText("Your Sled");
+		textSled.setBounds(88, 42, 100, 38);
 		frmInventory.getContentPane().add(textSled);
 		textSled.setColumns(10);
 		
@@ -405,6 +401,14 @@ public class InventoryScreen implements MouseListener{
 				panelCont.setVisible(false);
 				btnSell.setVisible(true);
 				btnUse.setVisible(true);
+				
+			
+				
+				enviroment.getPlayerTeam().getItems().remove(itemIndex);
+				if (itemIndex == enviroment.getPlayerTeam().getItems().size() && enviroment.getPlayerTeam().getItems().size() != 0) {
+					itemIndex -= 1;
+				}
+				mouseClicked(null);
 			}
 		});
 		btnApply.setBounds(49, 190, 86, 23);
@@ -498,12 +502,21 @@ public class InventoryScreen implements MouseListener{
 			textItemInformation.setText("");
 			
 		}
+		if (enviroment.getPlayerTeam().getActiveTeam().size() > 0) {
+			textNameContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getName());
+			textOffenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.OFFENCE));
+			textStanimaContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.STANIMA));
+			textDefenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.DEFENCE));
+			textModifiersContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers());
+		}else {
+			textNameContVar.setText("");
+			textOffenceContVar.setText("");
+			textStanimaContVar.setText("");
+			textDefenceContVar.setText("");
+			textModifiersContVar.setText("");
+		}
 		txtMoney.setText(""+enviroment.getPlayerTeam().getTotalFunds());
-		textNameContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getName());
-		textOffenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.OFFENCE));
-		textStanimaContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.STANIMA));
-		textDefenceContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getAttribute(ContestantAttribute.DEFENCE));
-		textModifiersContVar.setText(""+enviroment.getPlayerTeam().getActiveTeam().get(contIndex).getModifiers());
+		
 	}
 
 	/**

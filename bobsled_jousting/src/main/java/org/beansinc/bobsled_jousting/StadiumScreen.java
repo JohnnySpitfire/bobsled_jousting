@@ -12,6 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
+
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
+import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -118,15 +122,11 @@ public class StadiumScreen implements MouseListener{
 	private JButton btnNo;
 	private JCheckBox chckbUseSlime;
 	
-	/** The team index. */
-	private int teamIndex;
-	
-	/** The match. */
-	private boolean match = false;
-	
-	/** The bye. */
-	private boolean bye = false;
+	private int teamIndex = 0;
+	private boolean match;
+
 	private ArrayList<Item> items = new ArrayList<Item>();
+	private JTextField textReason;
 	
 	
 	/**
@@ -152,6 +152,37 @@ public class StadiumScreen implements MouseListener{
 	 */
 	public void finishedWindow() {
 		enviroment.closeStadiumScreen(this);
+	}
+	
+	public void nextWindow() throws InvalidObjectAttributeType, InvalidTeamSize {
+		enviroment.afterMatchWindow(this);
+	}
+	
+	public int averageStanima(BaseTeam team) {
+		int average = 0;
+		for(int i = 0; i < team.getActiveTeam().size(); i++) {
+			average += team.getActiveTeam().get(i).getAttribute(ContestantAttribute.MAX_STANIMA);
+		}
+		
+		return average / 4;
+	}
+	
+	public int averageDefence(BaseTeam team) {
+		int average = 0;
+		for(int i = 0; i < team.getActiveTeam().size(); i++) {
+			average += team.getActiveTeam().get(i).getAttribute(ContestantAttribute.DEFENCE);
+		}
+		
+		return average / 4;
+	}
+	
+	public int averageOffence(BaseTeam team) {
+		int average = 0;
+		for(int i = 0; i < team.getActiveTeam().size(); i++) {
+			average += team.getActiveTeam().get(i).getAttribute(ContestantAttribute.OFFENCE);
+		}
+		
+		return average / 4;
 	}
 	
 	/**
@@ -216,22 +247,32 @@ public class StadiumScreen implements MouseListener{
 		btnyes = new JButton("Yes");
 		btnyes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (match) {
-					if (chckbUseSlime.isSelected()) {
-						items.add(Item.SLIME_BOMB);
+					enviroment.setPlayedMatch(match);
+					if (match) {
+						if (chckbUseSlime.isSelected()) {
+							items.add(Item.SLIME_BOMB);
+							enviroment.getPlayerTeam().getItems().remove(enviroment.getPlayerTeam().getItems().indexOf(Item.SLIME_BOMB));
+						}
+						//remove slime bomb from player inventory
+						enviroment.setMatchOutcome(enviroment.getStadium().playMatch(enviroment.getPlayerTeam(), enviroment.getStadium().getAvailableMatches().get(teamIndex), items));
+				
+						
+					}else {
+						//bye week
+						
+						
+						//launch post-week screen
+						
 					}
-					//remove slime bomb from player inventory
-					enviroment.getStadium().playMatch(enviroment.getPlayerTeam(), enviroment.getStadium().getAvailableMatches().get(teamIndex), items);
-					
-					//launch post-week screen
-					closeWindow();
-				}else if (bye) {
-					//bye week
-					
-					
-					//launch post-week screen
-					closeWindow();
-				}
+					try {
+						nextWindow();
+					} catch (InvalidObjectAttributeType e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InvalidTeamSize e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			}
 		});
 		btnyes.setBounds(10, 114, 66, 23);
@@ -242,7 +283,7 @@ public class StadiumScreen implements MouseListener{
 			public void actionPerformed(ActionEvent e) {
 				panelConfirm.setVisible(false);
 				match = false;
-				bye = false;
+				
 			}
 		});
 		btnNo.setBounds(109, 114, 66, 23);
@@ -466,9 +507,14 @@ public class StadiumScreen implements MouseListener{
 		btnPlay.setBounds(275, 328, 116, 42);
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (enviroment.getPlayerTeam().getActiveTeam().size() < 4) {
+					textReason.setText("Active Team Not Full");
+				}else if (enviroment.getPlayerTeam().getActiveTeam().size() + enviroment.getPlayerTeam().getReserveTeam().size() > 9) {
+					textReason.setText("Reserve Team Over Full");
+				}else {
 				panelConfirm.setVisible(true);
 				match = true;
-				bye = false;
+				}
 			}
 		});
 		frmStadium.getContentPane().add(btnPlay);
@@ -477,12 +523,23 @@ public class StadiumScreen implements MouseListener{
 		btn.setBounds(275, 43, 116, 42);
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelConfirm.setVisible(true);
-				bye = true;
-				match = false;
+				if (enviroment.getPlayerTeam().getActiveTeam().size() < 4) {
+					textReason.setText("Active Team Not Full");
+				}else {
+					panelConfirm.setVisible(true);
+					match = false;
+				}
+				
 			}
 		});
 		frmStadium.getContentPane().add(btn);
+		
+		textReason = new JTextField();
+		textReason.setEditable(false);
+		textReason.setHorizontalAlignment(SwingConstants.CENTER);
+		textReason.setBounds(275, 390, 116, 20);
+		frmStadium.getContentPane().add(textReason);
+		textReason.setColumns(10);
 		
 		
 		
@@ -501,17 +558,17 @@ public class StadiumScreen implements MouseListener{
 		textActiveSled.setText(enviroment.getPlayerTeam().getName() + "'s Sled");
 		
 		
-		textOffenceActVar.setText("0");
-		textDefenceActVar.setText("0");
-		textStanimaActVar.setText("0");
+		textOffenceActVar.setText("" + averageOffence(enviroment.getPlayerTeam()));
+		textDefenceActVar.setText("" + averageDefence(enviroment.getPlayerTeam()));
+		textStanimaActVar.setText("" + averageStanima(enviroment.getPlayerTeam()));
 		textArmourAct.setText("Armour: " + enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.ARMOUR));
 		textSpeedAct.setText("Speed: " + enviroment.getPlayerTeam().getSled().getAttribute(SledAttribute.SPEED));
 		textModifiersAct.setText("Modifiers: " + enviroment.getPlayerTeam().getSled().getModifiers());
 		
 		
-		textOffenceCompVar.setText("0");
-		textDefenceCompVar.setText("0");
-		textStanimaCompVar.setText("0");
+		textOffenceCompVar.setText("" + averageOffence(enviroment.getStadium().getAvailableMatches().get(teamIndex)));
+		textDefenceCompVar.setText("" + averageDefence(enviroment.getStadium().getAvailableMatches().get(teamIndex)));
+		textStanimaCompVar.setText("" + averageStanima(enviroment.getStadium().getAvailableMatches().get(teamIndex)));
 		textArmourComp.setText("Armour: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getAttribute(SledAttribute.ARMOUR));
 		textSpeedComp.setText("Speed: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getAttribute(SledAttribute.SPEED));
 		textModifiersComp.setText("Modifiers: " + enviroment.getStadium().getAvailableMatches().get(teamIndex).getSled().getModifiers());
@@ -523,6 +580,7 @@ public class StadiumScreen implements MouseListener{
 		}
 		textCompTeamIndex.setText(""+(teamIndex + 1));
 		panelConfirm.setVisible(false);
+		textReason.setText("");
 	}
 
 	/**

@@ -9,9 +9,6 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import javax.swing.SwingConstants;
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 // TODO: Auto-generated Javadoc

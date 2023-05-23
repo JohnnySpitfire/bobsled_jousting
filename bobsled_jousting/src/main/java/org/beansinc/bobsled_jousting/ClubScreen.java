@@ -18,11 +18,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.SystemColor;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ClubScreen.
  */
-public class ClubScreen implements MouseListener {
+public class ClubScreen implements MouseListener, ActionListener {
+
+
+
 
 	/** The frm club. */
 	private JFrame frmClub;
@@ -257,6 +261,7 @@ public class ClubScreen implements MouseListener {
 		panelAct.add(textOffenceAct);
 		
 		textNameActVar = new JTextField();
+		textNameActVar.addActionListener(this);
 		textNameActVar.setHorizontalAlignment(SwingConstants.CENTER);
 		textNameActVar.setColumns(10);
 		textNameActVar.setBounds(68, 11, 114, 20);
@@ -406,6 +411,7 @@ public class ClubScreen implements MouseListener {
 		panelAct_1.add(textOffenceRes);
 		
 		textNameResVar = new JTextField();
+		textNameResVar.addActionListener(this);
 		textNameResVar.setHorizontalAlignment(SwingConstants.CENTER);
 		textNameResVar.setColumns(10);
 		textNameResVar.setBounds(68, 11, 114, 20);
@@ -623,8 +629,13 @@ public class ClubScreen implements MouseListener {
 			txtResState.setText("No Reserves");
 		}else if (enviroment.getPlayerTeam().getReserveTeam().size() == 5) {
 			txtResState.setText("Reserves Full");
+			txtResState.setForeground(Color.BLACK);
+		}else if (enviroment.getPlayerTeam().getReserveTeam().size() == 6){
+			txtResState.setText("Reserves Full");
+			txtResState.setForeground(Color.RED);
 		}else {
 			txtResState.setText("");
+			txtResState.setForeground(Color.BLACK);
 		}
 		
 		
@@ -674,6 +685,18 @@ public class ClubScreen implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+			if (enviroment.getPlayerTeam().getActiveTeam().size() != 0 && textNameActVar.getText().matches("[a-zA-Z]+")) {
+				enviroment.getPlayerTeam().getActiveTeam().get(activeIndex).setName(textNameActVar.getText());
+			}
+			if (enviroment.getPlayerTeam().getReserveTeam().size() != 0 && textNameResVar.getText().matches("[a-zA-Z]+")) {
+				enviroment.getPlayerTeam().getReserveTeam().get(reserveIndex).setName(textNameResVar.getText());
+			
+		}
 		
 	}
 }
