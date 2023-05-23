@@ -57,7 +57,7 @@ public enum Item {
      * Controls the the behaviour of the item, and the effect it has on a team.
      * 
      * @param team the team the item is applied to.
-     * @param item the item ued
+     * @param item the item used
      */
 
     public static void applyItemToTeam(BaseTeam team, Item item) {
@@ -83,10 +83,10 @@ public enum Item {
     }
 
     /**
-     * Applies an item to a contetant.
+     * Applies an item to a contestant.
      * Controls the the behaviour of the item, and the effect it has on a contestant.
      * 
-     * @param Contestant the contestant the item is applied to.
+     * @param contestant the contestant the item is applied to.
      * @param item the item used.
      */
 

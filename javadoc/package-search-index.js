@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.beansinc.bobsled_jousting"},{"l":"org.beansinc.bobsled_jousting.depreciated"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.beansinc.bobsled_jousting.depreciated"}];updateSearchResults();

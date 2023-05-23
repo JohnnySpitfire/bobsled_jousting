@@ -43,7 +43,7 @@ public class Utils {
      *
      * @param rnd The persistent random object created in GameEnviroment
      * @param currentWeek The current week
-     * @return Contestant The newly generated Contestant
+     * @return randomContestant The newly generated Contestant
      * @throws InvalidObjectAttributeType
      */
     public static Contestant generateRandomContestant(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
@@ -76,7 +76,7 @@ public class Utils {
      *
      * @param rnd The persistent random object created in GameEnviroment
      * @param currentWeek the current week
-     * @return Sled the newly generated sled
+     * @return randomSled the newly generated sled
      * @throws InvalidObjectAttributeType the invalid object attribute type
      */
     public static Sled generateRandomSled(Random rnd, int currentWeek) throws InvalidObjectAttributeType {
