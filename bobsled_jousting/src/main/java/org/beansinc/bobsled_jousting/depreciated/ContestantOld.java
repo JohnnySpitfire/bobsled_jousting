@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import java.util.Map;
 
 
-import org.beansinc.bobsled_jousting.BSExceptions.ObjectEffectNotFound;
+import org.beansinc.bobsled_jousting.BSExceptions.ObjectModifierNotFound;
 import org.beansinc.bobsled_jousting.ContestantAttribute;
 import org.beansinc.bobsled_jousting.ContestantModifer;
 import org.beansinc.bobsled_jousting.Utils;
@@ -96,10 +96,10 @@ public class ContestantOld {
         this.contestantEffects.add(effect);
     }
 
-    public void RemoveEffect(ContestantModifer effect) throws ObjectEffectNotFound {
+    public void RemoveEffect(ContestantModifer effect) throws ObjectModifierNotFound {
 
         if(!this.contestantEffects.contains(effect)) {
-            throw new ObjectEffectNotFound(effect);
+            throw new ObjectModifierNotFound(effect);
         } else {
             this.contestantEffects.remove(effect);
         }

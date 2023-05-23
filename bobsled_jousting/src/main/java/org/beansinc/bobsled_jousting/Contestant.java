@@ -2,26 +2,24 @@ package org.beansinc.bobsled_jousting;
 
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Contestant.
+ * Constuctors for the contestant as well as generating the funds value for the contestant.
  */
 public class Contestant extends TeamMember<ContestantAttribute, ContestantModifer>{
     
-    /** The Constant CONTESTANT_BASE_VALUE. */
     private static final int CONTESTANT_BASE_VALUE = 200;
     
-    /** The Constant CONTESTANT_ATTRIBUTE_VALUE_FACTOR. */
+    /** How much each point of attribute is worth. */
     private static final int CONTESTANT_ATTRIBUTE_VALUE_FACTOR = 1;
 
-    /** The nickname. */
+    /** The contestant's nickname. */
     private String nickname;
 
     /**
      * Instantiates a new contestant.
      *
-     * @param name the name
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the contestant's name
+     * @throws InvalidObjectAttributeType
      */
     public Contestant(String name) throws InvalidObjectAttributeType{
        
@@ -33,7 +31,7 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
      *
      * @param name the name
      * @param nickname the nickname
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @throws InvalidObjectAttributeType
      */
     public Contestant(String name, String nickname) throws InvalidObjectAttributeType{
        
@@ -46,7 +44,7 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
      *
      * @param name the name
      * @param attributes the attributes
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @throws InvalidObjectAttributeType
      */
     public Contestant(String name, Object[][] attributes) throws InvalidObjectAttributeType{
 
@@ -57,8 +55,9 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
 
     /**
      * Instantiates a new contestant.
+     * Performs a shallow copy of a contestant.
      *
-     * @param contestant the contestant
+     * @param contestant the contestant to copy
      */
     public Contestant(Contestant contestant){
 
@@ -88,7 +87,7 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
     }
 
     /**
-     * Update value.
+     * Update funds value of the contestant.
      */
     public void updateValue() {
         
@@ -96,24 +95,24 @@ public class Contestant extends TeamMember<ContestantAttribute, ContestantModife
     }
 
     /**
-     * Generate contestant value.
+     * Generate the value of the contestant .
      *
-     * @return the int
+     * @return the value of the contestant
      */
     private int generateContestantValue() {
 
-        int ramValue = CONTESTANT_BASE_VALUE;
+        int contestantValue = CONTESTANT_BASE_VALUE;
 
         for(ContestantAttribute attr: this.getAttributes().keySet()) {
 
-            ramValue += this.getAttribute(attr) * CONTESTANT_ATTRIBUTE_VALUE_FACTOR;
+            contestantValue += this.getAttribute(attr) * CONTESTANT_ATTRIBUTE_VALUE_FACTOR;
         }
 
         for(ContestantModifer mod: this.getModifiers()){
 
-            ramValue += mod.value * CONTESTANT_ATTRIBUTE_VALUE_FACTOR;
+            contestantValue += mod.value * CONTESTANT_ATTRIBUTE_VALUE_FACTOR;
         }
 
-        return ramValue;
+        return contestantValue;
     }
 }

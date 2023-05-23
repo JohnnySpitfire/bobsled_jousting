@@ -5,22 +5,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum SledAttribute.
+ * Stores sled attributes, and a method to generate random values.
  */
 public enum SledAttribute {
     
-    /** The armour. */
     ARMOUR,
-    
-    /** The speed. */
     SPEED;
 
     /**
      * Gets the default attributes.
      *
-     * @return the default attributes
+     * @return a 2D array of the default attributes containing {Attribute, Integer} pairs
      */
     public static Object[][] getDefaultAttributes(){
         return new Object[][]{
@@ -29,11 +25,13 @@ public enum SledAttribute {
         };
     }
 
-    /** The Constant VALUES. */
+    /**
+     * Sled attributes list to generate random values from.
+     */
     public static final List<SledAttribute> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 
     /**
-     * Gets the random attribute.
+     * Gets a random attribute.
      *
      * @param rn the rn
      * @return the random attribute

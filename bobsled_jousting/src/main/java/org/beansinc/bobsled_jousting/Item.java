@@ -5,9 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum Item.
+ * Stores Items.
  */
 public enum Item {
     
@@ -27,10 +26,10 @@ public enum Item {
     /**
      * Instantiates a new item.
      *
-     * @param value the value
+     * @param value the value of the item
      * @param description the description
-     * @param appliesToPlayerTeam the applies to player team
-     * @param appliesToContestant the applies to contestant
+     * @param appliesToPlayerTeam whether the item applies to the player team
+     * @param appliesToContestant whether the item applies to an individual contestant
      */
     Item(int value, String description, boolean appliesToPlayerTeam, boolean appliesToContestant){
         this.value = value;
@@ -39,13 +38,13 @@ public enum Item {
         this.appliesToContestant = appliesToContestant;
     }
 
-    /** The Constant VALUES. */
+    /** A list of values used to generate a random item */
     public static final List<Item> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
 
     /**
-     * Gets the random item.
+     * Gets a random item.
      *
-     * @param rnd the rnd
+     * @param rnd A random object from GameEnviroment
      * @return the random item
      */
     public static Item getRandomItem(Random rnd) {
@@ -54,11 +53,13 @@ public enum Item {
     }
 
     /**
-     * Apply item to team.
-     *
-     * @param team the team
-     * @param item the item
+     * Applies an item to a team.
+     * Controls the the behaviour of the item, and the effect it has on a team.
+     * 
+     * @param team the team the item is applied to.
+     * @param item the item ued
      */
+
     public static void applyItemToTeam(BaseTeam team, Item item) {
 
         switch(item) {
@@ -82,11 +83,13 @@ public enum Item {
     }
 
     /**
-     * Apply item to contestant.
-     *
-     * @param contestant the contestant
-     * @param item the item
+     * Applies an item to a contetant.
+     * Controls the the behaviour of the item, and the effect it has on a contestant.
+     * 
+     * @param Contestant the contestant the item is applied to.
+     * @param item the item used.
      */
+
     public static void applyItemToContestant(Contestant contestant, Item item) {
 
         switch(item) {

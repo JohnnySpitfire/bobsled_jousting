@@ -8,16 +8,15 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import org.beansinc.bobsled_jousting.BSExceptions.ItemNotFound;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class BaseTeam.
+ * The base class for teams, stores the basic behaviour, and stores all the objects required for the team
  */
 public class BaseTeam {
     
-    /** The Constant MAX_ACTIVE_SIZE. */
+    /** The maximum size of the active team. */
     public static final int MAX_ACTIVE_SIZE = 4;
     
-    /** The Constant MAX_RESERVE_SIZE. */
+    /** The maximum size of the reserve team. */
     public static final int MAX_RESERVE_SIZE = 5;
 
     /** The team name. */
@@ -38,15 +37,15 @@ public class BaseTeam {
     /** The team sled. */
     private Sled teamSled;
 
-    /** The rnd. */
+    /** The Random object from GameEnviroment. */
     public final Random rnd;
 
     /**
-     * Instantiates a new base team.
+     * Instantiates a new base team, used to generate computer teams.
      *
-     * @param name the name
-     * @param random the random
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the team's name
+     * @param random the random object from GameEnviroment
+     * @throws InvalidObjectAttributeType
      */
     public BaseTeam(String name, Random random) throws InvalidObjectAttributeType {
 
@@ -61,13 +60,13 @@ public class BaseTeam {
     }
 
     /**
-     * Instantiates a new base team.
+     * Instantiates a new base team, used to generate player teams.
      *
-     * @param name the name
-     * @param funds the funds
-     * @param random the random
-     * @throws InvalidTeamSize the invalid team size
-     * @throws InvalidObjectAttributeType the invalid object attribute type
+     * @param name the team's name
+     * @param funds a custom funds value
+     * @param random the random object from GameEnviroment
+     * @throws InvalidTeamSize
+     * @throws InvalidObjectAttributeType
      */
     public BaseTeam(String name, int funds, Random random) throws InvalidTeamSize, InvalidObjectAttributeType {
         
@@ -170,10 +169,10 @@ public class BaseTeam {
     }
 
     /**
-     * Adds the active contestant.
+     * Adds an active contestant.
      *
      * @param contestant the contestant
-     * @throws InvalidTeamSize the invalid team size
+     * @throws InvalidTeamSize
      */
     public void addActiveContestant(Contestant contestant) throws InvalidTeamSize {
 
@@ -185,10 +184,10 @@ public class BaseTeam {
     }
 
     /**
-     * Adds the reserve contestant.
+     * Adds a reserve contestant.
      *
      * @param contestant the contestant
-     * @throws InvalidTeamSize the invalid team size
+     * @throws InvalidTeamSize
      */
     public void addReserveContestant(Contestant contestant) throws InvalidTeamSize {
 
@@ -200,10 +199,10 @@ public class BaseTeam {
     }
 
     /**
-     * Removes the active contestant.
+     * Removes an active contestant.
      *
      * @param contestant the contestant
-     * @throws ContestantNotFound the contestant not found
+     * @throws ContestantNotFound
      */
     public void removeActiveContestant(Contestant contestant) throws ContestantNotFound {
 
@@ -214,11 +213,11 @@ public class BaseTeam {
     }
 
     /**
-     * Removes the reserve contestant.
+     * Removes a reserve contestant.
      *
      * @param contestant the contestant
-     * @throws InvalidTeamSize the invalid team size
-     * @throws ContestantNotFound the contestant not found
+     * @throws InvalidTeamSize 
+     * @throws ContestantNotFound
      */
     public void removeReserveContestant(Contestant contestant) throws InvalidTeamSize, ContestantNotFound {
 
@@ -232,7 +231,7 @@ public class BaseTeam {
     }
 
     /**
-     * Modify active contestant.
+     * Modifies a active contestant.
      *
      * @param modifiedContestant the modified contestant
      * @param oldContestant the old contestant
@@ -248,7 +247,7 @@ public class BaseTeam {
     }
 
     /**
-     * Modify reserve contestant.
+     * Modifies a reserve contestant.
      *
      * @param modifiedContestant the modified contestant
      * @param oldContestant the old contestant
@@ -279,7 +278,7 @@ public class BaseTeam {
 
 
     /**
-     * Swap sled.
+     * Swaps the  sled.
      *
      * @param newSled the new sled
      */
