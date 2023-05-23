@@ -163,7 +163,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     @Override
     public Contestant getNewRandomContestant(float difficulty, int currentWeek) throws InvalidObjectAttributeType, InvalidTeamSize {
         
-        float newContestantChance = (this.rnd.nextFloat(0.01f, 0.1f)) 
+        float newContestantChance = (this.rnd.nextFloat() * 0.1f )
                                     * MAX_RESERVE_SIZE - this.getReserveTeam().size()
                                     * difficulty;
         
@@ -188,7 +188,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
     @Override
     public Contestant randomContestantQuit(float difficulty) throws ContestantNotFound, InvalidTeamSize, InvalidObjectAttributeType {
 
-        float contestantQuitChance = (this.rnd.nextFloat(0.01f, 0.5f)) * (1f - difficulty);
+        float contestantQuitChance = (this.rnd.nextFloat()) * (1f - difficulty) * 0.5f;
 
         for(Contestant contestant : this.getActiveTeam()) {
 
@@ -222,7 +222,7 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
 
             modifiedContestant.getAttributes().forEach((attr, val) -> {
 
-                float contestantStatIncreaseChance = this.rnd.nextFloat(0.1f, 0.3f) * difficulty;
+                float contestantStatIncreaseChance = this.rnd.nextFloat() * difficulty * 0.2f;
                 int contestantStatIncrease = 10 + this.rnd.nextInt(20);
 
                     if(contestantStatIncreaseChance > 0.17) {
