@@ -8,7 +8,6 @@ import org.beansinc.bobsled_jousting.BSExceptions.ContestantNotFound;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
-// TODO: Auto-generated Javadoc
 /**
  * Controls the flow of the game, and stores important varibables, such as the Random Object, the difficulty of the game, and the PlayerTeam
  */

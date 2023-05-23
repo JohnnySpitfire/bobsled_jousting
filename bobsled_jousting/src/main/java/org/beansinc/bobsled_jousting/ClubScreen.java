@@ -19,7 +19,6 @@ import java.awt.event.MouseListener;
 import java.awt.SystemColor;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClubScreen.
  */
@@ -380,7 +379,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 							reserveIndex -= 1;
 						}
 					} catch (InvalidTeamSize e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -490,7 +488,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 							reserveIndex -= 1;
 						}
 					} catch (ItemNotFound e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -561,7 +558,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 							activeIndex -= 1;
 						}
 					} catch (InvalidTeamSize e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -651,7 +647,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -662,7 +657,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -673,7 +667,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -684,7 +677,6 @@ public class ClubScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

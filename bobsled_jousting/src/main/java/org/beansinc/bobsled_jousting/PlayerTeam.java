@@ -62,6 +62,11 @@ public class PlayerTeam extends BaseTeam implements TeamBehaviour {
             Contestant modifiedContestant = contestant;
             int maxStanima = contestant.getAttribute(ContestantAttribute.MAX_STANIMA);
             modifiedContestant.editAttribute(ContestantAttribute.STANIMA, maxStanima);
+            
+            if(modifiedContestant.getModifiers().contains(ContestantModifer.INJURED)) {
+                modifiedContestant.removeModifier(ContestantModifer.INJURED);
+            }
+
             this.modifyActiveContestant(modifiedContestant, contestant);
         }
         

@@ -22,7 +22,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JCheckBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StadiumScreen.
  */
@@ -267,10 +266,8 @@ public class StadiumScreen implements MouseListener{
 					try {
 						nextWindow();
 					} catch (InvalidObjectAttributeType e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (InvalidTeamSize e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 			}
@@ -598,7 +595,6 @@ public class StadiumScreen implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -609,7 +605,6 @@ public class StadiumScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -620,7 +615,6 @@ public class StadiumScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -631,7 +625,6 @@ public class StadiumScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }
