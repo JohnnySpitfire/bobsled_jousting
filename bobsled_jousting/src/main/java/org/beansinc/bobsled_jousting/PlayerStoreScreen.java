@@ -18,7 +18,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayerStoreScreen.
  */
@@ -314,7 +313,6 @@ public class PlayerStoreScreen implements MouseListener{
 						try {
 							enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getContestantSaleArray().get(contestantIndex));
 						} catch (InvalidTeamSize e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						if (contestantIndex == enviroment.getMarket().getContestantSaleArray().size() && enviroment.getMarket().getContestantSaleArray().size() != 0) {
@@ -416,7 +414,6 @@ public class PlayerStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -427,7 +424,6 @@ public class PlayerStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -438,7 +434,6 @@ public class PlayerStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -449,7 +444,6 @@ public class PlayerStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

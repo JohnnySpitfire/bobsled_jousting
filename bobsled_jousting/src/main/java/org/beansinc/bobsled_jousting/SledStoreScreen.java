@@ -19,7 +19,6 @@ import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SledStoreScreen.
  */
@@ -305,7 +304,6 @@ public class SledStoreScreen implements MouseListener{
 					try {
 						enviroment.getMarket().buyAsset(enviroment.getPlayerTeam(), enviroment.getMarket().getSledSaleArray().get(index));
 					} catch (InvalidTeamSize e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					enviroment.getPlayerTeam().getSled().setName(enviroment.getPlayerTeam().getName() + "'s Sled");
@@ -389,7 +387,6 @@ public class SledStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -400,7 +397,6 @@ public class SledStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -411,7 +407,6 @@ public class SledStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -422,7 +417,6 @@ public class SledStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

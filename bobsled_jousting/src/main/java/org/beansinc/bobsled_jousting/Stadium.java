@@ -8,7 +8,6 @@ import java.util.Set;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidObjectAttributeType;
 import org.beansinc.bobsled_jousting.BSExceptions.InvalidTeamSize;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class controls the matches avalible to the player, as well as the behaviour of the matches themselves.
  */

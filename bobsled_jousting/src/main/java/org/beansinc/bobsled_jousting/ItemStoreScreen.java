@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ItemStoreScreen.
  */
@@ -167,7 +166,6 @@ public class ItemStoreScreen implements MouseListener{
 						}
 					}
 				} catch (InvalidTeamSize e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -284,7 +282,6 @@ public class ItemStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -295,7 +292,6 @@ public class ItemStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -306,7 +302,6 @@ public class ItemStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -317,7 +312,6 @@ public class ItemStoreScreen implements MouseListener{
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

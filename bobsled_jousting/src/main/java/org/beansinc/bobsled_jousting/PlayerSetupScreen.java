@@ -18,7 +18,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.Action;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayerSetupScreen.
  */
@@ -536,10 +535,8 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 				try {
 					finishedWindow();
 				} catch (InvalidObjectAttributeType e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (InvalidTeamSize e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -686,7 +683,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 						enviroment.getPlayerTeam().addActiveContestant(initialContestants.get(initialIndex));
 				} 
 					catch (InvalidTeamSize e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					}
 				
@@ -736,7 +732,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		textNameVarIN.setText(""+initialContestants.get(initialIndex).getName());
 		textOffenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.OFFENCE));
 		textDefenceVarIN.setText(""+initialContestants.get(initialIndex).getAttribute(ContestantAttribute.DEFENCE));
@@ -792,7 +787,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -803,7 +797,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -814,7 +807,6 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -825,7 +817,7 @@ public class PlayerSetupScreen implements MouseListener, ActionListener {
 	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
